@@ -10,7 +10,8 @@ type props = {
 
 const UserImg = ({ userId }: props) => {
   const [userImgCache, setUserImgCache] = useAtom(userImgCacheAtom);
-  if (!userId) return <LoadingIcon className={Styles.img} />;
+  if (!userId)
+    return <LoadingIcon className={`${Styles.img} ${Styles.loading}`} />;
   if (userImgCache[userId])
     return (
       <img src={userImgCache[userId]} alt={userId} className={Styles.img} />

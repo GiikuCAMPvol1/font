@@ -1,18 +1,32 @@
 import { UserImg } from "@/components/UserImg";
 import InputStyles from "@/styles/InputStyles.module.scss";
 import Styles from "@/components/StartCard.module.scss";
+import { useState } from "react";
 
-const StartCard = () => {
+type props = {
+  className?: string;
+};
+
+const StartCard = ({ className }: props) => {
+  const [userName, setUserName] = useState("");
   return (
-    <div className={Styles.wrapper}>
-      <div className={Styles.input}>
+    <div className={`${Styles.wrapper} ${className}`}>
+      <div className={Styles.inputContainer}>
         <div className={Styles.icon}>
-          <UserImg userId={"test"} />
+          <UserImg userId={userName || new Date().toLocaleTimeString()} />
         </div>
-        <div>
+        <div className={Styles.input}>
           <p>ニックネームを選択</p>
-          <input type="text" className={InputStyles.InputText} />
+          <input
+            type="text"
+            className={InputStyles.InputText}
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
+      </div>
+      <div className={Styles.buttonWrapper}>
+        <button className={Styles.button}>開始</button>
       </div>
     </div>
   );
