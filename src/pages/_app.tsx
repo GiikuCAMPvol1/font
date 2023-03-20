@@ -17,8 +17,8 @@ export default function App({ Component, pageProps }: AppProps) {
   IsomorphicEffect(() => {
     const onResize = () => {
       const targetScale = Math.min(
-        window.innerWidth / 1920,
-        window.innerHeight / 1080
+        window.innerWidth / 600,
+        window.innerHeight / 450
       );
       setScale(targetScale);
     };
@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
   });
   return (
     <div className={Styles.body}>
-      <Wrapper className={Styles.container} {...{renderScale: scale}}>
+      <Wrapper className={Styles.container} {...{ renderScale: scale }}>
         <Component {...pageProps} />
       </Wrapper>
     </div>
