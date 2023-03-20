@@ -1,11 +1,9 @@
-import UserList from "@/components/lobby/UserList";
+import { UserList } from "@/components/lobby/UserList";
 
-const Lobby = () => {
+export default function Lobby() {
   return (
     <>
       <UserList/>
     </>
   )
 };
-
-export default Lobby;
