@@ -22,6 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
       );
       setScale(targetScale);
     };
+    onResize();
     window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("resize", onResize);
