@@ -1,0 +1,15 @@
+@use "@/styles/theme.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: theme.$cardBg;
+  .input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .icon {
+      width: 150px;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.InputText {
+  height: 50px;
+  border-radius: 5px;
+  font-size: 30px;
+  padding: 0 10px;
+  border: solid 2px rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.4);
+  color: white;
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
