@@ -1,5 +1,11 @@
+import UserList from "@/components/lobby/UserList";
+
 const Lobby = () => {
-  return <div>lobby</div>;
+  return (
+    <>
+      <UserList/>
+    </>
+  )
 };
 
 export default Lobby;
