@@ -1,0 +1,8 @@
+@use "theme";
+
+.main {
+  background-color: white;
+  .start {
+    background-color: theme.$cardBg;
+  }
+}

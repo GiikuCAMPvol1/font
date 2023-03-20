@@ -1,7 +1,5 @@
 const Lobby = () => {
-  return (
-    <div>lobby</div>
-  )
-}
+  return <div>lobby</div>;
+};
 
-export default Lobby
+export default Lobby;
