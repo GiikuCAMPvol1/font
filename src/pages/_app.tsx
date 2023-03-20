@@ -7,7 +7,7 @@ import { useIsomorphicEffect } from "@/utils/IsomorphicEffect";
 
 const Wrapper = styled.div.attrs<{ renderScale: number }>((p) => ({
   style: {
-    transform: `scale(${p.renderScale})`,
+    transform: `scale(${p.renderScale}) translate(-50%,-50%)`,
   },
 }))``;
 
@@ -17,8 +17,8 @@ export default function App({ Component, pageProps }: AppProps) {
   IsomorphicEffect(() => {
     const onResize = () => {
       const targetScale = Math.min(
-        1920 / window.innerWidth,
-        1080 / window.innerHeight
+        window.innerWidth / 1920,
+        window.innerHeight / 1080
       );
       setScale(targetScale);
     };
@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
   });
   return (
     <div className={Styles.body}>
-      <Wrapper renderScale={1}>
+      <Wrapper className={Styles.container} {...{renderScale: scale}}>
         <Component {...pageProps} />
       </Wrapper>
     </div>
