@@ -1,0 +1,22 @@
+.CodeEditor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:85vw;
+    height:60vh;
+    background-color: black;
+    border-radius: 50px;
+}
+.textarea{
+    width:80vw;
+    height:55vh;
+    font-size:1.5vw;
+    background-color: black;
+    color:white;
+    border: 1px solid black;
+    resize: none;
+    outline: none;
+}
+.textarea:focus {
+    box-shadow: none;
+}

@@ -1,0 +1,13 @@
+.LanguageSelectArea{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width:50vw;
+    height:12vh;
+    background-color: black;
+    border-radius: 30px;
+}
+.Images{
+    width:4vw;
+    height:4vw;
+}
