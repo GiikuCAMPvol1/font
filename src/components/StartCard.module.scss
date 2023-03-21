@@ -1,0 +1,35 @@
+@use "@/styles/theme.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: theme.$cardBg;
+  color: theme.$cardColor;
+  padding: 10px;
+  border-radius: 10px;
+  justify-content: center;
+  .inputContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .icon {
+      width: 100px;
+      overflow: hidden;
+    }
+    .input {
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  .buttonWrapper {
+    text-align: center;
+    .button {
+      background-color: theme.$secondlyBg;
+      color: theme.$secondlyColor;
+      border: none;
+      width: 135px;
+      height: 40px;
+      border-radius: 5px;
+    }
+  }
+}

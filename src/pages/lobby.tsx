@@ -1,7 +1,9 @@
-const Lobby = () => {
-  return (
-    <div>lobby</div>
-  )
-}
+import { UserList } from "@/components/lobby/UserList";
 
-export default Lobby
+export default function Lobby() {
+  return (
+    <>
+      <UserList/>
+    </>
+  )
+};

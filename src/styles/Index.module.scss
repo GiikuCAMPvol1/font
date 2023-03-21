@@ -1,0 +1,31 @@
+@use "theme";
+
+.logoWrapper {
+  height: 120px;
+  text-align: center;
+  .logo {
+    fill: black;
+    padding: 20px;
+    background-color: white;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    margin: 20px 0;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 330px;
+  margin: 0 40px;
+  .start {
+    height: 280px;
+    width: 280px;
+  }
+  .description {
+    height: 280px;
+    width: 200px;
+  }
+}
