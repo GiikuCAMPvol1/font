@@ -3,7 +3,11 @@ import { useState } from "react";
 import { dummyUserData } from "../dummyUserData";
 import JoinUser from "./JoinUser";
 
-const UserList = () => {
+type props = {
+  className?: string;
+};
+
+const UserListCard = ({ className }: props) => {
   // 参加できる人の数
   const [userCnt, setUserCnt] = useState(5)
   // 現在参加している人の数
@@ -15,7 +19,7 @@ const UserList = () => {
 
 
   return (
-    <div className={Styles.wrapper}>
+    <div className={`${Styles.wrapper} ${className}`}>
       <select className={Styles.userCnt} name="プレイヤー人数">
         <option onClick={() => setUserCnt(2)} value="2プレイヤー">2プレイヤー</option>
         <option onClick={() => setUserCnt(3)} value="3プレイヤー">3プレイヤー</option>
@@ -35,4 +39,4 @@ const UserList = () => {
   )
 }
 
-export { UserList }
+export { UserListCard }
