@@ -1,6 +1,5 @@
 import Styles from "@/components/lobby/UserListCard.module.scss";
-import { useState } from "react";
-import { dummyUserData } from "../dummyUserData";
+import { useEffect, useState } from "react";
 import JoinUser from "./JoinUser";
 
 type props = {
@@ -10,29 +9,61 @@ type props = {
 const UserListCard = ({ className }: props) => {
   // 参加できる人の数
   const [userCnt, setUserCnt] = useState(5)
-  // 現在参加している人の数
-  const [crrUserCnt, setCrrUserCnt] = useState(1)
 
-  // Todo:useEffectで現在参加している人の数を変化させる処理を記載
+  // 現在参加している人の数を変化させる処理
+  // 最初のユーザ配列データ
+  // Todo:名前の変更と親コンポーネントでのprops化
+  const arrData = Array.from({ length: userCnt }, (_, index) => {
+    if (index === 0) {
+      return { userId: "uuid", userName: "部屋作成した人" };
+    } else {
+      return { userId: "undef", userName: "空" };
+    }
+  });
+  // Todo:参加できる人の数に応じてユーザーの配列データを書き換える
+  const [joinUserArr, setJoinUserArr] = useState(arrData)
 
-  // Todo:参加できる人の数に応じてユーザーの配列データを書き換える(現在はdummyUserDataで処理)
-
+  useEffect(() => {
+    let arrData2;
+    if (userCnt > joinUserArr.length) {
+      // userCntがjoinUserArrより大きい場合、新しいオブジェクトを追加する
+      const addCount = userCnt - joinUserArr.length;
+      const newObjects = Array.from({ length: addCount }, () => {
+        return { userId: "undef", userName: "空" };
+      });
+      arrData2 = [...joinUserArr, ...newObjects];
+    } else if (userCnt < joinUserArr.length) {
+      // userCntがjoinUserArrより小さい場合、余分なオブジェクトを取り除く
+      arrData2 = joinUserArr.slice(0, userCnt);
+    } else {
+      // userCntがjoinUserArrと同じ場合、joinUserArrをそのまま使用する
+      arrData2 = joinUserArr;
+    }
+    setJoinUserArr(arrData2);
+  }, [userCnt]);
 
   return (
     <div className={`${Styles.wrapper} ${className}`}>
-      <select className={Styles.userCnt} name="プレイヤー人数">
-        <option onClick={() => setUserCnt(2)} value="2プレイヤー">2プレイヤー</option>
-        <option onClick={() => setUserCnt(3)} value="3プレイヤー">3プレイヤー</option>
-        <option onClick={() => setUserCnt(4)} value="4プレイヤー">4プレイヤー</option>
-        <option onClick={() => setUserCnt(5)} value="5プレイヤー" selected>5プレイヤー</option>
+      <select
+        className={Styles.userCnt}
+        name="プレイヤー人数"
+        onChange={(event) => setUserCnt(parseInt(event.target.value))}
+        value={userCnt}
+      >
+        <option value={2}>2プレイヤー</option>
+        <option value={3}>3プレイヤー</option>
+        <option value={4}>4プレイヤー</option>
+        <option value={5}>5プレイヤー</option>
       </select>
-      
-      {dummyUserData.map( data => 
-        <div key={data.userId}>
-          <JoinUser
-            userId={data.userId}
-            userName={data.userName}
-          />
+
+      {joinUserArr.map( (data, index) => 
+        <div key={index}>
+          {index < userCnt && (
+            <JoinUser
+              userId={data.userId}
+              userName={data.userName}
+            />
+          )}
         </div>
       )}
     </div>
