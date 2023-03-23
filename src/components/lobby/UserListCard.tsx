@@ -1,4 +1,4 @@
-import Styles from "@/components/lobby/UserList.module.scss";
+import Styles from "@/components/lobby/UserListCard.module.scss";
 import { useState } from "react";
 import { dummyUserData } from "../dummyUserData";
 import JoinUser from "./JoinUser";

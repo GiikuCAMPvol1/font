@@ -1,4 +1,4 @@
-import { UserList } from "@/components/lobby/UserList";
+import { UserList } from "@/components/lobby/UserListCard";
 
 export default function Lobby() {
   return (
