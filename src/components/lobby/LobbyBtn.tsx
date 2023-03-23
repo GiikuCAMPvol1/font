@@ -2,16 +2,24 @@ import Image from 'next/image'
 import React from 'react'
 import Styles from "@/components/lobby/LobbyBtn.module.scss";
 
-const LobbyBtn = () => {
+type Props = {
+  onClick: () => void;
+  src: string,
+  alt: string,
+  text: string,
+};
+
+
+const LobbyBtn = ({onClick, text, src, alt}: Props) => {
   return (
-    <div className={`${Styles.wrapper}`}>
+    <div className={`${Styles.wrapper}`} onClick={onClick}>
       <Image
-        src={'/game/Invite.png'}
-        alt={'招待アイコン'}
+        src={src}
+        alt={alt}
         width={26}
         height={26}
       />
-      <p>招待</p>
+      <p>{text}</p>
     </div>
   )
 }
