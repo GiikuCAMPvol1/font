@@ -1,4 +1,4 @@
-import styles from './GameMainStyles/CodeEditor.module.css'
+import styles from '@/styles/GameMainStyles/CodeEditor.module.css'
 
 export default function Home() {
   return (

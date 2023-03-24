@@ -1,6 +1,6 @@
 .footer{
     display: flex;
     justify-content: center;
-    gap:4.5vw;
-    margin-top:3vh;
+    gap:30px;
+    margin-top:20px;
 }

@@ -1,4 +1,4 @@
-import styles from './GameMainStyles/UserIcon.module.css'
+import styles from '@/styles/GameMainStyles/UserIcon.module.css'
 
 export default function Home() {
   return (

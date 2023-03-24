@@ -1,8 +1,8 @@
 .UserIcon{
     margin:auto;
-    margin-top:2vh;
-    width:5vw;
-    height:5vw;
+    margin-top:10px;
+    width:30px;
+    height:30px;
     background-color: red;
     border-radius: 50%;
 }

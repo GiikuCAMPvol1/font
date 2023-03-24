@@ -1,6 +1,6 @@
-import styles from './GameMainStyles/CompletionButton.module.css'
+import styles from '@/styles/GameMainStyles/CompletionButton.module.css'
 import Image from 'next/image';
-import CheckImage from './GameMainImages/check.png';
+import CheckImage from '../../../public/GameMainImages/check.png';
 
 export default function Home() {
   return (

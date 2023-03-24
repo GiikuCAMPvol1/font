@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import styles from './GameMainStyles/LanguageSelect.module.css';
+import styles from '@/styles/GameMainStyles/LanguageSelect.module.css';
 import Image from 'next/image';
-import jsImage from './GameMainImages/js.png';
-import pythonImage from './GameMainImages/python.png';
-import cImage from './GameMainImages/c++.png';
-import javaImage from './GameMainImages/java.png';
-import phpImage from './GameMainImages/php.png';
-import rubyImage from './GameMainImages/ruby.png';
-import goImage from './GameMainImages/go.png';
+import type { StaticImageData } from 'next/image'
+import jsImage from '../../../public/GameMainImages/js.png';
+import pythonImage from '../../../public/GameMainImages/python.png';
+import cImage from '../../../public/GameMainImages/c++.png';
+import javaImage from '../../../public/GameMainImages/java.png';
+import phpImage from '../../../public/GameMainImages/php.png';
+import rubyImage from '../../../public/GameMainImages/ruby.png';
+import goImage from '../../../public/GameMainImages/go.png';
 
 interface ImageData {
   id: number;
@@ -39,14 +40,13 @@ function ImageGallery() {
   return (
     <div className={styles.LanguageSelectArea}>
       {images.map((image) => (
-        <div key={image.id} onClick={() => handleImageClick(image.id)}>
-          <Image
-            src={image.src}
-            alt={image.alt}
-            className={styles.Image}
-            style={imageStyle(image.id)}
-          />
-        </div>
+        <Image
+          key={image.id}
+          src={image.src}
+          alt={image.alt}
+          className={styles.Images}
+          style={imageStyle(image.id)}
+        />
       ))}
     </div>
   );

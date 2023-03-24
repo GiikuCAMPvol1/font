@@ -2,15 +2,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width:85vw;
-    height:60vh;
+    width:500px;
+    height:250px;
     background-color: black;
     border-radius: 50px;
 }
 .textarea{
-    width:80vw;
-    height:55vh;
-    font-size:1.5vw;
+    width:450px;
+    height:220px;
+    font-size:17px;
     background-color: black;
     color:white;
     border: 1px solid black;
