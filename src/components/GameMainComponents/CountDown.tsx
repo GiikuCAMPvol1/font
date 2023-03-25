@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useAtom } from 'jotai';
 import { turnAtom } from '@/atom/turnAtom';
 import styles from "@/styles/GameMainStyles/CountDown.module.css";
@@ -24,23 +24,19 @@ export default function CountDown() {
   }, []);
 
   //useEffectにAtomを使用している関数を設定しても警告が出てくるため関数を別定義
-  const incrementTurn = useCallback(() => {
-    if(nowTurn < maxTurn){
-      console.log("turn")
-      setTurnState((prevState) => ({ ...prevState, nowTurn: prevState.nowTurn + 1 }));
-    }else{
-      //全てのターンが終わった時の処理
+  const nowTurnRef = useRef(nowTurn);
 
-    }
-  }, [nowTurn,maxTurn,setTurnState]);
+  useEffect(() => {
+    nowTurnRef.current = nowTurn;
+  }, [nowTurn]);
+
 
   //時間が0になった時にターンを進める
   useEffect(()=>{
     if(0 >= time){
-      console.log("time")
-      incrementTurn();
+      //時間が0になった時の処理
     }
-  },[time, incrementTurn])
+  },[time])
 
   //テキスト入力とプログラム入力の制限時間を代入
   useEffect(() => {
@@ -53,7 +49,7 @@ export default function CountDown() {
       setTime(consoleTime);
       setNowTime(consoleTime);
     }
-  }, [nowTurn,incrementTurn]);
+  }, [nowTurn]);
 
   //タイマーの時間に対する割合を代入
   const percentage = (time / nowTime) * 100;
