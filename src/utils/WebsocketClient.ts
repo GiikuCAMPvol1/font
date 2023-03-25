@@ -174,6 +174,23 @@ class WebsocketClient {
       });
     });
   }
+  
+  gameEndRequest() {
+    return new Promise<void>((resolve, reject) => {
+      const handler = (e: MessageEvent) => {
+        const data = JSON.parse(e.data) as unknown;
+        if (!typeGuard.onGameEnd(data)) {
+          reject();
+          return;
+        }
+        this.removeMessageHandler(handler);
+        resolve();
+      };
+      this.sendMessage({
+        type: "gameEndRequest",
+      });
+    });
+  }
 }
 
 export { WebsocketClient };
