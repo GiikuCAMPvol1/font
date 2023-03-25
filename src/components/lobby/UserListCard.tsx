@@ -16,7 +16,7 @@ const UserListCard = ({ className }: props) => {
   // 最初のユーザ配列データ
   const makeFirstUser = [{ userId: "uuid", userName: "部屋作成した人" }];
   // 参加できる人の数に応じてユーザーの配列データを書き換える
-  const [joinUserArr, setJoinUserArr] = useState(makeFirstUser)
+  const [joinUserArr, setJoinUserArr] = useState(makeFirstUser);
   useEffect(() => {
     // userCntがjoinUserArrより小さい場合、余分なオブジェクトを取り除く処理
     let newJoinArr;
@@ -29,10 +29,8 @@ const UserListCard = ({ className }: props) => {
   }, [userCnt]);
 
   // Todo:部屋に参加者が入ってきたときの処理
-  
 
   // Todo部屋から参加者が出て行ったときの処理
-
 
   // NullUserコンポーネントを複数回レンダリングする処理
   const nullUserCount = userCnt - joinUserArr.length;

@@ -6,8 +6,8 @@ import styled from "styled-components";
 import { useIsomorphicEffect } from "@/utils/IsomorphicEffect";
 import { WebsocketClient } from "@/utils/WebsocketClient";
 import { Loading } from "@/components/Loading/Loading";
-import {useSetAtom} from "jotai";
-import {socketAtom} from "@/atom/socketAtom";
+import { useSetAtom } from "jotai";
+import { socketAtom } from "@/atom/socketAtom";
 
 const Wrapper = styled.div.attrs<{ renderScale: number }>((p) => ({
   style: {
@@ -46,12 +46,12 @@ export default function App({ Component, pageProps }: AppProps) {
     socketRef.current = websocket;
     websocket.setup().then(() => {
       setSocket(websocket);
-      setIsInited(true)
+      setIsInited(true);
     });
     return () => {
       websocket.close();
     };
-  }, []);
+  }, [setSocket]);
 
   return (
     <div className={Styles.body}>

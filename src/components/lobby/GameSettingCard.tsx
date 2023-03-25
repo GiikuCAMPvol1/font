@@ -11,6 +11,7 @@ type Props = {
   setAnswerInputTime: Dispatch<SetStateAction<number>>,
   codeInputTime: number,
   setCodeInputTime: Dispatch<SetStateAction<number>>,
+
 };
 
 const GameSettingCard = ({ className, difficulty, setDifficulty, answerInputTime, setAnswerInputTime, codeInputTime, setCodeInputTime }: Props) => {

@@ -3,4 +3,11 @@
   width: 50px;
   background-color: black;
   border-radius: 30px;
+  overflow: auto;
+}
+.ImgSize {
+  margin: auto;
+  margin-top: 10px;
+  width: 38px;
+  height: 38px;
 }
