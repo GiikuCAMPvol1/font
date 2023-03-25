@@ -4,6 +4,7 @@ import ProblemTitle from "@/components/GameMainComponents/ProblemTitle";
 import CountDown from "@/components/GameMainComponents/CountDown";
 
 export default function Header() {
+
   return (
     <div className={styles.flex}>
       <Turn />

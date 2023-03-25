@@ -1,16 +1,19 @@
-import React, { useContext,useState } from 'react';
+import React from 'react';
+import { useAtom } from 'jotai';
+import { turnAtom } from '@/atom/turnAtom';
 import styles from '@/styles/GameMainStyles/Turn.module.css';
-import TurnContext from '@/context/TurnContext';
 
 const Turn = () => {
-  const { nowTurn, setNowTurn } = useContext(TurnContext);
-  const [maxTurn] = useState<number>(5);
+  const [turnState, setTurnState] = useAtom(turnAtom);
+  const [maxturnState, setMaxTurnState] = useAtom(turnAtom);
+  const { nowTurn } = turnState;
+  const { maxTurn } = maxturnState;
 
   return (
     <div className={styles.turn}>
       {nowTurn}/{maxTurn}
     </div>
   );
-}
+};
 
 export default Turn;
