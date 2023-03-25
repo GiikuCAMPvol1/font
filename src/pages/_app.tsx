@@ -51,7 +51,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return () => {
       websocket.close();
     };
-  }, []);
+  }, [setSocket]);
 
   return (
     <div className={Styles.body}>

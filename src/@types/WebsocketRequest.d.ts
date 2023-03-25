@@ -22,7 +22,7 @@ export type endPhaseRequest = {
 };
 
 export type openNextResultRequest = {
-  type: "OpenNextResultRequest";
+  type: "openNextResultRequest";
 };
 
 export type joinRoomRequest = {
