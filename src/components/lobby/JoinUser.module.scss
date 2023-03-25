@@ -2,17 +2,25 @@
 
 .wrapper {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
+    color: white;
+    background-color: black;
+    border-radius: 10rem 0px 0px 10rem;
+    border: solid 2px white;
+    margin: 5px auto;
+    width: 90%;
+    padding: 1px;
 
     .userImg {
-        flex: 1;
+        display: flex;
+        width: 20px;
+        margin: 0 5px;
+        border-radius: 100%;
+        overflow: hidden;
     }
 
     .userName {
-        flex: 9;
-        font-size: 30px;
+        font-size: 12px;
         font-weight: bold;
     }
 }
