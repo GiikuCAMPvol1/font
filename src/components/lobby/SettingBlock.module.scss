@@ -1,0 +1,14 @@
+.settingBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 12px;
+  width: 90%;
+  margin: 0 auto;
+
+  .titleWrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}

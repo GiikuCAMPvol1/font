@@ -3,7 +3,8 @@ export type WebsocketRequests =
   | endPhaseRequest
   | openNextResultRequest
   | joinRoomRequest
-  | createRoomRequest;
+  | createRoomRequest
+  | gameEndRequest;
 
 export type userIdRequest =
   | {
@@ -22,7 +23,7 @@ export type endPhaseRequest = {
 };
 
 export type openNextResultRequest = {
-  type: "OpenNextResultRequest";
+  type: "openNextResultRequest";
 };
 
 export type joinRoomRequest = {
@@ -34,4 +35,8 @@ export type joinRoomRequest = {
 export type createRoomRequest = {
   type: "createRoomRequest";
   username: string;
+};
+
+export type gameEndRequest = {
+  type: "gameEndRequest";
 };

@@ -1,5 +1,6 @@
 import { joinRoomResponse, userIdResponse } from "@/@types/WebsocketResponse";
 import {
+  onGameEnd,
   onPhaseStart,
   onResultOpen,
   onRoomUserListUpdate,
@@ -21,6 +22,8 @@ const typeGuard = {
     typeof i === "object" && (i as onPhaseStart).type === "onPhaseStart",
   onResultOpen: (i: unknown): i is onResultOpen =>
     typeof i === "object" && (i as onResultOpen).type === "onResultOpen",
+  onGameEnd: (i: unknown): i is onGameEnd =>
+    typeof i === "object" && (i as onGameEnd).type === "onGameEnd",
 };
 
 export { typeGuard };

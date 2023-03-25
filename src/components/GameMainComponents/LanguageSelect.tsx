@@ -24,13 +24,13 @@ function LanguageSelect() {
   const { thisLanguage } = languageState;
 
   const images: ImageData[] = [
-    { id: 1, src: jsImage, alt: 'Image 1' },
-    { id: 2, src: pythonImage, alt: 'Image 2' },
-    { id: 3, src: cImage, alt: 'Image 3' },
-    { id: 4, src: javaImage, alt: 'Image 4' },
-    { id: 5, src: phpImage, alt: 'Image 5' },
-    { id: 6, src: rubyImage, alt: 'Image 6' },
-    { id: 7, src: goImage, alt: 'Image 7' },
+    { id: 1, src: jsImage, alt: "Image 1" },
+    { id: 2, src: pythonImage, alt: "Image 2" },
+    { id: 3, src: cImage, alt: "Image 3" },
+    { id: 4, src: javaImage, alt: "Image 4" },
+    { id: 5, src: phpImage, alt: "Image 5" },
+    { id: 6, src: rubyImage, alt: "Image 6" },
+    { id: 7, src: goImage, alt: "Image 7" },
   ];
 
   const imageStyle = (id: number) => ({

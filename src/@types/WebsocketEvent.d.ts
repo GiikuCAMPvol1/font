@@ -4,7 +4,8 @@ export type WebsocketEvents =
   | onRoomUserListUpdate
   | onPhaseStart
   | onStateUpdate
-  | onResultOpen;
+  | onResultOpen
+  | onGameEnd;
 /**
  * サーバー側から勝手に送られてくる通知etc
  */
@@ -30,4 +31,7 @@ export type onResultOpen = {
     data: string;
   })[];
   isLast: boolean;
+};
+export type onGameEnd = {
+  type: "onGameEnd";
 };
