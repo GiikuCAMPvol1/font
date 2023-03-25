@@ -1,8 +1,9 @@
 export type WebsocketRequests =
   | userIdRequest
-  | endCodePhaseRequest
-  | endAnswerPhaseRequest
-  | openNextResultRequest;
+  | endPhaseRequest
+  | openNextResultRequest
+  | joinRoomRequest
+  | createRoomRequest;
 
 export type userIdRequest =
   | {
@@ -14,16 +15,23 @@ export type userIdRequest =
       token: string;
     };
 
-export type endCodePhaseRequest = {
-  type: "endCodePhaseRequest";
-  code: string;
-};
-
-export type endAnswerPhaseRequest = {
-  type: "endAnswerPhaseRequest";
-  answer: string;
+export type endPhaseRequest = {
+  type: "endPhaseRequest";
+  phase: "answer" | "code";
+  data: string;
 };
 
 export type openNextResultRequest = {
   type: "OpenNextResultRequest";
 };
+
+export type joinRoomRequest = {
+  type: "joinRoomRequest";
+  roomId: string;
+  username: string;
+}
+
+export type createRoomRequest = {
+  type: "createRoomRequest";
+  username: string;
+}

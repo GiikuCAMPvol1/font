@@ -1,7 +1,7 @@
 import { WebsocketRequests } from "@/@types/WebsocketRequest";
 import { typeGuard } from "@/utils/typeGuard";
-import { WebsocketEvents } from "@/@types/WebsocketEvent";
-import { WebsocketResponses } from "@/@types/WebsocketResponse";
+import {onStateUpdate, WebsocketEvents} from "@/@types/WebsocketEvent";
+import {joinRoomResponse, WebsocketResponses} from "@/@types/WebsocketResponse";
 
 type MessageEventHandler = (
   param: MessageEvent<WebsocketEvents | WebsocketResponses>
@@ -92,6 +92,65 @@ class WebsocketClient {
     });
     client?.close();
   }
+  
+  joinRoomRequest(roomId: string,username:string) {
+    return new Promise<joinRoomResponse>((resolve, reject) => {
+      const handler = (e: MessageEvent) => {
+        const data = JSON.parse(e.data) as unknown;
+        if (!typeGuard.joinRoomResponse(data)) {
+          reject();
+          return;
+        }
+        this.removeMessageHandler(handler)
+        resolve(e.data);
+      }
+      this.addMessageHandler(handler);
+      this.sendMessage({
+        type: "joinRoomRequest",
+        roomId,
+        username
+      });
+    });
+  }
+  
+  createRoomRequest(roomId: string,username:string) {
+    return new Promise<joinRoomResponse>((resolve, reject) => {
+      const handler = (e: MessageEvent) => {
+        const data = JSON.parse(e.data) as unknown;
+        if (!typeGuard.joinRoomResponse(data)) {
+          reject();
+          return;
+        }
+        this.removeMessageHandler(handler);
+        resolve(e.data);
+      }
+      this.addMessageHandler(handler);
+      this.sendMessage({
+        type: "createRoomRequest",
+        username
+      });
+    });
+  }
+  
+  endPhaseRequest(type: "code"|"answer",data: string){
+    return new Promise<onStateUpdate>((resolve, reject) => {
+      const handler = (e: MessageEvent) => {
+        const data = JSON.parse(e.data) as unknown;
+        if (!typeGuard.onStateUpdate(data)) {
+          reject();
+          return;
+        }
+        this.removeMessageHandler(handler);
+        resolve(e.data);
+      }
+      this.sendMessage({
+        type: "endPhaseRequest",
+        phase: type,
+        data: data
+      })
+    });
+  }
+  
 }
 
 export { WebsocketClient };

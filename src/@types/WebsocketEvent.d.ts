@@ -2,8 +2,7 @@ import { User } from "@/@types/User";
 
 export type WebsocketEvents =
   | onRoomUserListUpdate
-  | onStartCodePhase
-  | onAnswerPhaseStart
+  | onPhaseStart
   | onStateUpdate
   | onResultOpen;
 /**
@@ -15,13 +14,10 @@ export type onRoomUserListUpdate = {
   users: User[];
 };
 
-export type onStartCodePhase = {
-  type: "onCodePhaseStart";
-  answer: string;
-};
-export type onAnswerPhaseStart = {
-  type: "onAnswerPhaseStart";
-  code: string;
+export type onPhaseStart = {
+  type: "onPhaseStart";
+  phase: "answer" | "code";
+  data: string;
 };
 export type onStateUpdate = {
   type: "onStateUpdate";
