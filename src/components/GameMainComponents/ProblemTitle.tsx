@@ -1,7 +1,15 @@
-import styles from "@/styles/GameMainStyles/ProblemTitle.module.css";
+import React, { useState } from 'react';
+import styles from '@/styles/GameMainStyles/ProblemTitle.module.css';
 
-export default function Home() {
-  let ProblemTitle: String = "りんごと出力";
+const ProblemTitle = () => {
+  
+  const [problemTitle, setProblemTitle] = useState<string>('りんごと出力');
 
-  return <div className={styles.TitleArea}>{ProblemTitle}</div>;
+  return (
+    <div className={styles.TitleArea}>
+      {problemTitle}
+    </div>
+  );
 }
+
+export default ProblemTitle;

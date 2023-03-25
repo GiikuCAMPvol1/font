@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/GameMainStyles/CountDown.module.css";
 
-export default function Home() {
+export default function CountDown() {
   const totalTime = 60;
   const [time, setTime] = useState(totalTime);
 
