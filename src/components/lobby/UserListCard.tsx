@@ -8,7 +8,7 @@ type props = {
 
 const UserListCard = ({ className }: props) => {
   // 参加できる人の数
-  const [userCnt, setUserCnt] = useState(5)
+  const [userCnt, setUserCnt] = useState(5);
 
   // 現在参加している人の数を変化させる処理
   // 最初のユーザ配列データ
@@ -21,7 +21,7 @@ const UserListCard = ({ className }: props) => {
     }
   });
   // Todo:参加できる人の数に応じてユーザーの配列データを書き換える
-  const [joinUserArr, setJoinUserArr] = useState(arrData)
+  const [joinUserArr, setJoinUserArr] = useState(arrData);
 
   useEffect(() => {
     let arrData2;
@@ -56,18 +56,15 @@ const UserListCard = ({ className }: props) => {
         <option value={5}>5プレイヤー</option>
       </select>
 
-      {joinUserArr.map( (data, index) => 
+      {joinUserArr.map((data, index) => (
         <div key={index}>
           {index < userCnt && (
-            <JoinUser
-              userId={data.userId}
-              userName={data.userName}
-            />
+            <JoinUser userId={data.userId} userName={data.userName} />
           )}
         </div>
-      )}
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export { UserListCard }
+export { UserListCard };

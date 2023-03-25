@@ -1,16 +1,16 @@
 @use "@/styles/theme.scss";
 
 .wrapper {
-    display: flex;
-    background-color: white;
-    color: black;
-    padding: 10px;
-    width: 135px;
-    height: 39px;
-    border-radius: 5px;
+  display: flex;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  width: 135px;
+  height: 39px;
+  border-radius: 5px;
 
-    .btnText {
-        padding-left: 25px;
-        font-size: 13px;
-    }
+  .btnText {
+    padding-left: 25px;
+    font-size: 13px;
+  }
 }

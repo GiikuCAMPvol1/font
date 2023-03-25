@@ -1,9 +1,12 @@
 import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
 import Styles from "@/styles/App.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useIsomorphicEffect } from "@/utils/IsomorphicEffect";
+import { useSetAtom } from "jotai";
+import { socketAtom } from "@/atom/socketAtom";
+import { WebsocketClient } from "@/utils/WebsocketClient";
 
 const Wrapper = styled.div.attrs<{ renderScale: number }>((p) => ({
   style: {
@@ -13,6 +16,7 @@ const Wrapper = styled.div.attrs<{ renderScale: number }>((p) => ({
 
 export default function App({ Component, pageProps }: AppProps) {
   const [scale, setScale] = useState(1);
+  const setSocket = useSetAtom(socketAtom);
   const IsomorphicEffect = useIsomorphicEffect();
   IsomorphicEffect(() => {
     const onResize = () => {
@@ -28,6 +32,18 @@ export default function App({ Component, pageProps }: AppProps) {
       window.removeEventListener("resize", onResize);
     };
   });
+
+  useEffect(() => {
+    const websocket = new WebsocketClient();
+    void (async () => {
+      await websocket.connect();
+      setSocket(websocket);
+    })();
+    return () => {
+      websocket.close();
+    };
+  }, []);
+
   return (
     <div className={Styles.body}>
       <Wrapper className={Styles.container} {...{ renderScale: scale }}>
