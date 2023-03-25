@@ -16,10 +16,10 @@ const LobbyBtn = ({onClick, text, src, alt}: Props) => {
       <Image
         src={src}
         alt={alt}
-        width={26}
-        height={26}
+        width={20}
+        height={20}
       />
-      <p>{text}</p>
+      <p className={Styles.btnText}>{text}</p>
     </div>
   )
 }
