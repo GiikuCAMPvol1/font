@@ -1,6 +1,6 @@
-.flex{
-    margin-top:10px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.flex {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

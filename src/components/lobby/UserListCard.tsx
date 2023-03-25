@@ -16,7 +16,7 @@ const UserListCard = ({ className }: props) => {
   // 最初のユーザ配列データ
   const makeFirstUser = [{ userId: "uuid", userName: "部屋作成した人" }];
   // Todo:参加できる人の数に応じてユーザーの配列データを書き換える
-  const [joinUserArr, setJoinUserArr] = useState(makeFirstUser)
+  const [joinUserArr, setJoinUserArr] = useState(makeFirstUser);
 
   useEffect(() => {
     // userCntがjoinUserArrより小さい場合、余分なオブジェクトを取り除く処理
@@ -53,10 +53,7 @@ const UserListCard = ({ className }: props) => {
 
       {joinUserArr.map((data, index) => (
         <div key={index}>
-          <JoinUser
-            userId={data.userId}
-            userName={data.userName}
-          />
+          <JoinUser userId={data.userId} userName={data.userName} />
         </div>
       ))}
       {nullUsers}

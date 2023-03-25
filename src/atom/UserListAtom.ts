@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import {User} from "@/@types/User";
+import { User } from "@/@types/User";
 const userListAtom = atom<User[]>([]);
 
 export { userListAtom };

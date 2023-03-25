@@ -7,7 +7,7 @@ type MessageEventHandler = (
   param: MessageEvent<WebsocketEvents | WebsocketResponses>
 ) => unknown;
 
-let client:WebSocket;
+let client: WebSocket;
 
 class WebsocketClient {
   public isActive: boolean;
@@ -23,27 +23,27 @@ class WebsocketClient {
   }
 
   connect() {
-    return new Promise<void>((resolve,reject)=>{
+    return new Promise<void>((resolve, reject) => {
       if (client?.readyState === 1) {
-        resolve()
+        resolve();
         return;
       }
       client = new WebSocket("ws://127.0.0.1:9001");
       client.onopen = () => {
         client.onopen = client.onerror = null;
         resolve();
-      }
+      };
       client.onerror = () => {
         client.onopen = client.onerror = null;
         reject();
-      }
-    })
+      };
+    });
   }
 
   setup() {
-    return new Promise<void>(async(resolve, reject) => {
+    return new Promise<void>(async (resolve, reject) => {
       if (client?.readyState !== 1) {
-        await this.connect()
+        await this.connect();
       }
       if (this.isActive) {
         resolve();
@@ -76,11 +76,11 @@ class WebsocketClient {
     client?.addEventListener("message", handler);
     this.handlers.push(handler);
   }
-  removeMessageHandler(handler: MessageEventHandler){
+  removeMessageHandler(handler: MessageEventHandler) {
     client?.removeEventListener("message", handler);
     const index = this.handlers.indexOf(handler);
-    if (index === -1)return;
-    this.handlers = this.handlers.splice(index,1);
+    if (index === -1) return;
+    this.handlers = this.handlers.splice(index, 1);
   }
   sendMessage(message: WebsocketRequests) {
     client?.send(JSON.stringify(message));

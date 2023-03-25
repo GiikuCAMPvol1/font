@@ -1,9 +1,9 @@
 import { UserImg } from "@/components/UserImg";
 import InputStyles from "@/styles/InputStyles.module.scss";
 import Styles from "@/components/index/StartCard.module.scss";
-import {useState} from "react";
-import {generateUuid} from "@/utils/uuid";
-import {useIsomorphicEffect} from "@/utils/IsomorphicEffect";
+import { useState } from "react";
+import { generateUuid } from "@/utils/uuid";
+import { useIsomorphicEffect } from "@/utils/IsomorphicEffect";
 
 type props = {
   className?: string;
@@ -11,11 +11,11 @@ type props = {
 
 const StartCard = ({ className }: props) => {
   const [userName, setUserName] = useState("");
-  const [uuid,setUuid] = useState("");
-  const isomorphicEffect = useIsomorphicEffect()
-  isomorphicEffect(()=>{
+  const [uuid, setUuid] = useState("");
+  const isomorphicEffect = useIsomorphicEffect();
+  isomorphicEffect(() => {
     setUuid(generateUuid());
-  },[])
+  }, []);
 
   return (
     <div className={`${Styles.wrapper} ${className}`}>
