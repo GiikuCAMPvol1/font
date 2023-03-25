@@ -1,0 +1,21 @@
+@use "@/styles/theme.scss";
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+
+    .userCnt {
+        margin: 10px auto;
+        width: 90%;
+        font-size: 15px;
+        font-weight: bold;
+        color: white;
+        background-color: black;
+        border-radius: 5px;
+        border: solid 2px white;
+    }
+}
