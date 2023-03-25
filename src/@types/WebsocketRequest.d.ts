@@ -39,4 +39,4 @@ export type createRoomRequest = {
 
 export type gameEndRequest = {
   type: "gameEndRequest";
-}
+};

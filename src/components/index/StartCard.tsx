@@ -5,9 +5,9 @@ import { useState } from "react";
 import { generateUuid } from "@/utils/uuid";
 import { useIsomorphicEffect } from "@/utils/IsomorphicEffect";
 import { socketAtom } from "@/atom/socketAtom";
-import {useAtomValue, useSetAtom} from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
-import {roomMetadataAtom, userListAtom} from "@/atom/RoomAtom";
+import { roomMetadataAtom, userListAtom } from "@/atom/RoomAtom";
 
 type props = {
   className?: string;
@@ -32,8 +32,8 @@ const StartCard = ({ className }: props) => {
       setUserList(room.users);
       setRoom({
         roomId: room.roomId,
-        isOwner: room.owner
-      })
+        isOwner: room.owner,
+      });
       await router.push(`/lobby?${room.roomId}`);
     })();
   };

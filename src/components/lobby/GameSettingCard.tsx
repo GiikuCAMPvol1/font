@@ -1,34 +1,43 @@
 import Styles from "@/components/lobby/GameSettingCard.module.scss";
 import { ChangeEvent, useState } from "react";
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from "react";
 import SettingBlock from "./SettingBlock";
 
 type Props = {
-  className?: string,
-  difficulty: number,
-  setDifficulty: Dispatch<SetStateAction<number>>,
-  answerInputTime: number,
-  setAnswerInputTime: Dispatch<SetStateAction<number>>,
-  codeInputTime: number,
-  setCodeInputTime: Dispatch<SetStateAction<number>>,
-
+  className?: string;
+  difficulty: number;
+  setDifficulty: Dispatch<SetStateAction<number>>;
+  answerInputTime: number;
+  setAnswerInputTime: Dispatch<SetStateAction<number>>;
+  codeInputTime: number;
+  setCodeInputTime: Dispatch<SetStateAction<number>>;
 };
 
-const GameSettingCard = ({ className, difficulty, setDifficulty, answerInputTime, setAnswerInputTime, codeInputTime, setCodeInputTime }: Props) => {
+const GameSettingCard = ({
+  className,
+  difficulty,
+  setDifficulty,
+  answerInputTime,
+  setAnswerInputTime,
+  codeInputTime,
+  setCodeInputTime,
+}: Props) => {
   const handleChangeDifficulty = (event: ChangeEvent<HTMLInputElement>) => {
     setDifficulty(event.target.valueAsNumber);
-  }
-  const difficultyValueText = ["Easy", "Normal", "Hard"]
+  };
+  const difficultyValueText = ["Easy", "Normal", "Hard"];
 
-  const handleChangeAnswerInputTime = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeAnswerInputTime = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setAnswerInputTime(event.target.valueAsNumber);
-  }
-  const answerInputTimeValueText = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  };
+  const answerInputTimeValueText = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const handleChangeCodeInputTime = (event: ChangeEvent<HTMLInputElement>) => {
     setCodeInputTime(event.target.valueAsNumber);
-  }
-  const codeInputTimeValueText = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  };
+  const codeInputTimeValueText = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <div className={`${Styles.wrapper} ${className}`}>

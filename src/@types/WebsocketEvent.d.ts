@@ -34,4 +34,4 @@ export type onResultOpen = {
 };
 export type onGameEnd = {
   type: "onGameEnd";
-}
+};

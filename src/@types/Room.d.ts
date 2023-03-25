@@ -6,4 +6,4 @@ export type User = {
 export type Room = {
   roomId: string;
   isOwner: boolean;
-}
+};

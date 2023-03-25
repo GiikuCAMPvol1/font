@@ -174,7 +174,7 @@ class WebsocketClient {
       });
     });
   }
-  
+
   gameEndRequest() {
     return new Promise<void>((resolve, reject) => {
       const handler = (e: MessageEvent) => {

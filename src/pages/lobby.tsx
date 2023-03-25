@@ -7,12 +7,11 @@ import { useState } from "react";
 
 export default function Lobby() {
   // [props]難易度(数値が低いほど易しい)※[0:Easy, 1:Normal, 2:Hard]
-  const [difficulty, setDifficulty] = useState(1)
+  const [difficulty, setDifficulty] = useState(1);
   // [props]お題解答制限時間(分)
-  const [answerInputTime, setAnswerInputTime] = useState(2)
+  const [answerInputTime, setAnswerInputTime] = useState(2);
   // [props]コード記載制限時間(分)
-  const [codeInputTime, setCodeInputTime] = useState(5)
-
+  const [codeInputTime, setCodeInputTime] = useState(5);
 
   // Todo:招待ボタンを押したときの処理
   const InviteClick = () => {
