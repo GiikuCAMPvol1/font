@@ -1,5 +1,6 @@
 .TitleArea {
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   background-color: black;
@@ -8,4 +9,10 @@
   font-size: 20px;
   width: 325px;
   height: 40px;
+}
+.Images {
+  position:absolute;
+  right:12px;
+  width: 30px;
+  height: 30px;
 }

@@ -26,6 +26,7 @@ export default function CountDown() {
   //useEffectにAtomを使用している関数を設定しても警告が出てくるため関数を別定義
   const incrementTurn = useCallback(() => {
     if(nowTurn < maxTurn){
+      console.log("turn")
       setTurnState((prevState) => ({ ...prevState, nowTurn: prevState.nowTurn + 1 }));
     }else{
       //全てのターンが終わった時の処理
@@ -36,6 +37,7 @@ export default function CountDown() {
   //時間が0になった時にターンを進める
   useEffect(()=>{
     if(0 >= time){
+      console.log("time")
       incrementTurn();
     }
   },[time, incrementTurn])
