@@ -58,7 +58,7 @@ const UserListCard = ({ className }: props) => {
             userName={data.userName}
           />
         </div>
-      )}
+      ))}
       {nullUsers}
     </div>
   );
