@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/GameMainStyles/CountDown.module.css";
 
-export default function Home() {
+export default function CountDown() {
   const totalTime = 60;
   const [time, setTime] = useState(totalTime);
 
@@ -28,8 +28,10 @@ export default function Home() {
     <div className={styles.CountDownArea}>
       <div className={styles.cycle} style={cycleStyle}></div>
       <div className={styles.time}>
-        {Math.floor(time / 60).toString().padStart(2, "0")}:
-        {(time % 60).toString().padStart(2, "0")}
+        {Math.floor(time / 60)
+          .toString()
+          .padStart(2, "0")}
+        :{(time % 60).toString().padStart(2, "0")}
       </div>
     </div>
   );

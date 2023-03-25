@@ -58,10 +58,7 @@ const UserListCard = ({ className }: props) => {
 
       {joinUserArr.map((data, index) => (
         <div key={index}>
-          <JoinUser
-            userId={data.userId}
-            userName={data.userName}
-          />
+          <JoinUser userId={data.userId} userName={data.userName} />
         </div>
       ))}
       {nullUsers}

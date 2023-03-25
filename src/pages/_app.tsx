@@ -1,10 +1,13 @@
 import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
 import Styles from "@/styles/App.module.scss";
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useIsomorphicEffect } from "@/utils/IsomorphicEffect";
 import { WebsocketClient } from "@/utils/WebsocketClient";
+import { Loading } from "@/components/Loading/Loading";
+import {useSetAtom} from "jotai";
+import {socketAtom} from "@/atom/socketAtom";
 
 const Wrapper = styled.div.attrs<{ renderScale: number }>((p) => ({
   style: {
@@ -14,6 +17,8 @@ const Wrapper = styled.div.attrs<{ renderScale: number }>((p) => ({
 
 export default function App({ Component, pageProps }: AppProps) {
   const [scale, setScale] = useState(1);
+  const [isInited, setIsInited] = useState(true); //todo: バックエンドが完成したらfalseにする
+  const setSocket = useSetAtom(socketAtom);
   const IsomorphicEffect = useIsomorphicEffect();
   IsomorphicEffect(() => {
     const onResize = () => {
@@ -29,13 +34,20 @@ export default function App({ Component, pageProps }: AppProps) {
       window.removeEventListener("resize", onResize);
     };
   });
+  const refFirstRef = useRef(true);
   const socketRef = useRef<WebsocketClient>();
 
   useEffect(() => {
-    if (socketRef.current)return;
+    if (process.env.NODE_ENV === "development" && refFirstRef.current) {
+      refFirstRef.current = false;
+      return;
+    }
     const websocket = new WebsocketClient();
     socketRef.current = websocket;
-    void websocket.setup();
+    websocket.setup().then(() => {
+      setSocket(websocket);
+      setIsInited(true)
+    });
     return () => {
       websocket.close();
     };
@@ -44,7 +56,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={Styles.body}>
       <Wrapper className={Styles.container} {...{ renderScale: scale }}>
-        <Component {...pageProps} />
+        {isInited ? (
+          <Component {...pageProps} socket={socketRef.current} />
+        ) : (
+          <Loading message={"サーバーに接続しています..."} />
+        )}
       </Wrapper>
     </div>
   );

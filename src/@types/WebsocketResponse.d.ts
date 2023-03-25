@@ -10,6 +10,7 @@ export type joinRoomResponse = {
   type: "joinRoomResponse";
   roomId: string;
   userId: string;
+  owner: boolean;
   users: User[];
 };
 export type userIdResponse = {

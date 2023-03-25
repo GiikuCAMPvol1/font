@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import styles from '@/styles/GameMainStyles/LanguageSelect.module.css';
-import Image from 'next/image';
-import type { StaticImageData } from 'next/image'
-import jsImage from '../../../public/GameMainImages/js.png';
-import pythonImage from '../../../public/GameMainImages/python.png';
-import cImage from '../../../public/GameMainImages/c++.png';
-import javaImage from '../../../public/GameMainImages/java.png';
-import phpImage from '../../../public/GameMainImages/php.png';
-import rubyImage from '../../../public/GameMainImages/ruby.png';
-import goImage from '../../../public/GameMainImages/go.png';
+import React, { useState } from "react";
+import styles from "@/styles/GameMainStyles/LanguageSelect.module.css";
+import Image from "next/image";
+import type { StaticImageData } from "next/image";
+import jsImage from "../../../public/GameMainImages/js.png";
+import pythonImage from "../../../public/GameMainImages/python.png";
+import cImage from "../../../public/GameMainImages/c++.png";
+import javaImage from "../../../public/GameMainImages/java.png";
+import phpImage from "../../../public/GameMainImages/php.png";
+import rubyImage from "../../../public/GameMainImages/ruby.png";
+import goImage from "../../../public/GameMainImages/go.png";
 
 interface ImageData {
   id: number;
@@ -16,7 +16,7 @@ interface ImageData {
   alt: string;
 }
 
-function ImageGallery() {
+function LanguageSelect() {
   const [selectedImageId, setSelectedImageId] = useState<number | null>(null);
 
   const images: ImageData[] = [
@@ -45,16 +45,11 @@ function ImageGallery() {
           onClick={() => handleImageClick(image.id)}
           style={imageStyle(image.id)}
         >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            className={styles.Images}
-          />
+          <Image src={image.src} alt={image.alt} className={styles.Images} />
         </div>
       ))}
     </div>
   );
 }
 
-export default ImageGallery;
-
+export default LanguageSelect;
