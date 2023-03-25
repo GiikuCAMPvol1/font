@@ -1,6 +1,7 @@
 import Styles from "@/components/lobby/UserListCard.module.scss";
 import { useEffect, useState } from "react";
 import JoinUser from "./JoinUser";
+import NullUser from "./NullUser";
 
 type props = {
   className?: string;
@@ -8,39 +9,33 @@ type props = {
 
 const UserListCard = ({ className }: props) => {
   // 参加できる人の数
-  const [userCnt, setUserCnt] = useState(5)
+  const [userCnt, setUserCnt] = useState(5);
 
   // 現在参加している人の数を変化させる処理
-  // 最初のユーザ配列データ
   // Todo:名前の変更と親コンポーネントでのprops化
-  const arrData = Array.from({ length: userCnt }, (_, index) => {
-    if (index === 0) {
-      return { userId: "uuid", userName: "部屋作成した人" };
-    } else {
-      return { userId: "undef", userName: "空" };
-    }
-  });
+  // 最初のユーザ配列データ
+  const makeFirstUser = [{ userId: "uuid", userName: "部屋作成した人" }];
   // Todo:参加できる人の数に応じてユーザーの配列データを書き換える
-  const [joinUserArr, setJoinUserArr] = useState(arrData)
+  const [joinUserArr, setJoinUserArr] = useState(makeFirstUser);
 
   useEffect(() => {
-    let arrData2;
-    if (userCnt > joinUserArr.length) {
-      // userCntがjoinUserArrより大きい場合、新しいオブジェクトを追加する
-      const addCount = userCnt - joinUserArr.length;
-      const newObjects = Array.from({ length: addCount }, () => {
-        return { userId: "undef", userName: "空" };
-      });
-      arrData2 = [...joinUserArr, ...newObjects];
-    } else if (userCnt < joinUserArr.length) {
-      // userCntがjoinUserArrより小さい場合、余分なオブジェクトを取り除く
-      arrData2 = joinUserArr.slice(0, userCnt);
+    // userCntがjoinUserArrより小さい場合、余分なオブジェクトを取り除く処理
+    let newJoinArr;
+    if (userCnt < joinUserArr.length) {
+      newJoinArr = joinUserArr.slice(0, userCnt);
     } else {
-      // userCntがjoinUserArrと同じ場合、joinUserArrをそのまま使用する
-      arrData2 = joinUserArr;
+      newJoinArr = joinUserArr;
     }
-    setJoinUserArr(arrData2);
+    setJoinUserArr(newJoinArr);
   }, [userCnt]);
+
+  // NullUserコンポーネントを複数回レンダリングする処理
+  const nullUserCount = userCnt - joinUserArr.length;
+
+  const nullUsers = [];
+  for (let i = 0; i < nullUserCount; i++) {
+    nullUsers.push(<NullUser key={i} />);
+  }
 
   return (
     <div className={`${Styles.wrapper} ${className}`}>
@@ -56,18 +51,14 @@ const UserListCard = ({ className }: props) => {
         <option value={5}>5プレイヤー</option>
       </select>
 
-      {joinUserArr.map( (data, index) => 
+      {joinUserArr.map((data, index) => (
         <div key={index}>
-          {index < userCnt && (
-            <JoinUser
-              userId={data.userId}
-              userName={data.userName}
-            />
-          )}
+          <JoinUser userId={data.userId} userName={data.userName} />
         </div>
-      )}
+      ))}
+      {nullUsers}
     </div>
-  )
-}
+  );
+};
 
-export { UserListCard }
+export { UserListCard };

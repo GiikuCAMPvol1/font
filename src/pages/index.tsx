@@ -1,6 +1,6 @@
 import Styles from "@/styles/Index.module.scss";
-import { StartCard } from "@/components/StartCard";
-import { DescriptionCard } from "@/components/DescriptionCard";
+import { StartCard } from "@/components/index/StartCard";
+import { DescriptionCard } from "@/components/index/DescriptionCard";
 import { HTMLIcon } from "@/assets/HTMLIcon";
 
 export default function Home() {

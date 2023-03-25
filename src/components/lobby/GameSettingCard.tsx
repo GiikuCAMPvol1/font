@@ -7,7 +7,7 @@ type props = {
 const GameSettingCard = ({ className }: props) => {
   return (
     <div className={`${Styles.wrapper} ${className}`}>GameSettingCard</div>
-  )
-}
+  );
+};
 
-export default GameSettingCard
+export default GameSettingCard;

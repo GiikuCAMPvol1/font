@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import { userImgCacheAtom } from "@/atom/userImgCache";
 import { toSvg } from "jdenticon/standalone";
-import { LoadingIcon } from "@/assets/loadingIcon";
+import { LoadingIcon } from "@/assets/LoadingIcon";
 import Styles from "@/components/UserImg.module.scss";
 
 type props = {
