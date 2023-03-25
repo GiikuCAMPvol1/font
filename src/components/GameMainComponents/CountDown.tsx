@@ -56,7 +56,7 @@ export default function CountDown() {
 
   //上記の変数によってタイマーの表示する割合を設定
   const cycleStyle = {
-    background: `conic-gradient(red ${100 - percentage}%, white 0%)`,
+    background: `conic-gradient(yellowgreen ${100 - percentage}%, white 0%)`,
     borderRadius: "50%",
     width: "50px",
     height: "50px",
