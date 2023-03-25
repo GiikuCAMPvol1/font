@@ -16,12 +16,11 @@ interface ImageData {
   alt: string;
 }
 
-function ImageGallery() {
+function LanguageSelect() {
   const [selectedImageId, setSelectedImageId] = useState<number | null>(null);
 
   const images: ImageData[] = [
     { id: 1, src: jsImage, alt: 'Image 1' },
-    // ... 他のコードは変わらず
     { id: 2, src: pythonImage, alt: 'Image 2' },
     { id: 3, src: cImage, alt: 'Image 3' },
     { id: 4, src: javaImage, alt: 'Image 4' },
@@ -57,5 +56,5 @@ function ImageGallery() {
   );
 }
 
-export default ImageGallery;
+export default LanguageSelect;
 

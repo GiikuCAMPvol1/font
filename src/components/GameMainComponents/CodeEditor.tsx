@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import styles from '@/styles/GameMainStyles/CodeEditor.module.css';
 
-export default function Home() {
+export default function CodeEditor() {
   const [text, setText] = useState<string>('');
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {

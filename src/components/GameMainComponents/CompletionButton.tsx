@@ -2,7 +2,7 @@ import styles from '@/styles/GameMainStyles/CompletionButton.module.css'
 import Image from 'next/image';
 import CheckImage from '../../../public/GameMainImages/check.png';
 
-export default function Home() {
+export default function CompletionButton() {
   return (
     <div className={styles.CompletionButtonArea}>
         <Image src={CheckImage} alt="CheckImage" className={styles.CheckImage} />
