@@ -29,9 +29,9 @@ export type joinRoomRequest = {
   type: "joinRoomRequest";
   roomId: string;
   username: string;
-}
+};
 
 export type createRoomRequest = {
   type: "createRoomRequest";
   username: string;
-}
+};
