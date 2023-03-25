@@ -116,7 +116,7 @@ class WebsocketClient {
     });
   }
 
-  createRoomRequest(roomId: string, username: string) {
+  createRoomRequest(username: string) {
     return new Promise<joinRoomResponse>((resolve, reject) => {
       const handler = (e: MessageEvent) => {
         const data = JSON.parse(e.data) as unknown;

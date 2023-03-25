@@ -4,6 +4,9 @@ import Styles from "@/components/index/StartCard.module.scss";
 import { useState } from "react";
 import { generateUuid } from "@/utils/uuid";
 import { useIsomorphicEffect } from "@/utils/IsomorphicEffect";
+import {socketAtom} from "@/atom/socketAtom";
+import {useAtomValue} from "jotai";
+import {useRouter} from "next/router";
 
 type props = {
   className?: string;
@@ -12,16 +15,25 @@ type props = {
 const StartCard = ({ className }: props) => {
   const [userName, setUserName] = useState("");
   const [uuid, setUuid] = useState("");
+  const socket = useAtomValue(socketAtom);
+  const router = useRouter();
   const isomorphicEffect = useIsomorphicEffect();
   isomorphicEffect(() => {
     setUuid(generateUuid());
   }, []);
+  
+  const createRoom = () => {
+    void (async()=>{
+      const room = await socket?.createRoomRequest(userName);
+      if (room === undefined) return;
+      await router.push(`/lobby?${room.roomId}`);
+    })();
+  }
 
   return (
     <div className={`${Styles.wrapper} ${className}`}>
       <div className={Styles.inputContainer}>
         <div className={Styles.icon}>
-          <div id={uuid}></div>
           <UserImg userId={userName || uuid} />
         </div>
         <div className={Styles.input}>
@@ -35,7 +47,7 @@ const StartCard = ({ className }: props) => {
         </div>
       </div>
       <div className={Styles.buttonWrapper}>
-        <button className={Styles.button}>開始</button>
+        <button className={Styles.button} onClick={createRoom}>開始</button>
       </div>
     </div>
   );
