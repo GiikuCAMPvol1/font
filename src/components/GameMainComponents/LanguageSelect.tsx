@@ -21,6 +21,7 @@ function ImageGallery() {
 
   const images: ImageData[] = [
     { id: 1, src: jsImage, alt: 'Image 1' },
+    // ... 他のコードは変わらず
     { id: 2, src: pythonImage, alt: 'Image 2' },
     { id: 3, src: cImage, alt: 'Image 3' },
     { id: 4, src: javaImage, alt: 'Image 4' },
@@ -40,16 +41,21 @@ function ImageGallery() {
   return (
     <div className={styles.LanguageSelectArea}>
       {images.map((image) => (
-        <Image
+        <div
           key={image.id}
-          src={image.src}
-          alt={image.alt}
-          className={styles.Images}
+          onClick={() => handleImageClick(image.id)}
           style={imageStyle(image.id)}
-        />
+        >
+          <Image
+            src={image.src}
+            alt={image.alt}
+            className={styles.Images}
+          />
+        </div>
       ))}
     </div>
   );
 }
 
 export default ImageGallery;
+
