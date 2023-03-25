@@ -7,12 +7,12 @@ import Styles from "@/styles/Lobby.module.scss";
 export default function Lobby() {
   // Todo:招待ボタンを押したときの処理
   const InviteClick = () => {
-    console.log('Click Invite');
+    console.log("Click Invite");
   };
 
   // Todo:開始ボタンを押したときの処理
   const StartClick = () => {
-    console.log('Click Start');
+    console.log("Click Start");
   };
   return (
     <>
@@ -20,9 +20,9 @@ export default function Lobby() {
         <HTMLIcon className={Styles.logo} />
       </div>
       <div className={Styles.main}>
-        <UserListCard className={Styles.userListCard}/>
+        <UserListCard className={Styles.userListCard} />
         <div>
-          <GameSettingCard className={Styles.gameSettingCard}/>
+          <GameSettingCard className={Styles.gameSettingCard} />
           <div className={Styles.btnBox}>
             <LobbyBtn
               onClick={InviteClick}
@@ -40,5 +40,5 @@ export default function Lobby() {
         </div>
       </div>
     </>
-  )
-};
+  );
+}
