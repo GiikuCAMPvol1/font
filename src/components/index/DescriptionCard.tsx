@@ -1,4 +1,4 @@
-import Styles from "@/components/DescriptionCard.module.scss";
+import Styles from "@/components/index/DescriptionCard.module.scss";
 
 type props = {
   className?: string;

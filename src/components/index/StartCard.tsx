@@ -1,6 +1,6 @@
 import { UserImg } from "@/components/UserImg";
 import InputStyles from "@/styles/InputStyles.module.scss";
-import Styles from "@/components/StartCard.module.scss";
+import Styles from "@/components/index/StartCard.module.scss";
 import {useState} from "react";
 import {generateUuid} from "@/utils/uuid";
 import {useIsomorphicEffect} from "@/utils/IsomorphicEffect";
