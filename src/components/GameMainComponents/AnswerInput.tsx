@@ -1,8 +1,8 @@
-import React, { useState, ChangeEvent } from 'react';
-import styles from '@/styles/GameMainStyles/AnswerInput.module.css';
+import React, { useState, ChangeEvent } from "react";
+import styles from "@/styles/GameMainStyles/AnswerInput.module.css";
 
 function AnswerInput() {
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>("");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value);

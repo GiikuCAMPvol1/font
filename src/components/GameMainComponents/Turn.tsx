@@ -1,6 +1,6 @@
-import React, { useContext,useState } from 'react';
-import styles from '@/styles/GameMainStyles/Turn.module.css';
-import TurnContext from '@/context/TurnContext';
+import React, { useContext, useState } from "react";
+import styles from "@/styles/GameMainStyles/Turn.module.css";
+import TurnContext from "@/context/TurnContext";
 
 const Turn = () => {
   const { nowTurn, setNowTurn } = useContext(TurnContext);
@@ -11,6 +11,6 @@ const Turn = () => {
       {nowTurn}/{maxTurn}
     </div>
   );
-}
+};
 
 export default Turn;

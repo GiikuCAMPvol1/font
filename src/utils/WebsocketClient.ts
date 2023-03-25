@@ -1,6 +1,10 @@
 import { WebsocketRequests } from "@/@types/WebsocketRequest";
 import { typeGuard } from "@/utils/typeGuard";
-import {onResultOpen, onStateUpdate, WebsocketEvents} from "@/@types/WebsocketEvent";
+import {
+  onResultOpen,
+  onStateUpdate,
+  WebsocketEvents,
+} from "@/@types/WebsocketEvent";
 import {
   joinRoomResponse,
   WebsocketResponses,
@@ -154,8 +158,8 @@ class WebsocketClient {
     });
   }
 
-  openNextResultRequest(){
-    return new Promise<onResultOpen>((resolve, reject)=>{
+  openNextResultRequest() {
+    return new Promise<onResultOpen>((resolve, reject) => {
       const handler = (e: MessageEvent) => {
         const data = JSON.parse(e.data) as unknown;
         if (!typeGuard.onResultOpen(data)) {
@@ -168,7 +172,7 @@ class WebsocketClient {
       this.sendMessage({
         type: "openNextResultRequest",
       });
-    })
+    });
   }
 }
 
