@@ -30,7 +30,7 @@ const GameSettingCard = ({ className, difficulty, setDifficulty }: Props) => {
           min="0"
           max="100"
           value={difficulty}
-          className={`${Styles.rangeBar} range range-primary`}
+          className={`${Styles.rangeBar} ${Styles.range} ${Styles.rangePrimary}`}
           step="25"
           onChange={handleChangeDifficulty}
         />
