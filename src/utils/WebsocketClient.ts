@@ -7,8 +7,9 @@ type MessageEventHandler = (
   param: MessageEvent<WebsocketEvents | WebsocketResponses>
 ) => unknown;
 
+let client:WebSocket;
+
 class WebsocketClient {
-  public client?: WebSocket;
   public isActive: boolean;
   public userId: string | null;
   private token: string | null;
@@ -20,17 +21,36 @@ class WebsocketClient {
     this.isActive = false;
     this.handlers = [];
   }
+
   connect() {
-    return new Promise<void>((resolve, reject) => {
-      if (this.client?.readyState !== 1) {
-        this.client = new WebSocket("ws://localhost:5000");
+    return new Promise<void>((resolve,reject)=>{
+      if (client?.readyState === 1) {
+        resolve()
+        return;
+      }
+      client = new WebSocket("ws://127.0.0.1:9001");
+      client.onopen = () => {
+        client.onopen = client.onerror = null;
+        resolve();
+      }
+      client.onerror = () => {
+        client.onopen = client.onerror = null;
+        reject();
+      }
+    })
+  }
+
+  setup() {
+    return new Promise<void>(async(resolve, reject) => {
+      if (client?.readyState !== 1) {
+        await this.connect()
       }
       if (this.isActive) {
         resolve();
         return;
       }
       const handler = (e: MessageEvent) => {
-        this.client?.removeEventListener("message", handler);
+        client?.removeEventListener("message", handler);
         const data = JSON.parse(e.data) as unknown;
         if (!typeGuard.userIdResponse(data)) {
           reject();
@@ -43,10 +63,9 @@ class WebsocketClient {
         this.isActive = true;
         resolve();
       };
-      this.client.addEventListener("message", handler);
-      this.client.addEventListener("close", this.connect);
-      this.handlers.forEach((handler) => {
-        this.client?.addEventListener("message", handler);
+      client.addEventListener("message", handler);
+      this.handlers?.forEach((handler) => {
+        client?.addEventListener("message", handler);
       });
       this.sendMessage({
         type: "userIdRequest",
@@ -54,18 +73,24 @@ class WebsocketClient {
     });
   }
   addMessageHandler(handler: MessageEventHandler) {
+    client?.addEventListener("message", handler);
     this.handlers.push(handler);
-    this.client?.addEventListener("message", handler);
+  }
+  removeMessageHandler(handler: MessageEventHandler){
+    client?.removeEventListener("message", handler);
+    const index = this.handlers.indexOf(handler);
+    if (index === -1)return;
+    this.handlers = this.handlers.splice(index,1);
   }
   sendMessage(message: WebsocketRequests) {
-    this.client?.send(JSON.stringify(message));
+    client?.send(JSON.stringify(message));
   }
   close() {
     this.isActive = false;
     this.handlers.forEach((handler) => {
-      this.client?.removeEventListener("message", handler);
+      client?.removeEventListener("message", handler);
     });
-    this.client?.close();
+    client?.close();
   }
 }
 
