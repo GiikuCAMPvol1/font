@@ -5,3 +5,4 @@ export default function UserIcon() {
     <div className={styles.UserIcon}>
     </div>
   )
+}
