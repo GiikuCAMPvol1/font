@@ -38,7 +38,7 @@ export default function Lobby() {
   }, []);
   
   const InviteClick = () => {
-    const inviteLink = `https://${location.host}/?id=${router.query.id}`;
+    const inviteLink = `${location.origin}/?id=${router.query.id}`;
     if (navigator.clipboard) {
       void navigator.clipboard.writeText(inviteLink);
     }
