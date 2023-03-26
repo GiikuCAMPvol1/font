@@ -10,12 +10,12 @@ export type ResultOpen = {
   data: string;
   userId: string;
   username: string;
-}[]
+}[];
 
 const Result = () => {
   // 現在の画面状態(初期値:wait)
-  const [crrDisplay, setCrrDisplay] = useState("wait")
-  const [resultOpenData, setResultOpenData] = useState<ResultOpen>()
+  const [crrDisplay, setCrrDisplay] = useState("wait");
+  const [resultOpenData, setResultOpenData] = useState<ResultOpen>();
   useEffect(() => {
     // Todo:ページを開いたときに参加者情報の取得&回答取得
     const dummyResultOpenData = [
@@ -67,16 +67,16 @@ const Result = () => {
         userId: "<uuid>",
         username: "<string>",
       },
-    ]
-    setResultOpenData(dummyResultOpenData)
-  }, [])
-  
+    ];
+    setResultOpenData(dummyResultOpenData);
+  }, []);
+
   // Todo:開始ボタンを押したときの処理
   const StartClick = () => {
     console.log("Click Start");
-    setCrrDisplay("next")
+    setCrrDisplay("next");
   };
-  
+
   // Todo:次へボタンを押したときの処理
   const NextClick = () => {
     console.log("Click Next");
@@ -84,12 +84,12 @@ const Result = () => {
     //   setCrrDisplay("fin")
     // }
   };
-  
+
   // Todo:終了ボタンを押したときの処理
   const FinClick = () => {
     console.log("Click Fin");
   };
-  
+
   return (
     <>
       <div className={Styles.logoWrapper}>
@@ -98,9 +98,7 @@ const Result = () => {
       <div className={Styles.main}>
         <UserListCard className={Styles.userListCard} />
         <div>
-          <ResultCard
-            resultOpenData={resultOpenData}
-          />
+          <ResultCard resultOpenData={resultOpenData} />
           <div className={Styles.btnBox}>
             <div></div>
             {crrDisplay == "wait" && (
@@ -135,4 +133,4 @@ const Result = () => {
   );
 };
 
-export default Result
+export default Result;

@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
-import { useAtom } from 'jotai';
-import { turnAtom } from '@/atom/turnAtom';
+import { useAtom } from "jotai";
+import { turnAtom } from "@/atom/turnAtom";
 import styles from "@/styles/GameMainStyles/CodeEditor.module.css";
 
 export default function CodeEditor() {
@@ -18,15 +18,18 @@ export default function CodeEditor() {
 
   return (
     <div className={styles.CodeEditor}>
-      {nowTurn % 2 === 1 ?
+      {nowTurn % 2 === 1 ? (
         <textarea
           className={styles.textarea}
           value={text}
           onChange={handleChange}
         ></textarea>
-      :
-        <div className={styles.answerarea} dangerouslySetInnerHTML={createMarkup(text)}></div>
-      }
+      ) : (
+        <div
+          className={styles.answerarea}
+          dangerouslySetInnerHTML={createMarkup(text)}
+        ></div>
+      )}
     </div>
   );
 }

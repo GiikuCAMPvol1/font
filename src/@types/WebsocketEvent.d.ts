@@ -38,12 +38,12 @@ export type onResultOpen = {
 export type resultAnswer = User & {
   type: "answer";
   data: string;
-}
+};
 
 export type resultCode = User & {
   type: "code";
   data: string;
-}
+};
 
 export type onGameEnd = {
   type: "onGameEnd";

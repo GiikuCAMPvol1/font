@@ -10,9 +10,7 @@ import {
   WebsocketResponses,
 } from "@/@types/WebsocketResponse";
 
-type MessageEventHandler = (
-  param: MessageEvent
-) => unknown;
+type MessageEventHandler = (param: MessageEvent) => unknown;
 
 let client: WebSocket;
 

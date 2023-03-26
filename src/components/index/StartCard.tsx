@@ -8,7 +8,7 @@ import { socketAtom } from "@/atom/socketAtom";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
 import { roomMetadataAtom, userListAtom } from "@/atom/RoomAtom";
-import {convertInvalidUserList} from "@/utils/convertInvalidUserList";
+import { convertInvalidUserList } from "@/utils/convertInvalidUserList";
 
 type props = {
   className?: string;

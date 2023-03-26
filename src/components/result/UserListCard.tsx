@@ -9,18 +9,20 @@ type props = {
 
 const UserListCard = ({ className }: props) => {
   // 参加できる人の数に応じてユーザーの配列データを書き換える
-  const dummyData = [{
-    userId: "0",
-    userName: "ホスト",
-  },
-  {
-    userId: "1",
-    userName: "参加者1",
-  },
-  {
-    userId: "2",
-    userName: "参加者2",
-  }]
+  const dummyData = [
+    {
+      userId: "0",
+      userName: "ホスト",
+    },
+    {
+      userId: "1",
+      userName: "参加者1",
+    },
+    {
+      userId: "2",
+      userName: "参加者2",
+    },
+  ];
   const [joinUserArr, setJoinUserArr] = useState(dummyData);
 
   // Todo:部屋に参加者が入ってきたときの処理
