@@ -156,8 +156,10 @@ class WebsocketClient {
   }
 
   endPhaseRequest(type: "coding" | "reading", data: string) {
+    if (!this.userId)return;
     this.sendMessage({
       type: "endPhaseRequest",
+      userId: this.userId,
       phase: type,
       data: data,
     });

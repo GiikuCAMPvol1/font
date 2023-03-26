@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { useAtom } from "jotai";
+import {useAtom, useAtomValue} from "jotai";
 import { turnAtom } from "@/atom/turnAtom";
 import styles from "@/styles/GameMainStyles/CompletionButton.module.css";
 import Image from "next/image";
 import CheckImage from "../../../public/GameMainImages/check.png";
+import {socketAtom} from "@/atom/socketAtom";
+import {phaseAtom, phaseDataAtom} from "@/atom/PhaseAtom";
 
 export default function CompletionButton() {
   const [turnState, setTurnState] = useAtom(turnAtom);
   const [maxturnState, setMaxTurnState] = useAtom(turnAtom);
   const { nowTurn } = turnState;
   const { maxTurn } = maxturnState;
+  const socket = useAtomValue(socketAtom);
+  const phaseItem = useAtomValue(phaseAtom);
+  const data = useAtomValue(phaseDataAtom);
 
   const nowTurnRef = useRef(nowTurn);
 
@@ -18,15 +23,8 @@ export default function CompletionButton() {
   }, [nowTurn]);
 
   const Completionfunk = useCallback(() => {
-    if (nowTurnRef.current < maxTurn) {
-      console.log("turn");
-      setTurnState((prevState) => ({
-        ...prevState,
-        nowTurn: prevState.nowTurn + 1,
-      }));
-    } else {
-      //全てのターンが終わった時の処理
-    }
+    if (!socket || !phaseItem)return;
+    socket.endPhaseRequest(phaseItem.phase, data)
   }, [maxTurn, setTurnState]);
 
   return (

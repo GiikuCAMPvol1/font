@@ -20,6 +20,7 @@ export type userIdRequest =
 export type endPhaseRequest = {
   type: "endPhaseRequest";
   phase: "coding" | "reading";
+  userId: string;
   data: string;
 };
 

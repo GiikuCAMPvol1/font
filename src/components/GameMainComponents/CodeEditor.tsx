@@ -2,9 +2,10 @@ import React, { useState, ChangeEvent } from "react";
 import { useAtom } from "jotai";
 import { turnAtom } from "@/atom/turnAtom";
 import styles from "@/styles/GameMainStyles/CodeEditor.module.css";
+import {phaseDataAtom} from "@/atom/PhaseAtom";
 
 export default function CodeEditor() {
-  const [text, setText] = useState<string>("");
+  const [text, setText] = useAtom(phaseDataAtom);
   const [turnState, setTurnState] = useAtom(turnAtom);
   const { nowTurn } = turnState;
 

@@ -3,4 +3,6 @@ import { PhaseItem } from "@/@types/Phase";
 
 const phaseAtom = atom<PhaseItem | undefined>(undefined);
 
-export { phaseAtom };
+const phaseDataAtom = atom<string>("");
+
+export { phaseAtom, phaseDataAtom };

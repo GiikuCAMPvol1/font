@@ -1,17 +1,16 @@
 import React from "react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { turnAtom } from "@/atom/turnAtom";
 import styles from "@/styles/GameMainStyles/Turn.module.css";
+import { userListAtom } from "@/atom/RoomAtom";
 
 const Turn = () => {
-  const [turnState, setTurnState] = useAtom(turnAtom);
-  const [maxturnState, setMaxTurnState] = useAtom(turnAtom);
-  const { nowTurn } = turnState;
-  const { maxTurn } = maxturnState;
+  const [turnState] = useAtom(turnAtom);
+  const userList = useAtomValue(userListAtom);
 
   return (
     <div className={styles.turn}>
-      {nowTurn}/{maxTurn}
+      {turnState.nowTurn}/{userList.length}
     </div>
   );
 };

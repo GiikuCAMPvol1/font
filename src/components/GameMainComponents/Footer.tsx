@@ -1,18 +1,16 @@
-import React, { useContext } from "react";
 import styles from "@/styles/GameMainStyles/Footer.module.css";
 import LanguageSelect from "@/components/GameMainComponents/LanguageSelect";
 import AnswerInput from "@/components/GameMainComponents/AnswerInput";
 import CompletionButton from "@/components/GameMainComponents/CompletionButton";
-import { useAtom } from "jotai";
-import { turnAtom } from "@/atom/turnAtom";
+import { useAtomValue } from "jotai";
+import { phaseAtom } from "@/atom/PhaseAtom";
 
 export default function Footer() {
-  const [turnState] = useAtom(turnAtom);
-  const { nowTurn } = turnState;
+  const phaseItem = useAtomValue(phaseAtom);
 
   return (
     <div className={styles.footer}>
-      {nowTurn % 2 === 1 ? <LanguageSelect /> : <AnswerInput />}
+      {phaseItem?.phase === "coding" ? <LanguageSelect /> : <AnswerInput />}
       <CompletionButton />
     </div>
   );

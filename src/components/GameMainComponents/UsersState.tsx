@@ -1,16 +1,18 @@
-// UsersState.tsx
-import React, { useState } from "react";
-import styles from "@/styles/GameMainStyles/UsersState.module.css";
+import Styles from "@/Styles/GameMainStyles/UsersState.module.css";
 import { UserImg } from "@/components/UserImg";
+import { useAtomValue } from "jotai";
+import { userListAtom } from "@/atom/RoomAtom";
+import {CheckIcon} from "@/assets/CheckIcon";
 
 export default function UsersState() {
-  const [userIds, setUserIds] = useState<number[]>([1, 2, 3, 4, 5]);
+  const userList = useAtomValue(userListAtom);
 
   return (
-    <div className={styles.UsersStateArea}>
-      {userIds.map((userId) => (
-        <div className={styles.ImgSize} key={userId}>
-          <UserImg key={userId} userId={userId.toString()} />
+    <div className={Styles.UsersStateArea}>
+      {userList.map((user) => (
+        <div className={Styles.ImgSize} key={user.userId}>
+          <UserImg userId={user.username} />
+          {user.completed && <CheckIcon className={Styles.check}/>}
         </div>
       ))}
     </div>

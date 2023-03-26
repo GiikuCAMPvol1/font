@@ -68,7 +68,7 @@ export default function App({ Component, pageProps }: AppProps) {
       websocket.removeMessageHandler(phaseHandler);
       websocket.close();
     };
-  }, [setSocket, router, setPhaseItem]);
+  }, []);
 
   return (
     <div className={Styles.body}>
