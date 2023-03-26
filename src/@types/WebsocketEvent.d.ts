@@ -17,7 +17,7 @@ export type onRoomUserListUpdate = {
 
 export type onPhaseStart = {
   type: "onPhaseStart";
-  phase: "answer" | "code";
+  phase: "coding" | "reading";
   data: string;
 };
 export type onStateUpdate = {
