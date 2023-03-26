@@ -23,7 +23,7 @@ const Result = () => {
         type: "answer",
         data: "リンゴと表示",
         userId: "<uuid>",
-        username: "<string>",
+        username: "最初の人",
       },
       {
         type: "code",
