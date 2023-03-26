@@ -74,6 +74,14 @@ class WebsocketClient {
       this.handlers?.forEach((handler) => {
         client?.addEventListener("message", handler);
       });
+      if (this.userId&&this.token){
+        this.sendMessage({
+          type: "userIdRequest",
+          userId: this.userId,
+          token: this.token
+        });
+        return;
+      }
       this.sendMessage({
         type: "userIdRequest",
       });
