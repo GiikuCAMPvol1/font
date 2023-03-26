@@ -26,7 +26,7 @@ const SettingBlock = ({
       <div className={Styles.titleWrapper}>
         {title}
         <Image src={src} alt={title} width={20} height={20} />
-        {crrValue}
+        {crrValue}{typeof crrValue === 'number' && "分"}
       </div>
 
       <input
