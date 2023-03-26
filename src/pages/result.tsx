@@ -1,6 +1,6 @@
 import { HTMLIcon } from "@/assets/HTMLIcon"
 import LobbyBtn from "@/components/lobby/LobbyBtn";
-import { UserListCard } from "@/components/lobby/UserListCard";
+import { UserListCard } from "@/components/result/UserListCard";
 import ResultCard from "@/components/result/ResultCard";
 import Styles from "@/styles/Lobby.module.scss";
 
