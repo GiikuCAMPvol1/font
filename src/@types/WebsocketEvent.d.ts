@@ -26,12 +26,20 @@ export type onStateUpdate = {
 };
 export type onResultOpen = {
   type: "onResultOpen";
-  result: (User & {
-    type: "answer" | "code";
-    data: string;
-  })[];
+  result: (resultAnswer | resultCode)[];
   isLast: boolean;
 };
+
+export type resultAnswer = User & {
+  type: "answer";
+  data: string;
+}
+
+export type resultCode = User & {
+  type: "code";
+  data: string;
+}
+
 export type onGameEnd = {
   type: "onGameEnd";
 };
