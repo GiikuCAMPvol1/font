@@ -158,21 +158,10 @@ class WebsocketClient {
   }
 
   endPhaseRequest(type: "coding" | "reading", data: string) {
-    return new Promise<onStateUpdate>((resolve, reject) => {
-      const handler = (e: MessageEvent) => {
-        const data = JSON.parse(e.data) as unknown;
-        if (!typeGuard.onStateUpdate(data)) {
-          reject();
-          return;
-        }
-        this.removeMessageHandler(handler);
-        resolve(e.data);
-      };
-      this.sendMessage({
-        type: "endPhaseRequest",
-        phase: type,
-        data: data,
-      });
+    this.sendMessage({
+      type: "endPhaseRequest",
+      phase: type,
+      data: data,
     });
   }
 
