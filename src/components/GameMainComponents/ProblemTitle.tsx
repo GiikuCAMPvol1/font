@@ -38,16 +38,8 @@ const ProblemTitle = () => {
 
   return (
     <div className={styles.TitleArea}>
-      {problemTitle}
-      {nowTurn % 2 === 0 ? (
-        <Image
-          src={images[thisLanguage].src}
-          alt={images[thisLanguage].alt}
-          className={styles.Images}
-        />
-      ) : (
-        ""
-      )}
+      {nowTurn % 2 === 1 ? problemTitle : "このコードを説明せよ"}
+      {nowTurn % 2 === 0 ? <Image src={images[thisLanguage].src} alt={images[thisLanguage].alt} className={styles.Images} /> : ""}
     </div>
   );
 };

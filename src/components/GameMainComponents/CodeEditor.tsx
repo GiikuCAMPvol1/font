@@ -1,6 +1,6 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
-import { useAtom } from "jotai";
-import { turnAtom } from "@/atom/turnAtom";
+
+import React, { useState, ChangeEvent } from "react";
+import { useAtom } from 'jotai';
 import styles from "@/styles/GameMainStyles/CodeEditor.module.css";
 
 export default function CodeEditor() {
@@ -8,9 +8,12 @@ export default function CodeEditor() {
   const [turnState, setTurnState] = useAtom(turnAtom);
   const { nowTurn } = turnState;
 
-  //テキストエリアの値取得
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     setText(event.target.value);
+  };
+
+  const createMarkup = (text: string) => {
+    return { __html: text.replace(/\n/g, "<br>") };
   };
 
   return (
@@ -21,9 +24,9 @@ export default function CodeEditor() {
           value={text}
           onChange={handleChange}
         ></textarea>
-      ) : (
-        <div className={styles.answerarea}>{text}</div>
-      )}
+      :
+        <div className={styles.answerarea} dangerouslySetInnerHTML={createMarkup(text)}></div>
+      }
     </div>
   );
 }
