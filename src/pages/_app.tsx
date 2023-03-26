@@ -17,7 +17,7 @@ const Wrapper = styled.div.attrs<{ renderScale: number }>((p) => ({
 
 export default function App({ Component, pageProps }: AppProps) {
   const [scale, setScale] = useState(1);
-  const [isInited, setIsInited] = useState(true); //todo: バックエンドが完成したらfalseにする
+  const [isInited, setIsInited] = useState(false); //todo: バックエンドが完成したらfalseにする
   const setSocket = useSetAtom(socketAtom);
   const IsomorphicEffect = useIsomorphicEffect();
   IsomorphicEffect(() => {
