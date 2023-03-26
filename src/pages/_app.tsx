@@ -8,6 +8,9 @@ import { WebsocketClient } from "@/utils/WebsocketClient";
 import { Loading } from "@/components/Loading/Loading";
 import { useSetAtom } from "jotai";
 import { socketAtom } from "@/atom/socketAtom";
+import {phaseAtom} from "@/atom/PhaseAtom";
+import {typeGuard} from "@/utils/typeGuard";
+import {useRouter} from "next/router";
 
 const Wrapper = styled.div.attrs<{ renderScale: number }>((p) => ({
   style: {
@@ -19,6 +22,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const [scale, setScale] = useState(1);
   const [isInited, setIsInited] = useState(false); //todo: バックエンドが完成したらfalseにする
   const setSocket = useSetAtom(socketAtom);
+  const setPhaseItem = useSetAtom(phaseAtom);
+  const router = useRouter();
   const IsomorphicEffect = useIsomorphicEffect();
   IsomorphicEffect(() => {
     const onResize = () => {
@@ -44,11 +49,23 @@ export default function App({ Component, pageProps }: AppProps) {
     }
     const websocket = new WebsocketClient();
     socketRef.current = websocket;
+    
+    const phaseHandler = (e:MessageEvent) => {
+      const data = JSON.parse(e.data) as unknown;
+      if (!typeGuard.onPhaseStart(data))return;
+      setPhaseItem(data);
+      if (router.pathname !== "/gamemain"){
+        router.push("/gamemain");
+      }
+    }
+    
     websocket.setup().then(() => {
       setSocket(websocket);
       setIsInited(true);
+      websocket.addMessageHandler(phaseHandler);
     });
     return () => {
+      websocket.removeMessageHandler(phaseHandler);
       websocket.close();
     };
   }, [setSocket]);

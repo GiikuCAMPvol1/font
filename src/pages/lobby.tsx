@@ -10,6 +10,7 @@ import { userListAtom } from "@/atom/RoomAtom";
 import { socketAtom } from "@/atom/socketAtom";
 import { typeGuard } from "@/utils/typeGuard";
 import { convertInvalidUserList } from "@/utils/convertInvalidUserList";
+import {roomMetadataAtom} from "@/atom/RoomAtom";
 
 export default function Lobby() {
   // [props]難易度(数値が低いほど易しい)※[0:Easy, 1:Normal, 2:Hard]
@@ -21,6 +22,7 @@ export default function Lobby() {
 
   const socket = useAtomValue(socketAtom);
   const setUserList = useSetAtom(userListAtom);
+  const roomMetadata = useAtomValue(roomMetadataAtom);
 
   const router = useRouter();
 
@@ -44,9 +46,17 @@ export default function Lobby() {
     }
   };
 
-  // Todo:開始ボタンを押したときの処理
+  
+  
   const StartClick = () => {
-    console.log("Click Start");
+    if (!roomMetadata)return;
+    socket?.sendMessage({
+      type: "startGameRequest",
+      roomId: roomMetadata?.roomId,
+      difficulty:difficulty,
+      readingInputTime:answerInputTime,
+      codingInputTime:codeInputTime,
+    })
   };
   return (
     <>
@@ -72,12 +82,13 @@ export default function Lobby() {
               alt={"招待アイコン"}
               text={"招待"}
             />
-            <LobbyBtn
-              onClick={StartClick}
-              src={"/game/Start.png"}
-              alt={"開始アイコン"}
-              text={"開始"}
-            />
+            {roomMetadata?.isOwner &&
+                <LobbyBtn
+                    onClick={StartClick}
+                    src={"/game/Start.png"}
+                    alt={"開始アイコン"}
+                    text={"開始"}
+                />}
           </div>
         </div>
       </div>
