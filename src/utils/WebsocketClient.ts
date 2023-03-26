@@ -121,7 +121,7 @@ class WebsocketClient {
           return;
         }
         this.removeMessageHandler(handler);
-        resolve(e.data);
+        resolve(data);
       };
       this.addMessageHandler(handler);
       this.sendMessage({
@@ -146,7 +146,7 @@ class WebsocketClient {
           return;
         }
         this.removeMessageHandler(handler);
-        resolve(e.data);
+        resolve(data);
       };
       this.addMessageHandler(handler);
       this.sendMessage({
