@@ -98,7 +98,9 @@ const Result = () => {
       <div className={Styles.main}>
         <UserListCard className={Styles.userListCard} />
         <div>
-          <ResultCard/>
+          <ResultCard
+            resultOpenData={resultOpenData}
+          />
           <div className={Styles.btnBox}>
             <div></div>
             {crrDisplay == "wait" && (
