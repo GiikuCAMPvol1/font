@@ -27,14 +27,19 @@ const StartCard = ({ className }: props) => {
 
   const createRoom = () => {
     void (async () => {
-      const room = await socket?.createRoomRequest(userName);
+      const room = await (async () => {
+        if (typeof router.query.id !== "string") {
+          return await socket?.createRoomRequest(userName);
+        }
+        return await socket?.joinRoomRequest(router.query.id, userName);
+      })();
       if (room === undefined) return;
       setUserList(room.users);
       setRoom({
         roomId: room.roomId,
         isOwner: room.owner,
       });
-      await router.push(`/lobby?${room.roomId}`);
+      await router.push(`/lobby?id=${room.roomId}`);
     })();
   };
 

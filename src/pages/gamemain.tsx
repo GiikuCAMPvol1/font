@@ -6,12 +6,11 @@ import styles from "@/styles/GameMainStyles/GameMain.module.css";
 import TurnContext from "@/context/TurnContext";
 
 export default function Home() {
-
   return (
-      <div>
-        <Header />
-        <Container />
-        <Footer />
-      </div>
+    <div>
+      <Header />
+      <Container />
+      <Footer />
+    </div>
   );
 }

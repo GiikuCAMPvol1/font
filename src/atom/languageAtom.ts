@@ -1,5 +1,5 @@
-import { atom } from 'jotai';
+import { atom } from "jotai";
 
 export const languageAtom = atom({
-  thisLanguage:0,
+  thisLanguage: 0,
 });

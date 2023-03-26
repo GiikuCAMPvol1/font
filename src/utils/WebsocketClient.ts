@@ -74,6 +74,14 @@ class WebsocketClient {
       this.handlers?.forEach((handler) => {
         client?.addEventListener("message", handler);
       });
+      if (this.userId && this.token) {
+        this.sendMessage({
+          type: "userIdRequest",
+          userId: this.userId,
+          token: this.token,
+        });
+        return;
+      }
       this.sendMessage({
         type: "userIdRequest",
       });
@@ -102,6 +110,10 @@ class WebsocketClient {
 
   joinRoomRequest(roomId: string, username: string) {
     return new Promise<joinRoomResponse>((resolve, reject) => {
+      if (!this.userId) {
+        reject();
+        return;
+      }
       const handler = (e: MessageEvent) => {
         const data = JSON.parse(e.data) as unknown;
         if (!typeGuard.joinRoomResponse(data)) {
@@ -115,6 +127,7 @@ class WebsocketClient {
       this.sendMessage({
         type: "joinRoomRequest",
         roomId,
+        userId: this.userId,
         username,
       });
     });
@@ -122,6 +135,10 @@ class WebsocketClient {
 
   createRoomRequest(username: string) {
     return new Promise<joinRoomResponse>((resolve, reject) => {
+      if (!this.userId) {
+        reject();
+        return;
+      }
       const handler = (e: MessageEvent) => {
         const data = JSON.parse(e.data) as unknown;
         if (!typeGuard.joinRoomResponse(data)) {
@@ -134,12 +151,13 @@ class WebsocketClient {
       this.addMessageHandler(handler);
       this.sendMessage({
         type: "createRoomRequest",
+        userId: this.userId,
         username,
       });
     });
   }
 
-  endPhaseRequest(type: "code" | "answer", data: string) {
+  endPhaseRequest(type: "coding" | "reading", data: string) {
     return new Promise<onStateUpdate>((resolve, reject) => {
       const handler = (e: MessageEvent) => {
         const data = JSON.parse(e.data) as unknown;

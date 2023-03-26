@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { useAtom } from 'jotai';
-import { turnAtom } from '@/atom/turnAtom';
+import { useAtom } from "jotai";
+import { turnAtom } from "@/atom/turnAtom";
 import styles from "@/styles/GameMainStyles/CountDown.module.css";
 
 export default function CountDown() {
@@ -30,13 +30,12 @@ export default function CountDown() {
     nowTurnRef.current = nowTurn;
   }, [nowTurn]);
 
-
   //時間が0になった時にターンを進める
-  useEffect(()=>{
-    if(0 >= time){
+  useEffect(() => {
+    if (0 >= time) {
       //時間が0になった時の処理
     }
-  },[time])
+  }, [time]);
 
   //テキスト入力とプログラム入力の制限時間を代入
   useEffect(() => {
