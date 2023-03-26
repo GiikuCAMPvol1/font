@@ -1,4 +1,4 @@
-import { HTMLIcon } from "@/assets/HTMLIcon"
+import { HTMLIcon } from "@/assets/HTMLIcon";
 import LobbyBtn from "@/components/lobby/LobbyBtn";
 import { UserListCard } from "@/components/result/UserListCard";
 import ResultCard from "@/components/result/ResultCard";
@@ -18,7 +18,7 @@ const result = () => {
       <div className={Styles.main}>
         <UserListCard className={Styles.userListCard} />
         <div>
-          <ResultCard/>
+          <ResultCard />
           <div className={Styles.btnBox}>
             <div></div>
             <LobbyBtn
@@ -32,7 +32,7 @@ const result = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default result
+export default result;

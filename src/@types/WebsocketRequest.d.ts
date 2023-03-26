@@ -47,7 +47,7 @@ export type gameEndRequest = {
 export type startGameRequest = {
   type: "startGameRequest";
   difficulty: number;
-  roomId:string;
+  roomId: string;
   readingInputTime: number;
   codingInputTime: number;
-}
+};

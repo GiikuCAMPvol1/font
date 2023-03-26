@@ -27,11 +27,11 @@ const StartCard = ({ className }: props) => {
 
   const createRoom = () => {
     void (async () => {
-      const room = await (async()=>{
-        if (typeof router.query.id !== "string"){
+      const room = await (async () => {
+        if (typeof router.query.id !== "string") {
           return await socket?.createRoomRequest(userName);
         }
-        return await socket?.joinRoomRequest(router.query.id,userName);
+        return await socket?.joinRoomRequest(router.query.id, userName);
       })();
       if (room === undefined) return;
       setUserList(room.users);

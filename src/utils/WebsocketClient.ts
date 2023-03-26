@@ -74,11 +74,11 @@ class WebsocketClient {
       this.handlers?.forEach((handler) => {
         client?.addEventListener("message", handler);
       });
-      if (this.userId&&this.token){
+      if (this.userId && this.token) {
         this.sendMessage({
           type: "userIdRequest",
           userId: this.userId,
-          token: this.token
+          token: this.token,
         });
         return;
       }
@@ -151,7 +151,7 @@ class WebsocketClient {
       this.addMessageHandler(handler);
       this.sendMessage({
         type: "createRoomRequest",
-        userId:this.userId,
+        userId: this.userId,
         username,
       });
     });

@@ -1,7 +1,7 @@
-import React from 'react';
-import { useAtom } from 'jotai';
-import { turnAtom } from '@/atom/turnAtom';
-import styles from '@/styles/GameMainStyles/Turn.module.css';
+import React from "react";
+import { useAtom } from "jotai";
+import { turnAtom } from "@/atom/turnAtom";
+import styles from "@/styles/GameMainStyles/Turn.module.css";
 
 const Turn = () => {
   const [turnState, setTurnState] = useAtom(turnAtom);
