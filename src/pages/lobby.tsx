@@ -4,6 +4,7 @@ import LobbyBtn from "@/components/lobby/LobbyBtn";
 import { UserListCard } from "@/components/lobby/UserListCard";
 import Styles from "@/styles/Lobby.module.scss";
 import { useState } from "react";
+import {useRouter} from "next/router";
 
 export default function Lobby() {
   // [props]難易度(数値が低いほど易しい)※[0:Easy, 1:Normal, 2:Hard]
@@ -13,9 +14,14 @@ export default function Lobby() {
   // [props]コード記載制限時間(分)
   const [codeInputTime, setCodeInputTime] = useState(5);
 
+  const router = useRouter();
+
   // Todo:招待ボタンを押したときの処理
   const InviteClick = () => {
-    console.log("Click Invite");
+    const inviteLink = `https://${location.host}/lobby?id=${router.query.id}`;
+    if(navigator.clipboard){
+      void navigator.clipboard.writeText(inviteLink);
+    }
   };
 
   // Todo:開始ボタンを押したときの処理
