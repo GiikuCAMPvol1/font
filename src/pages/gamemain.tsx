@@ -1,9 +1,6 @@
-import React, { useState } from "react";
 import Header from "@/components/GameMainComponents/Header";
 import Container from "@/components/GameMainComponents/Container";
 import Footer from "@/components/GameMainComponents/Footer";
-import styles from "@/styles/GameMainStyles/GameMain.module.css";
-import TurnContext from "@/context/TurnContext";
 
 export default function Home() {
   return (

@@ -6,11 +6,10 @@ import Styles from "@/styles/Lobby.module.scss";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAtomValue, useSetAtom } from "jotai";
-import { userListAtom } from "@/atom/RoomAtom";
+import { userListAtom, roomMetadataAtom } from "@/atom/RoomAtom";
 import { socketAtom } from "@/atom/socketAtom";
 import { typeGuard } from "@/utils/typeGuard";
 import { convertInvalidUserList } from "@/utils/convertInvalidUserList";
-import {roomMetadataAtom} from "@/atom/RoomAtom";
 
 export default function Lobby() {
   // [props]難易度(数値が低いほど易しい)※[0:Easy, 1:Normal, 2:Hard]
@@ -31,13 +30,12 @@ export default function Lobby() {
       const data = JSON.parse(e.data) as unknown;
       if (!typeGuard.onRoomUserListUpdate(data)) return;
       setUserList(convertInvalidUserList(data.users[0]));
-      //setUserList()
     };
     socket?.addMessageHandler(handler);
     return () => {
       socket?.removeMessageHandler(handler);
     };
-  }, []);
+  }, [setUserList, socket]);
 
   const InviteClick = () => {
     const inviteLink = `${location.origin}/?id=${router.query.id}`;
@@ -46,17 +44,15 @@ export default function Lobby() {
     }
   };
 
-  
-  
   const StartClick = () => {
-    if (!roomMetadata)return;
+    if (!roomMetadata) return;
     socket?.sendMessage({
       type: "startGameRequest",
       roomId: roomMetadata?.roomId,
-      difficulty:difficulty,
-      readingInputTime:answerInputTime,
-      codingInputTime:codeInputTime,
-    })
+      difficulty: difficulty,
+      readingInputTime: answerInputTime,
+      codingInputTime: codeInputTime,
+    });
   };
   return (
     <>
@@ -82,13 +78,14 @@ export default function Lobby() {
               alt={"招待アイコン"}
               text={"招待"}
             />
-            {roomMetadata?.isOwner &&
-                <LobbyBtn
-                    onClick={StartClick}
-                    src={"/game/Start.png"}
-                    alt={"開始アイコン"}
-                    text={"開始"}
-                />}
+            {roomMetadata?.isOwner && (
+              <LobbyBtn
+                onClick={StartClick}
+                src={"/game/Start.png"}
+                alt={"開始アイコン"}
+                text={"開始"}
+              />
+            )}
           </div>
         </div>
       </div>

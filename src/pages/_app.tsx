@@ -8,9 +8,9 @@ import { WebsocketClient } from "@/utils/WebsocketClient";
 import { Loading } from "@/components/Loading/Loading";
 import { useSetAtom } from "jotai";
 import { socketAtom } from "@/atom/socketAtom";
-import {phaseAtom} from "@/atom/PhaseAtom";
-import {typeGuard} from "@/utils/typeGuard";
-import {useRouter} from "next/router";
+import { phaseAtom } from "@/atom/PhaseAtom";
+import { typeGuard } from "@/utils/typeGuard";
+import { useRouter } from "next/router";
 
 const Wrapper = styled.div.attrs<{ renderScale: number }>((p) => ({
   style: {
@@ -49,16 +49,16 @@ export default function App({ Component, pageProps }: AppProps) {
     }
     const websocket = new WebsocketClient();
     socketRef.current = websocket;
-    
-    const phaseHandler = (e:MessageEvent) => {
+
+    const phaseHandler = (e: MessageEvent) => {
       const data = JSON.parse(e.data) as unknown;
-      if (!typeGuard.onPhaseStart(data))return;
+      if (!typeGuard.onPhaseStart(data)) return;
       setPhaseItem(data);
-      if (router.pathname !== "/gamemain"){
+      if (router.pathname !== "/gamemain") {
         router.push("/gamemain");
       }
-    }
-    
+    };
+
     websocket.setup().then(() => {
       setSocket(websocket);
       setIsInited(true);
@@ -68,7 +68,7 @@ export default function App({ Component, pageProps }: AppProps) {
       websocket.removeMessageHandler(phaseHandler);
       websocket.close();
     };
-  }, [setSocket]);
+  }, [setSocket, router, setPhaseItem]);
 
   return (
     <div className={Styles.body}>

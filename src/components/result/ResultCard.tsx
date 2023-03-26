@@ -18,13 +18,9 @@ const ResultCard = ({ resultOpenData }: Props) => {
                   <div className={Styles.userImg}>
                     <UserImg userId={data.userId} />
                   </div>
-                  <p className={Styles.userName}>
-                    {data.username}
-                  </p>
+                  <p className={Styles.userName}>{data.username}</p>
                 </div>
-                <div className={Styles.answerData}>
-                  {data.data}
-                </div>
+                <div className={Styles.answerData}>{data.data}</div>
               </div>
             )}
             {data.type == "code" && (
@@ -33,13 +29,9 @@ const ResultCard = ({ resultOpenData }: Props) => {
                   <div className={Styles.userImg}>
                     <UserImg userId={data.userId} />
                   </div>
-                  <p className={Styles.userName}>
-                    {data.username}
-                  </p>
+                  <p className={Styles.userName}>{data.username}</p>
                 </div>
-                <div className={Styles.codeData}>
-                  {data.data}
-                </div>
+                <div className={Styles.codeData}>{data.data}</div>
               </div>
             )}
           </div>
