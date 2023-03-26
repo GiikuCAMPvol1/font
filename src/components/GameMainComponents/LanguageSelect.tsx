@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useAtom } from 'jotai';
-import { languageAtom } from '@/atom/languageAtom';
+import { useAtom } from "jotai";
+import { languageAtom } from "@/atom/languageAtom";
 import styles from "@/styles/GameMainStyles/LanguageSelect.module.css";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
@@ -42,11 +42,11 @@ function LanguageSelect() {
   };
 
   useEffect(() => {
-  setLanguageState((prevState) => ({
-    ...prevState,
-    thisLanguage: selectedImageId - 1,
-  })); // 使用方法が配列の添字に使うため -1
-}, [selectedImageId, setLanguageState]);
+    setLanguageState((prevState) => ({
+      ...prevState,
+      thisLanguage: selectedImageId - 1,
+    })); // 使用方法が配列の添字に使うため -1
+  }, [selectedImageId, setLanguageState]);
 
   return (
     <div className={styles.LanguageSelectArea}>

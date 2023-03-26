@@ -74,11 +74,11 @@ class WebsocketClient {
       this.handlers?.forEach((handler) => {
         client?.addEventListener("message", handler);
       });
-      if (this.userId&&this.token){
+      if (this.userId && this.token) {
         this.sendMessage({
           type: "userIdRequest",
           userId: this.userId,
-          token: this.token
+          token: this.token,
         });
         return;
       }
@@ -110,6 +110,10 @@ class WebsocketClient {
 
   joinRoomRequest(roomId: string, username: string) {
     return new Promise<joinRoomResponse>((resolve, reject) => {
+      if (!this.userId) {
+        reject();
+        return;
+      }
       const handler = (e: MessageEvent) => {
         const data = JSON.parse(e.data) as unknown;
         if (!typeGuard.joinRoomResponse(data)) {
@@ -123,6 +127,7 @@ class WebsocketClient {
       this.sendMessage({
         type: "joinRoomRequest",
         roomId,
+        userId: this.userId,
         username,
       });
     });
@@ -130,6 +135,10 @@ class WebsocketClient {
 
   createRoomRequest(username: string) {
     return new Promise<joinRoomResponse>((resolve, reject) => {
+      if (!this.userId) {
+        reject();
+        return;
+      }
       const handler = (e: MessageEvent) => {
         const data = JSON.parse(e.data) as unknown;
         if (!typeGuard.joinRoomResponse(data)) {
@@ -142,27 +151,17 @@ class WebsocketClient {
       this.addMessageHandler(handler);
       this.sendMessage({
         type: "createRoomRequest",
+        userId: this.userId,
         username,
       });
     });
   }
 
-  endPhaseRequest(type: "code" | "answer", data: string) {
-    return new Promise<onStateUpdate>((resolve, reject) => {
-      const handler = (e: MessageEvent) => {
-        const data = JSON.parse(e.data) as unknown;
-        if (!typeGuard.onStateUpdate(data)) {
-          reject();
-          return;
-        }
-        this.removeMessageHandler(handler);
-        resolve(e.data);
-      };
-      this.sendMessage({
-        type: "endPhaseRequest",
-        phase: type,
-        data: data,
-      });
+  endPhaseRequest(type: "coding" | "reading", data: string) {
+    this.sendMessage({
+      type: "endPhaseRequest",
+      phase: type,
+      data: data,
     });
   }
 

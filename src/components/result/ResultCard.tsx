@@ -30,4 +30,4 @@ const ResultCard = ({resultOpenData}: Props) => {
   )
 }
 
-export default ResultCard
+export default ResultCard;

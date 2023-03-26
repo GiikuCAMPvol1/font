@@ -1,4 +1,4 @@
-import { HTMLIcon } from "@/assets/HTMLIcon"
+import { HTMLIcon } from "@/assets/HTMLIcon";
 import LobbyBtn from "@/components/lobby/LobbyBtn";
 import { UserListCard } from "@/components/result/UserListCard";
 import ResultCard from "@/components/result/ResultCard";
@@ -98,9 +98,7 @@ const Result = () => {
       <div className={Styles.main}>
         <UserListCard className={Styles.userListCard} />
         <div>
-          <ResultCard
-            resultOpenData={resultOpenData}
-          />
+          <ResultCard/>
           <div className={Styles.btnBox}>
             <div></div>
             {crrDisplay == "wait" && (
@@ -132,7 +130,7 @@ const Result = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Result

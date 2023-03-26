@@ -3,11 +3,11 @@ import GameSettingCard from "@/components/lobby/GameSettingCard";
 import LobbyBtn from "@/components/lobby/LobbyBtn";
 import { UserListCard } from "@/components/lobby/UserListCard";
 import Styles from "@/styles/Lobby.module.scss";
-import {useEffect, useState} from "react";
-import {useRouter} from "next/router";
-import {useAtomValue} from "jotai";
-import {roomMetadataAtom} from "@/atom/RoomAtom";
-import {socketAtom} from "@/atom/socketAtom";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useAtomValue } from "jotai";
+import { roomMetadataAtom } from "@/atom/RoomAtom";
+import { socketAtom } from "@/atom/socketAtom";
 
 export default function Lobby() {
   // [props]難易度(数値が低いほど易しい)※[0:Easy, 1:Normal, 2:Hard]
@@ -21,7 +21,7 @@ export default function Lobby() {
 
   const InviteClick = () => {
     const inviteLink = `https://${location.host}/?id=${router.query.id}`;
-    if(navigator.clipboard){
+    if (navigator.clipboard) {
       void navigator.clipboard.writeText(inviteLink);
     }
   };
