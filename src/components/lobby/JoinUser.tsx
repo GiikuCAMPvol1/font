@@ -6,11 +6,11 @@ type Props = {
   userName: string;
 };
 
-const JoinUser = ({ userId, userName }: Props) => {
+const JoinUser = ({ userName }: Props) => {
   return (
     <div className={Styles.wrapper}>
       <div className={Styles.userImg}>
-        <UserImg userId={userId} />
+        <UserImg userId={userName} />
       </div>
       <p className={Styles.userName}>{userName}</p>
     </div>

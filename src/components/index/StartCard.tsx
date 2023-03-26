@@ -8,6 +8,7 @@ import { socketAtom } from "@/atom/socketAtom";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
 import { roomMetadataAtom, userListAtom } from "@/atom/RoomAtom";
+import { convertInvalidUserList } from "@/utils/convertInvalidUserList";
 
 type props = {
   className?: string;
@@ -34,7 +35,7 @@ const StartCard = ({ className }: props) => {
         return await socket?.joinRoomRequest(router.query.id, userName);
       })();
       if (room === undefined) return;
-      setUserList(room.users);
+      setUserList(convertInvalidUserList(room.users[0]));
       setRoom({
         roomId: room.roomId,
         isOwner: room.owner,

@@ -3,10 +3,10 @@ import { ResultOpen } from "@/pages/result";
 import { UserImg } from "../UserImg";
 
 type Props = {
-  resultOpenData?: ResultOpen
-}
+  resultOpenData?: ResultOpen;
+};
 
-const ResultCard = ({resultOpenData}: Props) => {
+const ResultCard = ({ resultOpenData }: Props) => {
   return (
     <div className={Styles.wrapper}>
       <div className={Styles.resultOpenData}>
@@ -46,7 +46,7 @@ const ResultCard = ({resultOpenData}: Props) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ResultCard;

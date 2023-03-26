@@ -12,7 +12,12 @@ export type WebsocketEvents =
 
 export type onRoomUserListUpdate = {
   type: "onRoomUserListUpdate";
-  users: User[];
+  users: [
+    {
+      userId: string[];
+      username: string[];
+    }
+  ];
 };
 
 export type onPhaseStart = {
@@ -33,12 +38,12 @@ export type onResultOpen = {
 export type resultAnswer = User & {
   type: "answer";
   data: string;
-}
+};
 
 export type resultCode = User & {
   type: "code";
   data: string;
-}
+};
 
 export type onGameEnd = {
   type: "onGameEnd";

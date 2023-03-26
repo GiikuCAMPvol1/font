@@ -10,9 +10,7 @@ import {
   WebsocketResponses,
 } from "@/@types/WebsocketResponse";
 
-type MessageEventHandler = (
-  param: MessageEvent<WebsocketEvents | WebsocketResponses>
-) => unknown;
+type MessageEventHandler = (param: MessageEvent) => unknown;
 
 let client: WebSocket;
 
@@ -121,7 +119,7 @@ class WebsocketClient {
           return;
         }
         this.removeMessageHandler(handler);
-        resolve(e.data);
+        resolve(data);
       };
       this.addMessageHandler(handler);
       this.sendMessage({
@@ -146,7 +144,7 @@ class WebsocketClient {
           return;
         }
         this.removeMessageHandler(handler);
-        resolve(e.data);
+        resolve(data);
       };
       this.addMessageHandler(handler);
       this.sendMessage({

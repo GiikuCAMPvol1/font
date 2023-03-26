@@ -5,9 +5,11 @@ import { UserListCard } from "@/components/lobby/UserListCard";
 import Styles from "@/styles/Lobby.module.scss";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useAtomValue } from "jotai";
-import { roomMetadataAtom } from "@/atom/RoomAtom";
+import { useAtomValue, useSetAtom } from "jotai";
+import { userListAtom } from "@/atom/RoomAtom";
 import { socketAtom } from "@/atom/socketAtom";
+import { typeGuard } from "@/utils/typeGuard";
+import { convertInvalidUserList } from "@/utils/convertInvalidUserList";
 
 export default function Lobby() {
   // [props]難易度(数値が低いほど易しい)※[0:Easy, 1:Normal, 2:Hard]
@@ -17,10 +19,26 @@ export default function Lobby() {
   // [props]コード記載制限時間(分)
   const [codeInputTime, setCodeInputTime] = useState(5);
 
+  const socket = useAtomValue(socketAtom);
+  const setUserList = useSetAtom(userListAtom);
+
   const router = useRouter();
 
+  useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      const data = JSON.parse(e.data) as unknown;
+      if (!typeGuard.onRoomUserListUpdate(data)) return;
+      setUserList(convertInvalidUserList(data.users[0]));
+      //setUserList()
+    };
+    socket?.addMessageHandler(handler);
+    return () => {
+      socket?.removeMessageHandler(handler);
+    };
+  }, []);
+
   const InviteClick = () => {
-    const inviteLink = `https://${location.host}/?id=${router.query.id}`;
+    const inviteLink = `${location.origin}/?id=${router.query.id}`;
     if (navigator.clipboard) {
       void navigator.clipboard.writeText(inviteLink);
     }
