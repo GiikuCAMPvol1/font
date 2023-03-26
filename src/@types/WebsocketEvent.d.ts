@@ -12,7 +12,12 @@ export type WebsocketEvents =
 
 export type onRoomUserListUpdate = {
   type: "onRoomUserListUpdate";
-  users: User[];
+  users: [
+    {
+      userId: string[];
+      username: string[];
+    }
+  ];
 };
 
 export type onPhaseStart = {

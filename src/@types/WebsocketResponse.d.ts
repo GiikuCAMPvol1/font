@@ -1,5 +1,3 @@
-import { User } from "@/@types/User";
-
 export type WebsocketResponses = joinRoomResponse | userIdResponse;
 
 /**
@@ -11,7 +9,12 @@ export type joinRoomResponse = {
   roomId: string;
   userId: string;
   owner: boolean;
-  users: User[];
+  users: [
+    {
+      userId: string[];
+      username: string[];
+    }
+  ];
 };
 export type userIdResponse = {
   type: "userIdResponse";
