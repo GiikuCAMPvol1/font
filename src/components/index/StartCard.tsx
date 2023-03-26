@@ -34,7 +34,7 @@ const StartCard = ({ className }: props) => {
         roomId: room.roomId,
         isOwner: room.owner,
       });
-      await router.push(`/lobby?${room.roomId}`);
+      await router.push(`/lobby?id=${room.roomId}`);
     })();
   };
 
