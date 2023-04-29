@@ -9,15 +9,19 @@
     color: white;
     border-radius: 20px 0 0 20px;
     font-size: 12px;
-    overflow-y: scroll;
-    padding: 200px 1px 10px 1px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 1px 20px 1px;
 
     .resultOpenData {
         width: 250px;
-        margin: 0 auto;
+        height: 195px;
+        margin: 0px auto 0 auto;
 
         .answerWrapper {
             margin: 5px 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
 
             .userWrapper {
                 display: flex;
@@ -60,6 +64,7 @@
 
         .codeWrapper {
             margin: 5px 0;
+            padding-bottom: 10px;
 
             .userWrapper {
                 display: flex;

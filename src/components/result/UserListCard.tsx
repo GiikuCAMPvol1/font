@@ -11,16 +11,28 @@ const UserListCard = ({ className }: props) => {
   // 参加できる人の数に応じてユーザーの配列データを書き換える
   const dummyData = [
     {
-      userId: "0",
-      userName: "ホスト",
+      userId: "上田さん",
+      userName: "上田さん",
     },
     {
-      userId: "1",
-      userName: "参加者1",
+      userId: "吉田さん",
+      userName: "吉田さん",
     },
     {
-      userId: "2",
-      userName: "参加者2",
+      userId: "Kagariさん",
+      userName: "Kagariさん",
+    },
+    {
+      userId: "和田さん",
+      userName: "和田さん",
+    },
+    {
+      userId: "かげさん",
+      userName: "かげさん",
+    },
+    {
+      userId: "かえでさん",
+      userName: "かえでさん",
     },
   ];
   const [joinUserArr, setJoinUserArr] = useState(dummyData);
