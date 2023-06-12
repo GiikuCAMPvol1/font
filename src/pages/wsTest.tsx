@@ -1,31 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const WsTest = () => {
+  const socketRef = useRef<WebSocket>();
+  const [isConnected, setIsConnected] = useState(false);
   useEffect(() => {
-    const socket = new WebSocket("ws://127.0.0.1:8000");
-
-    socket.addEventListener("open", function (event) {
-      console.log("サーバーへの接続成功");
-    });
-
-    socket.addEventListener("message", function (event) {
-      console.log("Message from server ", event.data);
-    });
-
-    const handleButtonClick = () => {
-      socket.send("hello from client");
+    socketRef.current = new WebSocket("ws://localhost:8000");
+    socketRef.current.onopen = () => {
+      setIsConnected(true);
     };
-
-    const button = document.getElementById("button");
-    button?.addEventListener("click", handleButtonClick);
-
+    socketRef.current.onmessage = (e) => {
+      const message = JSON.parse(e.data);
+      console.log(message);
+    };
+    socketRef.current.onclose = () => {
+      setIsConnected(false);
+    };
     return () => {
-      // Clean up WebSocket connection when component unmounts
-      socket.close();
+      socketRef.current?.close();
     };
   }, []);
 
-  return <input type="button" id="button" value="データの送信" />;
+  const handleCreateRoomClick = () => {
+    const createRoomMessage = {
+      type: "createRoom",
+      payload: {
+        userId: "your-user-id",
+        username: "your-username",
+      },
+    };
+    socketRef.current?.send(JSON.stringify(createRoomMessage));
+  };
+
+  return (
+    <div>
+      <h2>WebSocket is connected : {`${isConnected}`}</h2>
+      <button onClick={handleCreateRoomClick}>部屋作成</button>
+    </div>
+  );
 };
 
 export default WsTest;
