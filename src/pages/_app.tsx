@@ -4,7 +4,7 @@ import Styles from "@/styles/App.module.scss";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useIsomorphicEffect } from "@/utils/IsomorphicEffect";
-import { WebsocketClient } from "@/utils/WebsocketClient";
+// import { WebsocketClient } from "@/utils/WebsocketClient";
 import { Loading } from "@/components/Loading/Loading";
 import { useSetAtom } from "jotai";
 import { socketAtom } from "@/atom/socketAtom";
@@ -40,44 +40,40 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   });
   const refFirstRef = useRef(true);
-  const socketRef = useRef<WebsocketClient>();
+  // const socketRef = useRef<WebsocketClient>();
 
-  useEffect(() => {
-    if (process.env.NODE_ENV === "development" && refFirstRef.current) {
-      refFirstRef.current = false;
-      return;
-    }
-    const websocket = new WebsocketClient();
-    socketRef.current = websocket;
+  // useEffect(() => {
+  // if (process.env.NODE_ENV === "development" && refFirstRef.current) {
+  //   refFirstRef.current = false;
+  //   return;
+  // }
+  // const websocket = new WebsocketClient();
+  // socketRef.current = websocket;
 
-    const phaseHandler = (e: MessageEvent) => {
-      const data = JSON.parse(e.data) as unknown;
-      if (!typeGuard.onPhaseStart(data)) return;
-      setPhaseItem(data);
-      if (router.pathname !== "/gamemain") {
-        router.push("/gamemain");
-      }
-    };
+  //   const phaseHandler = (e: MessageEvent) => {
+  //     const data = JSON.parse(e.data) as unknown;
+  //     if (!typeGuard.onPhaseStart(data)) return;
+  //     setPhaseItem(data);
+  //     if (router.pathname !== "/gamemain") {
+  //       router.push("/gamemain");
+  //     }
+  //   };
 
-    websocket.setup().then(() => {
-      setSocket(websocket);
-      setIsInited(true);
-      websocket.addMessageHandler(phaseHandler);
-    });
-    return () => {
-      websocket.removeMessageHandler(phaseHandler);
-      websocket.close();
-    };
-  }, []);
+  //   websocket.setup().then(() => {
+  //     setSocket(websocket);
+  //     setIsInited(true);
+  //     websocket.addMessageHandler(phaseHandler);
+  //   });
+  //   return () => {
+  //     websocket.removeMessageHandler(phaseHandler);
+  //     websocket.close();
+  //   };
+  // }, []);
 
   return (
     <div className={Styles.body}>
       <Wrapper className={Styles.container} {...{ renderScale: scale }}>
-        {isInited ? (
-          <Component {...pageProps} socket={socketRef.current} />
-        ) : (
-          <Loading message={"サーバーに接続しています..."} />
-        )}
+        <Component {...pageProps} />
       </Wrapper>
     </div>
   );
