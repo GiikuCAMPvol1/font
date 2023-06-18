@@ -5,8 +5,12 @@ import { generateUuid } from "@/utils/uuid";
 import { useIsomorphicEffect } from "@/utils/IsomorphicEffect";
 import { useRecoilState } from "recoil";
 import { userNameState, uuidState } from "@/recoil/socket";
-import { handleCreateRoomClick } from "@/utils/WebsocketClient";
+import {
+  handleCreateRoomClick,
+  handleJoinRoomClick,
+} from "@/utils/WebsocketClient";
 import { socket } from "@/pages/index";
+import { useRouter } from "next/router";
 
 type props = {
   className?: string;
@@ -19,6 +23,8 @@ const StartCard = ({ className }: props) => {
   isomorphicEffect(() => {
     setUuid(generateUuid());
   }, []);
+  const router = useRouter();
+  const roomId: string = router.query.id as string;
 
   return (
     <div className={`${Styles.wrapper} ${className}`}>
@@ -37,12 +43,23 @@ const StartCard = ({ className }: props) => {
         </div>
       </div>
       <div className={Styles.buttonWrapper}>
-        <button
-          className={Styles.button}
-          onClick={() => handleCreateRoomClick({ socket, uuid, userName })}
-        >
-          開始
-        </button>
+        {roomId === undefined ? (
+          <button
+            className={Styles.button}
+            onClick={() => handleCreateRoomClick({ socket, uuid, userName })}
+          >
+            開始
+          </button>
+        ) : (
+          <button
+            className={Styles.button}
+            onClick={() =>
+              handleJoinRoomClick({ socket, uuid, userName, roomId })
+            }
+          >
+            参加
+          </button>
+        )}
       </div>
     </div>
   );

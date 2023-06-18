@@ -5,6 +5,9 @@ import { UserListCard } from "@/components/lobby/UserListCard";
 import Styles from "@/styles/Lobby.module.scss";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { socket } from "@/pages/index";
+import { useRecoilState } from "recoil";
+import { roomState } from "@/recoil/socket";
 
 export default function Lobby() {
   // [props]難易度(数値が低いほど易しい)※[0:Easy, 1:Normal, 2:Hard]
@@ -13,14 +16,22 @@ export default function Lobby() {
   const [answerInputTime, setAnswerInputTime] = useState(2);
   // [props]コード記載制限時間(分)
   const [codeInputTime, setCodeInputTime] = useState(5);
-  const router = useRouter();
+  const [room, setRoom] = useRecoilState(roomState);
 
   const InviteClick = () => {
-    const inviteLink = `${location.origin}/?id=${router.query.id}`;
+    const inviteLink = `${location.origin}/?id=${room.roomId}`;
     if (navigator.clipboard) {
       void navigator.clipboard.writeText(inviteLink);
     }
   };
+  const res_joinRoom: string = room.roomId;
+  console.log(res_joinRoom);
+
+  // 他の人の参加時のレスポンス
+  socket.on(res_joinRoom, (data) => {
+    console.log(data);
+    setRoom(data);
+  });
 
   // ownerのみが開始できる処理
   const StartClick = () => {

@@ -19,3 +19,25 @@ export const handleCreateRoomClick = ({
   };
   socket.emit("req_createRoom", createRoomMessage);
 };
+
+type handleJoinRoomClickProps = {
+  socket: Socket;
+  uuid: string;
+  userName: string;
+  roomId: string;
+};
+
+// 部屋参加関数
+export const handleJoinRoomClick = ({
+  socket,
+  uuid,
+  userName,
+  roomId,
+}: handleJoinRoomClickProps) => {
+  const joinRoomMessage = {
+    userId: uuid,
+    username: userName,
+    roomId: roomId,
+  };
+  socket.emit("req_joinRoom", joinRoomMessage);
+};

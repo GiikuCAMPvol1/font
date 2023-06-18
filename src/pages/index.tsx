@@ -10,16 +10,24 @@ import io from "socket.io-client";
 export const socket = io("http://localhost:8000");
 
 export default function Home() {
-  // const [socket, setSocket] = useRecoilState(socketState);
   const [uuid, setUuid] = useRecoilState(uuidState);
   const [room, setRoom] = useRecoilState(roomState);
   const router = useRouter();
-
   const res_createRoom = uuid;
+  const res_joinRoom: string = router.query.id as string;
+
+  // 部屋作成時のレスポンス
   socket.on(res_createRoom, (data) => {
     setRoom(data);
     router.push(`/lobby?id=${data.roomId}`);
   });
+
+  // 部屋参加時のレスポンス
+  socket.on(res_joinRoom, (data) => {
+    setRoom(data);
+    router.push(`/lobby?id=${data.roomId}`);
+  });
+
   return (
     <>
       <div className={Styles.logoWrapper}>
