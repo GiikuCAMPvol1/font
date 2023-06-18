@@ -2,8 +2,8 @@ import Styles from "@/components/lobby/UserListCard.module.scss";
 import { useState } from "react";
 import JoinUser from "./JoinUser";
 import NullUser from "./NullUser";
-import { useAtomValue } from "jotai";
-import { userListAtom } from "@/atom/RoomAtom";
+import { roomState } from "@/recoil/socket";
+import { useRecoilState } from "recoil";
 
 type props = {
   className?: string;
@@ -11,8 +11,7 @@ type props = {
 
 const UserListCard = ({ className }: props) => {
   const [userCnt, setUserCnt] = useState(5);
-
-  const userList = useAtomValue(userListAtom);
+  const [room, setRoom] = useRecoilState(roomState);
 
   return (
     <div className={`${Styles.wrapper} ${className}`}>
@@ -29,12 +28,12 @@ const UserListCard = ({ className }: props) => {
         <option value={5}>5プレイヤー</option>
       </select>
 
-      {userList.map((user) => (
+      {room.users.map((user) => (
         <div key={user.userId}>
-          <JoinUser userId={user.userId} userName={user.username} />
+          <JoinUser userName={user.username} />
         </div>
       ))}
-      {[...Array(userCnt - userList.length)].map((_, id) => (
+      {[...Array(userCnt - room.users.length)].map((_, id) => (
         <NullUser key={id} />
       ))}
     </div>

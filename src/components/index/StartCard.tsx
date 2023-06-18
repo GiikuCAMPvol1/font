@@ -1,48 +1,30 @@
 import { UserImg } from "@/components/UserImg";
 import InputStyles from "@/styles/InputStyles.module.scss";
 import Styles from "@/components/index/StartCard.module.scss";
-import { useState } from "react";
 import { generateUuid } from "@/utils/uuid";
 import { useIsomorphicEffect } from "@/utils/IsomorphicEffect";
-import { socketAtom } from "@/atom/socketAtom";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useRecoilState } from "recoil";
+import { userNameState, uuidState } from "@/recoil/socket";
+import {
+  handleCreateRoomClick,
+  handleJoinRoomClick,
+} from "@/utils/WebsocketClient";
+import { socket } from "@/pages/index";
 import { useRouter } from "next/router";
-import { roomMetadataAtom, userListAtom } from "@/atom/RoomAtom";
-import { convertInvalidUserList } from "@/utils/convertInvalidUserList";
 
 type props = {
   className?: string;
 };
 
 const StartCard = ({ className }: props) => {
-  const [userName, setUserName] = useState("");
-  const [uuid, setUuid] = useState("");
-  const socket = useAtomValue(socketAtom);
-  const setUserList = useSetAtom(userListAtom);
-  const setRoom = useSetAtom(roomMetadataAtom);
-  const router = useRouter();
+  const [userName, setUserName] = useRecoilState(userNameState);
+  const [uuid, setUuid] = useRecoilState(uuidState);
   const isomorphicEffect = useIsomorphicEffect();
   isomorphicEffect(() => {
     setUuid(generateUuid());
   }, []);
-
-  const createRoom = () => {
-    void (async () => {
-      const room = await (async () => {
-        if (typeof router.query.id !== "string") {
-          return await socket?.createRoomRequest(userName);
-        }
-        return await socket?.joinRoomRequest(router.query.id, userName);
-      })();
-      if (room === undefined) return;
-      setUserList(convertInvalidUserList(room.users[0]));
-      setRoom({
-        roomId: room.roomId,
-        isOwner: room.owner,
-      });
-      await router.push(`/lobby?id=${room.roomId}`);
-    })();
-  };
+  const router = useRouter();
+  const roomId: string = router.query.id as string;
 
   return (
     <div className={`${Styles.wrapper} ${className}`}>
@@ -61,9 +43,23 @@ const StartCard = ({ className }: props) => {
         </div>
       </div>
       <div className={Styles.buttonWrapper}>
-        <button className={Styles.button} onClick={createRoom}>
-          開始
-        </button>
+        {roomId === undefined ? (
+          <button
+            className={Styles.button}
+            onClick={() => handleCreateRoomClick({ socket, uuid, userName })}
+          >
+            開始
+          </button>
+        ) : (
+          <button
+            className={Styles.button}
+            onClick={() =>
+              handleJoinRoomClick({ socket, uuid, userName, roomId })
+            }
+          >
+            参加
+          </button>
+        )}
       </div>
     </div>
   );
