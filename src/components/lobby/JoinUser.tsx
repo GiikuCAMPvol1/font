@@ -2,7 +2,6 @@ import { UserImg } from "../UserImg";
 import Styles from "@/components/lobby/JoinUser.module.scss";
 
 type Props = {
-  userId: string;
   userName: string;
 };
 
