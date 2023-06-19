@@ -2,7 +2,7 @@ import Header from "@/components/GameMainComponents/Header";
 import Container from "@/components/GameMainComponents/Container";
 import Footer from "@/components/GameMainComponents/Footer";
 
-export default function Home() {
+const Gamemain = () => {
   return (
     <div>
       <Header />
@@ -10,4 +10,6 @@ export default function Home() {
       <Footer />
     </div>
   );
-}
+};
+
+export default Gamemain;
