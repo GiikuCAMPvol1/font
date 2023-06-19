@@ -7,8 +7,7 @@ type Props = {
   src: string;
   crrValue: string | number;
   stepMaxNum: number;
-  setting: number;
-  setSetting: Dispatch<SetStateAction<number>>;
+  setting: number | string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -18,7 +17,6 @@ const SettingBlock = ({
   crrValue,
   stepMaxNum,
   setting,
-  setSetting,
   onChange,
 }: Props) => {
   return (

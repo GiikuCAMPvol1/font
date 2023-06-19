@@ -4,19 +4,23 @@ import LobbyBtn from "@/components/lobby/LobbyBtn";
 import { UserListCard } from "@/components/lobby/UserListCard";
 import Styles from "@/styles/Lobby.module.scss";
 import { useState } from "react";
-import { useRouter } from "next/router";
 import { socket } from "@/pages/index";
 import { useRecoilState } from "recoil";
-import { roomState } from "@/recoil/socket";
+import { gameState, roomState, uuidState } from "@/recoil/socket";
+import { handleStartGameClick } from "@/utils/WebsocketClient";
+import { useRouter } from "next/router";
 
 export default function Lobby() {
-  // [props]難易度(数値が低いほど易しい)※[0:Easy, 1:Normal, 2:Hard]
-  const [difficulty, setDifficulty] = useState(1);
+  // [props]難易度(数値が低いほど易しい)※[Easy, Normal, Hard]
+  const [difficulty, setDifficulty] = useState("Normal");
   // [props]お題解答制限時間(分)
-  const [answerInputTime, setAnswerInputTime] = useState(2);
+  const [readingTime, setReadingTime] = useState(2);
   // [props]コード記載制限時間(分)
-  const [codeInputTime, setCodeInputTime] = useState(5);
+  const [codingTime, setCodingTime] = useState(5);
   const [room, setRoom] = useRecoilState(roomState);
+  const [game, setGame] = useRecoilState(gameState);
+  const [uuid, setUuid] = useRecoilState(uuidState);
+  const router = useRouter();
 
   const InviteClick = () => {
     const inviteLink = `${location.origin}/?id=${room.roomId}`;
@@ -24,26 +28,20 @@ export default function Lobby() {
       void navigator.clipboard.writeText(inviteLink);
     }
   };
-  const res_joinRoom: string = room.roomId;
-  console.log(res_joinRoom);
 
+  const roomId = room.roomId;
   // 他の人の参加時のレスポンス
-  socket.on(res_joinRoom, (data) => {
-    console.log(data);
+  socket.on(roomId, (data) => {
     setRoom(data);
   });
 
-  // ownerのみが開始できる処理
-  const StartClick = () => {
-    // if (!roomMetadata) return;
-    // socket?.sendMessage({
-    //   type: "startGameRequest",
-    //   roomId: roomId,
-    //   difficulty: difficulty,
-    //   readingInputTime: answerInputTime,
-    //   codingInputTime: codeInputTime,
-    // });
-  };
+  // ゲーム開始時のレスポンス
+  socket.on(roomId, (data) => {
+    // setGame(data);
+    // router.push(`/gamemain?id=${roomId}`);
+    console.log(data);
+  });
+
   return (
     <>
       <div className={Styles.logoWrapper}>
@@ -56,28 +54,36 @@ export default function Lobby() {
             className={Styles.gameSettingCard}
             difficulty={difficulty}
             setDifficulty={setDifficulty}
-            answerInputTime={answerInputTime}
-            setAnswerInputTime={setAnswerInputTime}
-            codeInputTime={codeInputTime}
-            setCodeInputTime={setCodeInputTime}
+            readingTime={readingTime}
+            setReadingTime={setReadingTime}
+            codingTime={codingTime}
+            setCodingTime={setCodingTime}
           />
-          <div className={Styles.btnBox}>
-            <LobbyBtn
-              onClick={InviteClick}
-              src={"/game/Invite.png"}
-              alt={"招待アイコン"}
-              text={"招待"}
-            />
-            {/* ownerにのみ表示 */}
-            {/* {roomMetadata?.isOwner && (
+          {/* ownerにのみ表示 */}
+          {uuid === room.ownerId && (
+            <div className={Styles.btnBox}>
               <LobbyBtn
-                onClick={StartClick}
+                onClick={InviteClick}
+                src={"/game/Invite.png"}
+                alt={"招待アイコン"}
+                text={"招待"}
+              />
+              <LobbyBtn
+                onClick={() =>
+                  handleStartGameClick({
+                    socket,
+                    roomId,
+                    difficulty,
+                    readingTime,
+                    codingTime,
+                  })
+                }
                 src={"/game/Start.png"}
                 alt={"開始アイコン"}
                 text={"開始"}
               />
-            )} */}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </>

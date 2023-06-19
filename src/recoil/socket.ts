@@ -1,11 +1,5 @@
 // =============== ソケット通信で使用する状態まとめファイル ===============
 import { atom } from "recoil";
-import { io, Socket } from "socket.io-client";
-
-// export const socketState = atom<Socket>({
-//   key: "socketState",
-//   default: io("http://localhost:8000"),
-// });
 
 // 部屋作成・参加時のユーザー名
 export const userNameState = atom<string>({
@@ -19,14 +13,14 @@ export const uuidState = atom<string>({
   default: "",
 });
 
-interface Room {
+type Room = {
   roomId: string;
   ownerId: string;
   users: {
     userId: string;
     username: string;
   }[];
-}
+};
 
 // 部屋オブジェクト
 export const roomState = atom<Room>({
@@ -38,6 +32,44 @@ export const roomState = atom<Room>({
       {
         userId: "",
         username: "",
+      },
+    ],
+  },
+});
+
+type Game = {
+  roomId: string;
+  difficulty: string;
+  readingTime: number;
+  codingTime: number;
+  turn: 1;
+  users: {
+    userId: string;
+    username: string;
+    phase: "read" | "code";
+    problem: string;
+    answerCheck: boolean;
+    answer: [];
+  }[];
+};
+
+// ゲームオブジェクト
+export const gameState = atom<Game>({
+  key: "gameState",
+  default: {
+    roomId: "",
+    difficulty: "",
+    readingTime: 0,
+    codingTime: 0,
+    turn: 1,
+    users: [
+      {
+        userId: "",
+        username: "",
+        phase: "read",
+        problem: "",
+        answerCheck: false,
+        answer: [],
       },
     ],
   },

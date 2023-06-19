@@ -41,3 +41,28 @@ export const handleJoinRoomClick = ({
   };
   socket.emit("req_joinRoom", joinRoomMessage);
 };
+
+type handleStartGameClickProps = {
+  socket: Socket;
+  roomId: string;
+  difficulty: string;
+  readingTime: number;
+  codingTime: number;
+};
+
+// ゲーム開始関数
+export const handleStartGameClick = ({
+  socket,
+  roomId,
+  difficulty,
+  readingTime,
+  codingTime,
+}: handleStartGameClickProps) => {
+  const startGameMessage = {
+    roomId,
+    difficulty,
+    readingTime,
+    codingTime,
+  };
+  socket.emit("req_startGame", startGameMessage);
+};
