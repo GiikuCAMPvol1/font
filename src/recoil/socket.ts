@@ -43,10 +43,10 @@ type Game = {
   readingTime: number;
   codingTime: number;
   turn: 1;
+  phase: "read" | "code" | "end";
   users: {
     userId: string;
     username: string;
-    phase: "read" | "code";
     problem: string;
     answerCheck: boolean;
     answer: [];
@@ -62,11 +62,11 @@ export const gameState = atom<Game>({
     readingTime: 0,
     codingTime: 0,
     turn: 1,
+    phase: "read",
     users: [
       {
         userId: "",
         username: "",
-        phase: "read",
         problem: "",
         answerCheck: false,
         answer: [],

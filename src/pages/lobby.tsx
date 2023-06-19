@@ -37,9 +37,8 @@ export default function Lobby() {
 
   // ゲーム開始時のレスポンス
   socket.on(roomId, (data) => {
-    // setGame(data);
-    // router.push(`/gamemain?id=${roomId}`);
-    console.log(data);
+    setGame(data);
+    router.push(`/gamemain?id=${roomId}`);
   });
 
   return (
