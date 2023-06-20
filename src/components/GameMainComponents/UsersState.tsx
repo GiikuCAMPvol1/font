@@ -1,13 +1,11 @@
 import Styles from "@/Styles/GameMainStyles/UsersState.module.css";
 import { UserImg } from "@/components/UserImg";
-import { useAtomValue } from "jotai";
-import { userListAtom } from "@/atom/RoomAtom";
 import { CheckIcon } from "@/assets/CheckIcon";
-import { useRecoilState } from "recoil";
+import { useRecoilValue} from "recoil";
 import { gameState } from "@/recoil/socket";
 
 export default function UsersState() {
-  const [game, setGame] = useRecoilState(gameState);
+  const game = useRecoilValue(gameState);
   const userList = game.users;
 
   return (

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import styles from "@/styles/GameMainStyles/CountDown.module.css";
-import { useRecoilState } from "recoil";
+import { useRecoilValue} from "recoil";
 import { gameState } from "@/recoil/socket";
 
 export default function CountDown() {
-  const [game, setGame] = useRecoilState(gameState);
+  const game = useRecoilValue(gameState);
   const nowTurn = game.turn;
 
   const codingTime = game.codingTime * 60; //プログラムを書く時の制限時間

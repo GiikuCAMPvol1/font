@@ -9,7 +9,7 @@ import {
   handleCreateRoomClick,
   handleJoinRoomClick,
 } from "@/utils/WebsocketClient";
-import { socket } from "@/pages/index";
+import { socket } from "@/pages";
 import { useRouter } from "next/router";
 
 type props = {

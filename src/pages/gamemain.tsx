@@ -2,12 +2,12 @@ import Header from "@/components/GameMainComponents/Header";
 import Container from "@/components/GameMainComponents/Container";
 import Footer from "@/components/GameMainComponents/Footer";
 import { socket } from "@/pages/index";
-import { useRecoilState } from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 import { gameState, roomState } from "@/recoil/socket";
 import { useEffect } from "react";
 
 const Gamemain = () => {
-  const [game, setGame] = useRecoilState(gameState);
+  const game = useRecoilValue(gameState);
   const [room, setRoom] = useRecoilState(roomState);
   const roomId = room.roomId;
 

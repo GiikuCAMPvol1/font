@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "@/styles/GameMainStyles/Turn.module.css";
-import { useRecoilState } from "recoil";
+import { useRecoilValue} from "recoil";
 import { gameState } from "@/recoil/socket";
 
 const Turn = () => {
-  const [game, setGame] = useRecoilState(gameState);
+  const game = useRecoilValue(gameState);
   const maxTurn = game.users.length;
   const nowTurn = game.turn;
 
