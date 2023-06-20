@@ -47,16 +47,18 @@ export default function Lobby() {
       <div className={Styles.main}>
         <UserListCard className={Styles.userListCard} />
         <div>
-          <GameSettingCard
-            disabled={uuid !== room.ownerId}
-            className={Styles.gameSettingCard}
-            difficulty={difficulty}
-            setDifficulty={setDifficulty}
-            readingTime={readingTime}
-            setReadingTime={setReadingTime}
-            codingTime={codingTime}
-            setCodingTime={setCodingTime}
-          />
+          {uuid === room.ownerId &&
+            <GameSettingCard
+              disabled={uuid !== room.ownerId}
+              className={Styles.gameSettingCard}
+              difficulty={difficulty}
+              setDifficulty={setDifficulty}
+              readingTime={readingTime}
+              setReadingTime={setReadingTime}
+              codingTime={codingTime}
+              setCodingTime={setCodingTime}
+            />
+          }
           {/* ownerにのみ表示 */}
           {uuid === room.ownerId && (
             <div className={Styles.btnBox}>
