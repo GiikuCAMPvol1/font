@@ -15,7 +15,7 @@ const UsersState = () => {
           <UserImg userId={roomUser.username} />
           {game.users[
             game.users.findIndex((user) => user.userId === roomUser.userId)
-          ] && <CheckIcon className={Styles.check} />}
+          ].answerCheck && <CheckIcon className={Styles.check} />}
         </div>
       ))}
     </div>
