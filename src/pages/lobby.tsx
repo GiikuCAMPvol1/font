@@ -13,7 +13,7 @@ import {Slide} from "@/components/slide";
 
 export default function Lobby() {
   // [props]難易度(数値が低いほど易しい)※[Easy, Normal, Hard]
-  const [difficulty, setDifficulty] = useState("Normal");
+  const [difficulty, setDifficulty] = useState(1);
   // [props]お題解答制限時間(分)
   const [readingTime, setReadingTime] = useState(2);
   // [props]コード記載制限時間(分)

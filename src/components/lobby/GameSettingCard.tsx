@@ -4,8 +4,8 @@ import SettingBlock from "./SettingBlock";
 
 type Props = {
   className?: string;
-  difficulty: string;
-  setDifficulty: Dispatch<SetStateAction<string>>;
+  difficulty: number;
+  setDifficulty: Dispatch<SetStateAction<number>>;
   readingTime: number;
   setReadingTime: Dispatch<SetStateAction<number>>;
   codingTime: number;
@@ -24,7 +24,7 @@ const GameSettingCard = ({
   disabled,
 }: Props) => {
   const handleChangeDifficulty = (event: ChangeEvent<HTMLInputElement>) => {
-    setDifficulty(event.target.value);
+    setDifficulty(Number(event.target.value));
   };
   const difficultyValueText = ["Easy", "Normal", "Hard"];
 
@@ -44,7 +44,7 @@ const GameSettingCard = ({
         disabled={disabled}
         title={"レベル"}
         src={"/game/difficulty.png"}
-        crrValue={difficulty}
+        crrValue={difficultyValueText[difficulty]}
         stepMaxNum={difficultyValueText.length - 1}
         setting={difficulty.toString()}
         onChange={handleChangeDifficulty}
