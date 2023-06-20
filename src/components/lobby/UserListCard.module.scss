@@ -9,14 +9,11 @@
   border-radius: 20px;
 
   .userCnt {
-    cursor: pointer;
     margin: 10px auto;
     width: 90%;
     font-size: 15px;
     font-weight: bold;
     color: white;
-    background-color: black;
-    border-radius: 5px;
-    border: solid 2px white;
+    text-align: right;
   }
 }
