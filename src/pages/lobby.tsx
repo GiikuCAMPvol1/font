@@ -5,28 +5,27 @@ import { UserListCard } from "@/components/lobby/UserListCard";
 import Styles from "@/styles/Lobby.module.scss";
 import { useState } from "react";
 import { socket } from "@/pages/index";
-import { useRecoilState } from "recoil";
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import { gameState, roomState, uuidState } from "@/recoil/socket";
 import { handleStartGameClick } from "@/utils/WebsocketClient";
 import { useRouter } from "next/router";
+import {Slide} from "@/components/slide";
 
 export default function Lobby() {
   // [props]難易度(数値が低いほど易しい)※[Easy, Normal, Hard]
-  const [difficulty, setDifficulty] = useState("Normal");
+  const [difficulty, setDifficulty] = useState(1);
   // [props]お題解答制限時間(分)
   const [readingTime, setReadingTime] = useState(2);
   // [props]コード記載制限時間(分)
   const [codingTime, setCodingTime] = useState(5);
   const [room, setRoom] = useRecoilState(roomState);
-  const [game, setGame] = useRecoilState(gameState);
-  const [uuid, setUuid] = useRecoilState(uuidState);
+  const setGame = useSetRecoilState(gameState);
+  const uuid = useRecoilValue(uuidState);
   const router = useRouter();
 
   const InviteClick = () => {
     const inviteLink = `${location.origin}/?id=${room.roomId}`;
-    if (navigator.clipboard) {
-      void navigator.clipboard.writeText(inviteLink);
-    }
+    void navigator.clipboard?.writeText(inviteLink);
   };
 
   const roomId = room.roomId;
@@ -36,9 +35,9 @@ export default function Lobby() {
   });
 
   // ゲーム開始時のレスポンス
-  socket.on(roomId, (data) => {
+  socket.on(`res_gameStart_${roomId}`, (data) => {
     setGame(data);
-    router.push(`/gamemain?id=${roomId}`);
+    void router.push(`/gamemain?id=${roomId}`);
   });
 
   return (
@@ -49,15 +48,22 @@ export default function Lobby() {
       <div className={Styles.main}>
         <UserListCard className={Styles.userListCard} />
         <div>
-          <GameSettingCard
-            className={Styles.gameSettingCard}
-            difficulty={difficulty}
-            setDifficulty={setDifficulty}
-            readingTime={readingTime}
-            setReadingTime={setReadingTime}
-            codingTime={codingTime}
-            setCodingTime={setCodingTime}
-          />
+          {uuid === room.ownerId ?
+            <GameSettingCard
+              disabled={uuid !== room.ownerId}
+              className={Styles.gameSettingCard}
+              difficulty={difficulty}
+              setDifficulty={setDifficulty}
+              readingTime={readingTime}
+              setReadingTime={setReadingTime}
+              codingTime={codingTime}
+              setCodingTime={setCodingTime}
+            />
+            :
+            <div className={Styles.slide}>
+              <Slide/>
+            </div>
+          }
           {/* ownerにのみ表示 */}
           {uuid === room.ownerId && (
             <div className={Styles.btnBox}>

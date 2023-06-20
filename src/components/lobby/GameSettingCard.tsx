@@ -1,16 +1,16 @@
 import Styles from "@/components/lobby/GameSettingCard.module.scss";
-import { ChangeEvent, useState } from "react";
-import { Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import SettingBlock from "./SettingBlock";
 
 type Props = {
   className?: string;
-  difficulty: string;
-  setDifficulty: Dispatch<SetStateAction<string>>;
+  difficulty: number;
+  setDifficulty: Dispatch<SetStateAction<number>>;
   readingTime: number;
   setReadingTime: Dispatch<SetStateAction<number>>;
   codingTime: number;
   setCodingTime: Dispatch<SetStateAction<number>>;
+  disabled?: boolean;
 };
 
 const GameSettingCard = ({
@@ -21,9 +21,10 @@ const GameSettingCard = ({
   setReadingTime,
   codingTime,
   setCodingTime,
+  disabled,
 }: Props) => {
   const handleChangeDifficulty = (event: ChangeEvent<HTMLInputElement>) => {
-    setDifficulty(event.target.value);
+    setDifficulty(Number(event.target.value));
   };
   const difficultyValueText = ["Easy", "Normal", "Hard"];
 
@@ -40,14 +41,16 @@ const GameSettingCard = ({
   return (
     <div className={`${Styles.wrapper} ${className}`}>
       <SettingBlock
+        disabled={disabled}
         title={"レベル"}
         src={"/game/difficulty.png"}
-        crrValue={difficulty}
+        crrValue={difficultyValueText[difficulty]}
         stepMaxNum={difficultyValueText.length - 1}
         setting={difficulty.toString()}
         onChange={handleChangeDifficulty}
       />
       <SettingBlock
+        disabled={disabled}
         title={"回答時間"}
         src={"/game/time.png"}
         crrValue={readingTimeValueText[readingTime]}
@@ -56,6 +59,7 @@ const GameSettingCard = ({
         onChange={handleChangeReadingTime}
       />
       <SettingBlock
+        disabled={disabled}
         title={"記載時間"}
         src={"/game/time.png"}
         crrValue={codingTimeValueText[codingTime]}

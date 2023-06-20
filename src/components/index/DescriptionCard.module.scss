@@ -1,8 +1,9 @@
 @use "@/styles/theme.scss";
 
 .wrapper {
-  padding: 10px;
   border-radius: 10px;
   background-color: theme.$cardBg;
   color: theme.$cardColor;
+  display: flex;
+  align-items: center;
 }

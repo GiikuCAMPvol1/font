@@ -2,7 +2,7 @@ import Styles from "@/styles/Index.module.scss";
 import { StartCard } from "@/components/index/StartCard";
 import { DescriptionCard } from "@/components/index/DescriptionCard";
 import { HTMLIcon } from "@/assets/HTMLIcon";
-import { useRecoilState } from "recoil";
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import { roomState, uuidState } from "@/recoil/socket";
 import { useRouter } from "next/router";
 import io from "socket.io-client";
@@ -10,8 +10,8 @@ import io from "socket.io-client";
 export const socket = io("http://localhost:8000");
 
 export default function Home() {
-  const [uuid, setUuid] = useRecoilState(uuidState);
-  const [room, setRoom] = useRecoilState(roomState);
+  const uuid = useRecoilValue(uuidState);
+  const setRoom = useSetRecoilState(roomState);
   const router = useRouter();
   const res_createRoom = uuid;
   const res_joinRoom: string = router.query.id as string;

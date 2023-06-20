@@ -45,7 +45,7 @@ export const handleJoinRoomClick = ({
 type handleStartGameClickProps = {
   socket: Socket;
   roomId: string;
-  difficulty: string;
+  difficulty: number;
   readingTime: number;
   codingTime: number;
 };

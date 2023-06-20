@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import styles from "@/styles/GameMainStyles/AnswerInput.module.css";
-import {phaseDataAtom} from "@/atom/PhaseAtom";
-import {useAtom} from "jotai";
+import { phaseDataAtom } from "@/atom/PhaseAtom";
+import { useAtom } from "jotai";
 
 function AnswerInput() {
   const [inputValue, setInputValue] = useAtom(phaseDataAtom);

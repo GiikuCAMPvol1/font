@@ -1,0 +1,37 @@
+.wrapper{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16/9;
+  .container{
+    position: absolute;
+    top: 0;
+    transition: left ease 0.1s;
+    display: flex;
+    height: 100%;
+    img{
+      aspect-ratio: 16/9;
+      height: 100%;
+    }
+  }
+  .prev,.next{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    z-index: 1;
+    background: rgba(0,0,0,0.5);
+  }
+  .prev{
+    left: -15px;
+    text-align: right;
+    padding: 0 5px;
+  }
+  .next{
+    right: -15px;
+    text-align: left;
+    padding: 0 5px;
+  }
+}

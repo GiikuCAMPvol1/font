@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <div className={styles.footer}>
-      {phaseItem?.phase === "coding" ? <LanguageSelect /> : <AnswerInput />}
+      {phaseItem?.phase === "reading" ? <LanguageSelect /> : <AnswerInput />}
       <CompletionButton />
     </div>
   );

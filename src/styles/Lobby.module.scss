@@ -31,6 +31,12 @@
     height: 195px;
     width: 300px;
   }
+  .slide{
+    height: 280px;
+    display: flex;
+    align-items: center;
+    width: 300px;
+  }
 
   .btnBox {
     margin-top: calc(280px - 195px - 39px);
