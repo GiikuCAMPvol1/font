@@ -50,6 +50,7 @@ export default function Lobby() {
         <UserListCard className={Styles.userListCard} />
         <div>
           <GameSettingCard
+            disabled={uuid !== room.ownerId}
             className={Styles.gameSettingCard}
             difficulty={difficulty}
             setDifficulty={setDifficulty}

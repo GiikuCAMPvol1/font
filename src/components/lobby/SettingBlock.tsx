@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Styles from "@/components/lobby/SettingBlock.module.scss";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent } from "react";
 
 type Props = {
   title: string;
@@ -9,6 +9,7 @@ type Props = {
   stepMaxNum: number;
   setting: number | string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 };
 
 const SettingBlock = ({
@@ -18,6 +19,7 @@ const SettingBlock = ({
   stepMaxNum,
   setting,
   onChange,
+  disabled
 }: Props) => {
   return (
     <div className={Styles.settingBlock}>
@@ -33,9 +35,10 @@ const SettingBlock = ({
         min="0"
         max={stepMaxNum}
         value={setting}
-        className={Styles.range}
+        className={`${Styles.range} ${disabled && Styles.disabled}`}
         step="1"
         onChange={onChange}
+        disabled={disabled}
       />
     </div>
   );
