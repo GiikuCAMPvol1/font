@@ -9,15 +9,15 @@ import { useRecoilState } from "recoil";
 import { gameState, uuidState } from "@/recoil/socket";
 import { socket } from "@/pages/index";
 import { getIndexByUserId } from "@/utils/getIndexByUserId";
+import { answerCodeState, languageState } from "@/recoil/answers";
 
 export default function CompletionButton() {
+  const [answerCode, setAnswerCode] = useRecoilState(answerCodeState);
+  const [language, setLanguage] = useRecoilState(languageState);
   const [game, setGame] = useRecoilState(gameState);
   const [uuid, setUuid] = useRecoilState(uuidState);
   const roomId = game.roomId;
   const userId = uuid;
-  const userIdIndex = getIndexByUserId(game.users, userId);
-  const answerCode = game.users[userIdIndex].answers[game.turn].answerCode;
-  const language = game.users[userIdIndex].answers[game.turn].language;
 
   return (
     <div
