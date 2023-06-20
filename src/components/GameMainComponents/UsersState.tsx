@@ -1,21 +1,25 @@
 import Styles from "@/Styles/GameMainStyles/UsersState.module.css";
 import { UserImg } from "@/components/UserImg";
 import { CheckIcon } from "@/assets/CheckIcon";
-import { useRecoilValue} from "recoil";
-import { gameState } from "@/recoil/socket";
+import { useRecoilValue } from "recoil";
+import { gameState, roomState } from "@/recoil/socket";
 
-export default function UsersState() {
+const UsersState = () => {
   const game = useRecoilValue(gameState);
-  const userList = game.users;
+  const room = useRecoilValue(roomState);
 
   return (
     <div className={Styles.UsersStateArea}>
-      {userList.map((user) => (
-        <div className={Styles.ImgSize} key={user.userId}>
-          <UserImg userId={user.username} />
-          {user.answerCheck && <CheckIcon className={Styles.check} />}
+      {room.users.map((roomUser) => (
+        <div className={Styles.ImgSize} key={roomUser.userId}>
+          <UserImg userId={roomUser.username} />
+          {game.users[
+            game.users.findIndex((user) => user.userId === roomUser.userId)
+          ] && <CheckIcon className={Styles.check} />}
         </div>
       ))}
     </div>
   );
-}
+};
+
+export default UsersState;
