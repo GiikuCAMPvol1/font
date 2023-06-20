@@ -49,7 +49,8 @@ type Game = {
     username: string;
     problem: string;
     answerCheck: boolean;
-    answer: [];
+    answers: string[];
+    languages: string[];
   }[];
 };
 
@@ -69,7 +70,8 @@ export const gameState = atom<Game>({
         username: "",
         problem: "",
         answerCheck: false,
-        answer: [],
+        answers: [],
+        languages: [],
       },
     ],
   },
