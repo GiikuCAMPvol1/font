@@ -1,17 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useAtom } from "jotai";
-import { turnAtom } from "@/atom/turnAtom";
+import { useState, useEffect } from "react";
 import styles from "@/styles/GameMainStyles/CountDown.module.css";
+import { useRecoilState } from "recoil";
+import { gameState } from "@/recoil/socket";
 
 export default function CountDown() {
-  const consoleTime = 300; //プログラムを書く時の制限時間
-  const textTime = 180; //回答を書く時の制限時間
+  const [game, setGame] = useRecoilState(gameState);
+  const nowTurn = game.turn;
+
+  const codingTime = game.codingTime * 60; //プログラムを書く時の制限時間
+  const readingTime = game.readingTime * 60; //回答を書く時の制限時間
+  // 変動する時間の最大値を管理: nowTime
   const [nowTime, setNowTime] = useState(15);
+  // 変動する時間を管理: time
   const [time, setTime] = useState(nowTime);
-  const [turnState, setTurnState] = useAtom(turnAtom);
-  const [maxturnState, setMaxTurnState] = useAtom(turnAtom);
-  const { nowTurn } = turnState;
-  const { maxTurn } = maxturnState;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -23,13 +24,6 @@ export default function CountDown() {
     };
   }, []);
 
-  //useEffectにAtomを使用している関数を設定しても警告が出てくるため関数を別定義
-  const nowTurnRef = useRef(nowTurn);
-
-  useEffect(() => {
-    nowTurnRef.current = nowTurn;
-  }, [nowTurn]);
-
   //時間が0になった時にターンを進める
   useEffect(() => {
     if (0 >= time) {
@@ -39,14 +33,14 @@ export default function CountDown() {
 
   //テキスト入力とプログラム入力の制限時間を代入
   useEffect(() => {
-    if (nowTurn % 2 === 0) {
+    if (game.phase === "read") {
       //テキスト入力ターン
-      setTime(textTime);
-      setNowTime(textTime);
-    } else {
+      setTime(readingTime);
+      setNowTime(readingTime);
+    } else if (game.phase === "code") {
       //プログラム入力ターン
-      setTime(consoleTime);
-      setNowTime(consoleTime);
+      setTime(codingTime);
+      setNowTime(codingTime);
     }
   }, [nowTurn]);
 
