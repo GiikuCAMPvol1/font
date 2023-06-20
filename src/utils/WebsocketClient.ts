@@ -66,3 +66,28 @@ export const handleStartGameClick = ({
   };
   socket.emit("req_startGame", startGameMessage);
 };
+
+type handleAnswerClickProps = {
+  socket: Socket;
+  roomId: string;
+  userId: string;
+  answerCode: string;
+  language: string;
+};
+
+// 回答関数
+export const handleAnswerClick = ({
+  socket,
+  roomId,
+  userId,
+  answerCode,
+  language,
+}: handleAnswerClickProps) => {
+  const answerMessage = {
+    roomId,
+    userId,
+    answerCode,
+    language,
+  };
+  socket.emit("req_answer", answerMessage);
+};
