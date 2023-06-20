@@ -9,7 +9,7 @@ const Footer = () => {
   const game = useRecoilValue(gameState);
   return (
     <div className={styles.footer}>
-      {game.phase === "read" ? <LanguageSelect /> : <AnswerInput />}
+      {game.phase === "code" ? <LanguageSelect /> : <AnswerInput />}
       <CompletionButton />
     </div>
   );
