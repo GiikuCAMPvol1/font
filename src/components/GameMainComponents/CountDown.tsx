@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import styles from "@/styles/GameMainStyles/CountDown.module.css";
-import { useRecoilValue} from "recoil";
-import { gameState } from "@/recoil/socket";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { gameState, uuidState } from "@/recoil/socket";
+import { handleAnswerClick } from "@/utils/WebsocketClient";
+import { socket } from "@/pages/index";
+import { answerCodeState, languageState } from "@/recoil/answers";
 
 export default function CountDown() {
   const game = useRecoilValue(gameState);
-  const nowTurn = game.turn;
+  const uuid = useRecoilValue(uuidState);
 
   const codingTime = game.codingTime * 60; //プログラムを書く時の制限時間
   const readingTime = game.readingTime * 60; //回答を書く時の制限時間
@@ -13,6 +16,12 @@ export default function CountDown() {
   const [nowTime, setNowTime] = useState(15);
   // 変動する時間を管理: time
   const [time, setTime] = useState(nowTime);
+  const [answerCode, setAnswerCode] = useRecoilState(answerCodeState);
+  const [language, setLanguage] = useRecoilState(languageState);
+
+  const nowTurn = game.turn;
+  const roomId = game.roomId;
+  const userId = uuid;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -27,7 +36,8 @@ export default function CountDown() {
   //時間が0になった時にターンを進める
   useEffect(() => {
     if (0 >= time) {
-      //時間が0になった時の処理
+      handleAnswerClick({ socket, roomId, userId, answerCode, language });
+      setAnswerCode("");
     }
   }, [time]);
 
