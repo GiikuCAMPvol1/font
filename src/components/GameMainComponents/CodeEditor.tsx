@@ -1,16 +1,15 @@
-import React, { useState, ChangeEvent } from "react";
-import { useAtom } from "jotai";
-import { turnAtom } from "@/atom/turnAtom";
+import { ChangeEvent } from "react";
 import styles from "@/styles/GameMainStyles/CodeEditor.module.css";
-import { phaseDataAtom } from "@/atom/PhaseAtom";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { gameState } from "@/recoil/socket";
+import { answerCodeState } from "@/recoil/answers";
 
-export default function CodeEditor() {
-  const [text, setText] = useAtom(phaseDataAtom);
-  const [turnState, setTurnState] = useAtom(turnAtom);
-  const { nowTurn } = turnState;
+const CodeEditor = () => {
+  const [answerCode, setAnswerCode] = useRecoilState(answerCodeState);
+  const game = useRecoilValue(gameState);
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
-    setText(event.target.value);
+    setAnswerCode(event.target.value);
   };
 
   const createMarkup = (text: string) => {
@@ -19,18 +18,20 @@ export default function CodeEditor() {
 
   return (
     <div className={styles.CodeEditor}>
-      {nowTurn % 2 === 1 ? (
+      {game.phase === "code" ? (
         <textarea
           className={styles.textarea}
-          value={text}
+          value={answerCode}
           onChange={handleChange}
         ></textarea>
       ) : (
         <div
           className={styles.answerarea}
-          dangerouslySetInnerHTML={createMarkup(text)}
+          dangerouslySetInnerHTML={createMarkup(answerCode)}
         ></div>
       )}
     </div>
   );
-}
+};
+
+export default CodeEditor;

@@ -1,13 +1,13 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import styles from "@/styles/GameMainStyles/AnswerInput.module.css";
-import { phaseDataAtom } from "@/atom/PhaseAtom";
-import { useAtom } from "jotai";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { answerCodeState } from "@/recoil/answers";
 
 function AnswerInput() {
-  const [inputValue, setInputValue] = useAtom(phaseDataAtom);
+  const [answerCode, setAnswerCode] = useRecoilState(answerCodeState);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setInputValue(event.target.value);
+    setAnswerCode(event.target.value);
   };
 
   return (
@@ -16,7 +16,7 @@ function AnswerInput() {
         type="text"
         placeholder="ここに回答を入力"
         className={styles.AnswerInput}
-        value={inputValue}
+        value={answerCode}
         onChange={handleChange}
       />
     </div>
