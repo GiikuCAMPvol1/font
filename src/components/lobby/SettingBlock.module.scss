@@ -99,15 +99,15 @@
     cursor: pointer;
   }
 
-  .disabled::-moz-range-thumb{
+  .disabled::-moz-range-thumb {
     background: #8f8f8f;
     border: 2px solid #b9c7af;
   }
-  .disabled::-ms-thumb{
+  .disabled::-ms-thumb {
     background: #2e3a2e;
     border: 2px solid #b9c7af;
   }
-  .disabled::-webkit-slider-thumb{
+  .disabled::-webkit-slider-thumb {
     background: #2e3a2e;
     border: 2px solid #b9c7af;
   }

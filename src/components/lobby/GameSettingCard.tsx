@@ -1,6 +1,5 @@
 import Styles from "@/components/lobby/GameSettingCard.module.scss";
-import { ChangeEvent } from "react";
-import { Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import SettingBlock from "./SettingBlock";
 
 type Props = {
@@ -22,7 +21,7 @@ const GameSettingCard = ({
   setReadingTime,
   codingTime,
   setCodingTime,
-  disabled
+  disabled,
 }: Props) => {
   const handleChangeDifficulty = (event: ChangeEvent<HTMLInputElement>) => {
     setDifficulty(event.target.value);

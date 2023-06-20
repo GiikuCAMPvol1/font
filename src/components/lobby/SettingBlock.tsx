@@ -19,7 +19,7 @@ const SettingBlock = ({
   stepMaxNum,
   setting,
   onChange,
-  disabled
+  disabled,
 }: Props) => {
   return (
     <div className={Styles.settingBlock}>
