@@ -10,5 +10,5 @@ export const answerCodeState = atom<string>({
 // 回答言語
 export const languageState = atom<string>({
   key: "languageState",
-  default: "",
+  default: "js",
 });

@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useAtom } from "jotai";
-import { languageAtom } from "@/atom/languageAtom";
+import { useState, useEffect } from "react";
 import styles from "@/styles/GameMainStyles/LanguageSelect.module.css";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
@@ -11,52 +9,44 @@ import javaImage from "../../../public/GameMainImages/java.png";
 import phpImage from "../../../public/GameMainImages/php.png";
 import rubyImage from "../../../public/GameMainImages/ruby.png";
 import goImage from "../../../public/GameMainImages/go.png";
+import { languageState } from "@/recoil/answers";
+import { useRecoilState } from "recoil";
 
 interface ImageData {
-  id: number;
+  name: string;
   src: StaticImageData;
-  alt: string;
 }
 
 function LanguageSelect() {
-  const [selectedImageId, setSelectedImageId] = useState<number>(1);
-  const [languageState, setLanguageState] = useAtom(languageAtom);
-  const { thisLanguage } = languageState;
+  const [language, setLanguage] = useRecoilState(languageState);
 
   const images: ImageData[] = [
-    { id: 1, src: jsImage, alt: "Image 1" },
-    { id: 2, src: pythonImage, alt: "Image 2" },
-    { id: 3, src: cImage, alt: "Image 3" },
-    { id: 4, src: javaImage, alt: "Image 4" },
-    { id: 5, src: phpImage, alt: "Image 5" },
-    { id: 6, src: rubyImage, alt: "Image 6" },
-    { id: 7, src: goImage, alt: "Image 7" },
+    { name: "js", src: jsImage },
+    { name: "python", src: pythonImage },
+    { name: "c", src: cImage },
+    { name: "java", src: javaImage },
+    { name: "php", src: phpImage },
+    { name: "ruby", src: rubyImage },
+    { name: "go", src: goImage },
   ];
 
-  const imageStyle = (id: number) => ({
-    opacity: id === selectedImageId ? 1 : 0.4,
+  const imageStyle = (name: string) => ({
+    opacity: name === language ? 1 : 0.4,
   });
 
-  const handleImageClick = (id: number) => {
-    setSelectedImageId(id);
+  const handleImageClick = (name: string) => {
+    setLanguage(name);
   };
-
-  useEffect(() => {
-    setLanguageState((prevState) => ({
-      ...prevState,
-      thisLanguage: selectedImageId - 1,
-    })); // 使用方法が配列の添字に使うため -1
-  }, [selectedImageId, setLanguageState]);
 
   return (
     <div className={styles.LanguageSelectArea}>
       {images.map((image) => (
         <div
-          key={image.id}
-          onClick={() => handleImageClick(image.id)}
-          style={imageStyle(image.id)}
+          key={image.name}
+          onClick={() => handleImageClick(image.name)}
+          style={imageStyle(image.name)}
         >
-          <Image src={image.src} alt={image.alt} className={styles.Images} />
+          <Image src={image.src} alt={image.name} className={styles.Images} />
         </div>
       ))}
     </div>
