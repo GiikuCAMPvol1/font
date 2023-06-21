@@ -1,7 +1,7 @@
 import Styles from "@/Styles/GameMainStyles/UsersState.module.css";
 import { UserImg } from "@/components/UserImg";
 import { CheckIcon } from "@/assets/CheckIcon";
-import { useRecoilValue} from "recoil";
+import { useRecoilValue } from "recoil";
 import { gameState } from "@/recoil/socket";
 
 function UsersState() {
@@ -20,4 +20,4 @@ function UsersState() {
   );
 }
 
-export {UsersState};
+export { UsersState };

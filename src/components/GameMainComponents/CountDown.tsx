@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "@/styles/GameMainStyles/CountDown.module.css";
-import { useRecoilValue} from "recoil";
+import { useRecoilValue } from "recoil";
 import { gameState } from "@/recoil/socket";
 
 function CountDown() {
@@ -68,5 +68,4 @@ function CountDown() {
   );
 }
 
-
-export {CountDown};
+export { CountDown };

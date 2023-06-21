@@ -1,6 +1,6 @@
 import Styles from "@/components/lobby/GameSettingCard.module.scss";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import {SettingBlock} from "./SettingBlock";
+import { SettingBlock } from "./SettingBlock";
 
 type Props = {
   className?: string;
@@ -71,4 +71,4 @@ const GameSettingCard = ({
   );
 };
 
-export {GameSettingCard};
+export { GameSettingCard };

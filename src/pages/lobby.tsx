@@ -1,15 +1,15 @@
 import { HTMLIcon } from "@/assets/HTMLIcon";
-import {GameSettingCard} from "@/components/lobby/GameSettingCard";
-import {LobbyBtn} from "@/components/lobby/LobbyBtn";
+import { GameSettingCard } from "@/components/lobby/GameSettingCard";
+import { LobbyBtn } from "@/components/lobby/LobbyBtn";
 import { UserListCard } from "@/components/lobby/UserListCard";
 import Styles from "@/styles/Lobby.module.scss";
 import { useState } from "react";
 import { socket } from "@/pages/index";
-import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { gameState, roomState, uuidState } from "@/recoil/socket";
 import { handleStartGameClick } from "@/utils/WebsocketClient";
 import { useRouter } from "next/router";
-import {Slide} from "@/components/slide";
+import { Slide } from "@/components/slide";
 
 export default function Lobby() {
   // [props]難易度(数値が低いほど易しい)※[Easy, Normal, Hard]
@@ -48,7 +48,7 @@ export default function Lobby() {
       <div className={Styles.main}>
         <UserListCard className={Styles.userListCard} />
         <div>
-          {uuid === room.ownerId ?
+          {uuid === room.ownerId ? (
             <GameSettingCard
               disabled={uuid !== room.ownerId}
               className={Styles.gameSettingCard}
@@ -59,11 +59,11 @@ export default function Lobby() {
               codingTime={codingTime}
               setCodingTime={setCodingTime}
             />
-            :
+          ) : (
             <div className={Styles.slide}>
-              <Slide/>
+              <Slide />
             </div>
-          }
+          )}
           {/* ownerにのみ表示 */}
           {uuid === room.ownerId && (
             <div className={Styles.btnBox}>

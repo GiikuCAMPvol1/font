@@ -2,7 +2,7 @@ import styles from "@/styles/GameMainStyles/CompletionButton.module.css";
 import Image from "next/image";
 import CheckImage from "../../../public/GameMainImages/check.png";
 import { handleAnswerClick } from "@/utils/WebsocketClient";
-import { useRecoilValue} from "recoil";
+import { useRecoilValue } from "recoil";
 import { gameState, uuidState } from "@/recoil/socket";
 import { socket } from "@/pages/index";
 import { answerCodeState, languageState } from "@/recoil/answers";
@@ -28,5 +28,4 @@ function CompletionButton() {
   );
 }
 
-
-export {CompletionButton}
+export { CompletionButton };

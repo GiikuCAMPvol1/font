@@ -4,5 +4,4 @@ function UserIcon() {
   return <div className={styles.UserIcon}></div>;
 }
 
-
-export {UserIcon};
+export { UserIcon };

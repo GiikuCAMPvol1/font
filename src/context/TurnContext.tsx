@@ -8,4 +8,4 @@ const TurnContext = createContext<{
   setNowTurn: () => {},
 });
 
-export {TurnContext};
+export { TurnContext };

@@ -1,8 +1,8 @@
-import {Header} from "@/components/GameMainComponents/Header";
-import {Container} from "@/components/GameMainComponents/Container";
-import {Footer} from "@/components/GameMainComponents/Footer";
+import { Header } from "@/components/GameMainComponents/Header";
+import { Container } from "@/components/GameMainComponents/Container";
+import { Footer } from "@/components/GameMainComponents/Footer";
 import { socket } from "@/pages/index";
-import {useRecoilState, useRecoilValue} from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { gameState, roomState } from "@/recoil/socket";
 import { useEffect } from "react";
 

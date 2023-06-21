@@ -50,7 +50,7 @@ function LanguageSelect() {
         <div
           key={image.id}
           onClick={() => handleImageClick(image.id)}
-          style={{opacity: image.id===selectedImageId?1:0.4}}
+          style={{ opacity: image.id === selectedImageId ? 1 : 0.4 }}
         >
           <Image src={image.src} alt={image.alt} className={styles.Images} />
         </div>
@@ -59,4 +59,4 @@ function LanguageSelect() {
   );
 }
 
-export {LanguageSelect};
+export { LanguageSelect };
