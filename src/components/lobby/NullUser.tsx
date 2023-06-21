@@ -12,4 +12,4 @@ const NullUser = () => {
   );
 };
 
-export default NullUser;
+export {NullUser};

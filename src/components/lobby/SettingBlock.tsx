@@ -44,4 +44,4 @@ const SettingBlock = ({
   );
 };
 
-export default SettingBlock;
+export {SettingBlock};
