@@ -1,5 +1,8 @@
 import styles from "@/styles/GameMainStyles/UserIcon.module.css";
 
-export default function UserIcon() {
+function UserIcon() {
   return <div className={styles.UserIcon}></div>;
 }
+
+
+export {UserIcon};

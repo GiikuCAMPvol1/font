@@ -1,9 +1,9 @@
 import styles from "@/styles/GameMainStyles/Header.module.css";
-import Turn from "@/components/GameMainComponents/Turn";
-import ProblemTitle from "@/components/GameMainComponents/ProblemTitle";
-import CountDown from "@/components/GameMainComponents/CountDown";
+import {Turn} from "@/components/GameMainComponents/Turn";
+import {ProblemTitle} from "@/components/GameMainComponents/ProblemTitle";
+import {CountDown} from "@/components/GameMainComponents/CountDown";
 
-export default function Header() {
+function Header() {
   return (
     <div className={styles.flex}>
       <Turn />
@@ -12,3 +12,5 @@ export default function Header() {
     </div>
   );
 }
+
+export {Header}

@@ -4,7 +4,7 @@ import { CheckIcon } from "@/assets/CheckIcon";
 import { useRecoilValue} from "recoil";
 import { gameState } from "@/recoil/socket";
 
-export default function UsersState() {
+function UsersState() {
   const game = useRecoilValue(gameState);
   const userList = game.users;
 
@@ -19,3 +19,5 @@ export default function UsersState() {
     </div>
   );
 }
+
+export {UsersState};

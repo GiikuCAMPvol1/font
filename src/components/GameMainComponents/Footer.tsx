@@ -1,11 +1,11 @@
 import styles from "@/styles/GameMainStyles/Footer.module.css";
-import LanguageSelect from "@/components/GameMainComponents/LanguageSelect";
-import AnswerInput from "@/components/GameMainComponents/AnswerInput";
-import CompletionButton from "@/components/GameMainComponents/CompletionButton";
+import {LanguageSelect} from "@/components/GameMainComponents/LanguageSelect";
+import {AnswerInput} from "@/components/GameMainComponents/AnswerInput";
+import {CompletionButton} from "@/components/GameMainComponents/CompletionButton";
 import {useRecoilValue} from "recoil";
 import {gameState} from "@/recoil/socket";
 
-export default function Footer() {
+function Footer() {
   const game = useRecoilValue(gameState);
 
   return (
@@ -15,3 +15,5 @@ export default function Footer() {
     </div>
   );
 }
+
+export {Footer}
