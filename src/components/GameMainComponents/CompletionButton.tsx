@@ -19,7 +19,7 @@ export default function CompletionButton() {
 
   const clickFunction = () => {
     if (isClicked) {
-      console.log("すでに回答しています。");
+      alert("すでに回答しています。");
     } else {
       setIsClicked(true);
     }
