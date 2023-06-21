@@ -1,5 +1,6 @@
 // =============== ソケット通信で使用する状態まとめファイル ===============
 import { atom } from "recoil";
+import { Game, Room } from "@/@types/sockets";
 
 // 部屋作成・参加時のユーザー名
 export const userNameState = atom<string>({
@@ -13,72 +14,12 @@ export const uuidState = atom<string>({
   default: "",
 });
 
-type Room = {
-  roomId: string;
-  ownerId: string;
-  users: {
-    userId: string;
-    username: string;
-  }[];
-};
-
 // 部屋オブジェクト
 export const roomState = atom<Room>({
   key: "roomState",
-  default: {
-    roomId: "",
-    ownerId: "",
-    users: [
-      {
-        userId: "",
-        username: "",
-      },
-    ],
-  },
 });
-
-type Game = {
-  roomId: string;
-  difficulty: string;
-  readingTime: number;
-  codingTime: number;
-  turn: 1;
-  phase: "read" | "code" | "end";
-  users: {
-    userId: string;
-    username: string;
-    problem: string;
-    answerCheck: boolean;
-    answers: {
-      answerCode: string;
-      language: string;
-    }[];
-  }[];
-};
 
 // ゲームオブジェクト
 export const gameState = atom<Game>({
   key: "gameState",
-  default: {
-    roomId: "",
-    difficulty: "",
-    readingTime: 0,
-    codingTime: 0,
-    turn: 1,
-    phase: "read",
-    users: [
-      {
-        userId: "",
-        username: "",
-        problem: "",
-        answerCheck: false,
-        answers: [
-          {
-            answerCode: "",
-            language: "",
-          },
-        ],
-      },
-    ],
-  },
 });

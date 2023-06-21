@@ -13,9 +13,8 @@ const UsersState = () => {
       {room.users.map((roomUser) => (
         <div className={Styles.ImgSize} key={roomUser.userId}>
           <UserImg userId={roomUser.username} />
-          {game.users[
-            game.users.findIndex((user) => user.userId === roomUser.userId)
-          ].answerCheck && <CheckIcon className={Styles.check} />}
+          {game.users.find((user) => user.userId === roomUser.userId)
+            ?.isAnswered && <CheckIcon className={Styles.check} />}
         </div>
       ))}
     </div>

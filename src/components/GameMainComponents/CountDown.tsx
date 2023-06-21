@@ -5,10 +5,15 @@ import { gameState, uuidState } from "@/recoil/socket";
 import { handleAnswerClick } from "@/utils/WebsocketClient";
 import { socket } from "@/pages/index";
 import { answerCodeState, languageState } from "@/recoil/answers";
+import { getUserByUserId } from "@/utils/user";
+import { getLastAnswerFromProblem } from "@/utils/problem";
 
 export default function CountDown() {
   const game = useRecoilValue(gameState);
   const uuid = useRecoilValue(uuidState);
+  const user = getUserByUserId(game, uuid);
+
+  const lastAnswer = getLastAnswerFromProblem(game.problems[user.problemId]);
 
   const codingTime = game.codingTime * 60; //プログラムを書く時の制限時間
   const readingTime = game.readingTime * 60; //回答を書く時の制限時間
@@ -36,7 +41,25 @@ export default function CountDown() {
   //時間が0になった時にターンを進める
   useEffect(() => {
     if (0 >= time) {
-      handleAnswerClick({ socket, roomId, userId, answerCode, language });
+      if (lastAnswer.type === "code") {
+        handleAnswerClick(socket, {
+          type: "read",
+          roomId,
+          userId,
+          readAnswer: answerCode,
+          problemId: user.problemId,
+        });
+        return;
+      } else {
+        handleAnswerClick(socket, {
+          type: "code",
+          roomId,
+          userId,
+          codeAnswer: answerCode,
+          language,
+          problemId: user.problemId,
+        });
+      }
       setAnswerCode("");
     }
   }, [time]);

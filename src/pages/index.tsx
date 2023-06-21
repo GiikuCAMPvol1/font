@@ -2,7 +2,7 @@ import Styles from "@/styles/Index.module.scss";
 import { StartCard } from "@/components/index/StartCard";
 import { DescriptionCard } from "@/components/index/DescriptionCard";
 import { HTMLIcon } from "@/assets/HTMLIcon";
-import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { roomState, uuidState } from "@/recoil/socket";
 import { useRouter } from "next/router";
 import io from "socket.io-client";
