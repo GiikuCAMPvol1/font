@@ -7,13 +7,13 @@ import { gameState, roomState } from "@/recoil/socket";
 import { useEffect } from "react";
 
 const Gamemain = () => {
-  const game = useRecoilValue(gameState);
-  const [room, setRoom] = useRecoilState(roomState);
-  const roomId = room.roomId;
+  const [game,setGame] = useRecoilState(gameState);
+  const {roomId} = useRecoilValue(roomState);
 
   // 誰かが回答した時のレスポンス
   socket.on(`res_answer_${roomId}`, (data) => {
-    setRoom(data);
+    setGame(data);
+    
   });
 
   // TODO:ターンが変わった時のレスポンス(全員が回答 or タイムアップ)
