@@ -1,15 +1,16 @@
-import { useAtomValue } from "jotai";
 import styles from "@/styles/GameMainStyles/ProblemTitle.module.css";
-import { phaseAtom } from "@/atom/PhaseAtom";
+import {useRecoilValue} from "recoil";
+import {gameState, uuidState} from "@/recoil/socket";
 
 const ProblemTitle = () => {
-  const phaseItem = useAtomValue(phaseAtom);
+  const game = useRecoilValue(gameState);
+  const userId = useRecoilValue(uuidState);
 
-  if (!phaseItem) return <></>;
+  if (!game) return <></>;
 
   return (
     <div className={styles.TitleArea}>
-      {phaseItem.phase === "coding" ? phaseItem.data : "このコードを説明せよ"}
+      {game.phase === "code" ? game.users.filter((item)=>item.userId === userId)[0].problem : "このコードを説明せよ"}
     </div>
   );
 };

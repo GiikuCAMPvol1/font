@@ -2,15 +2,15 @@ import styles from "@/styles/GameMainStyles/Footer.module.css";
 import LanguageSelect from "@/components/GameMainComponents/LanguageSelect";
 import AnswerInput from "@/components/GameMainComponents/AnswerInput";
 import CompletionButton from "@/components/GameMainComponents/CompletionButton";
-import { useAtomValue } from "jotai";
-import { phaseAtom } from "@/atom/PhaseAtom";
+import {useRecoilValue} from "recoil";
+import {gameState} from "@/recoil/socket";
 
 export default function Footer() {
-  const phaseItem = useAtomValue(phaseAtom);
+  const game = useRecoilValue(gameState);
 
   return (
     <div className={styles.footer}>
-      {phaseItem?.phase === "reading" ? <LanguageSelect /> : <AnswerInput />}
+      {game?.phase === "code" ? <LanguageSelect /> : <AnswerInput />}
       <CompletionButton />
     </div>
   );

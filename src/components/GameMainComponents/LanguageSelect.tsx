@@ -33,10 +33,6 @@ function LanguageSelect() {
     { id: 7, src: goImage, alt: "Image 7" },
   ];
 
-  const imageStyle = (id: number) => ({
-    opacity: id === selectedImageId ? 1 : 0.4,
-  });
-
   const handleImageClick = (id: number) => {
     setSelectedImageId(id);
   };
@@ -54,7 +50,7 @@ function LanguageSelect() {
         <div
           key={image.id}
           onClick={() => handleImageClick(image.id)}
-          style={imageStyle(image.id)}
+          style={{opacity: image.id===selectedImageId?1:0.4}}
         >
           <Image src={image.src} alt={image.alt} className={styles.Images} />
         </div>

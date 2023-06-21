@@ -1,13 +1,16 @@
 .LanguageSelectArea {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 10px;
   align-items: center;
   width: 325px;
   height: 48px;
   background-color: black;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .Images {
   width: 30px;
   height: 30px;
+  object-fit: contain;
+  cursor: pointer;
 }
