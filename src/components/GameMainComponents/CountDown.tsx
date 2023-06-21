@@ -3,7 +3,7 @@ import styles from "@/styles/GameMainStyles/CountDown.module.css";
 import { useRecoilValue} from "recoil";
 import { gameState } from "@/recoil/socket";
 
-function CountDown() {
+export default function CountDown() {
   const game = useRecoilValue(gameState);
   const nowTurn = game.turn;
 
@@ -67,6 +67,3 @@ function CountDown() {
     </div>
   );
 }
-
-
-export {CountDown};

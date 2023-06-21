@@ -15,4 +15,4 @@ const Turn = () => {
   );
 };
 
-export {Turn};
+export default Turn;

@@ -1,8 +1,8 @@
 import styles from "@/styles/GameMainStyles/Container.module.css";
-import {UsersState} from "@/components/GameMainComponents/UsersState";
-import {CodeEditor} from "@/components/GameMainComponents/CodeEditor";
+import UsersState from "@/components/GameMainComponents/UsersState";
+import CodeEditor from "@/components/GameMainComponents/CodeEditor";
 
-function Container() {
+export default function Container() {
   return (
     <div className={styles.flex}>
       <UsersState />
@@ -10,5 +10,3 @@ function Container() {
     </div>
   );
 }
-
-export {Container}

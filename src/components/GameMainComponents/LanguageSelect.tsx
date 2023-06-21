@@ -59,4 +59,4 @@ function LanguageSelect() {
   );
 }
 
-export {LanguageSelect};
+export default LanguageSelect;

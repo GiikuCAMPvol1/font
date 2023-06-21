@@ -15,4 +15,4 @@ const ProblemTitle = () => {
   );
 };
 
-export {ProblemTitle};
+export default ProblemTitle;
