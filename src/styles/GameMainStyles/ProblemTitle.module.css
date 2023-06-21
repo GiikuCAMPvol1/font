@@ -1,14 +1,13 @@
 .TitleArea {
-  display: flex;
   position: relative;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
+  padding:10px;
   background-color: black;
-  border-radius: 40px;
+  border-radius: 20px;
   color: white;
-  font-size: 20px;
+  font-size: 15px;
   width: 325px;
-  height: 40px;
+  height: 80px;
 }
 .Images {
   position: absolute;

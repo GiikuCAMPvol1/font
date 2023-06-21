@@ -6,14 +6,24 @@ import { useRecoilState } from "recoil";
 import { gameState, uuidState } from "@/recoil/socket";
 import { socket } from "@/pages/index";
 import { answerCodeState, languageState } from "@/recoil/answers";
+import { useState } from "react";
 
 export default function CompletionButton() {
   const [answerCode, setAnswerCode] = useRecoilState(answerCodeState);
   const [language, setLanguage] = useRecoilState(languageState);
   const [game, setGame] = useRecoilState(gameState);
   const [uuid, setUuid] = useRecoilState(uuidState);
+  const [isClicked, setIsClicked] = useState(false);
   const roomId = game.roomId;
   const userId = uuid;
+
+  const clickFunction = () => {
+    if (isClicked) {
+      console.log("すでに回答しています。");
+    } else {
+      setIsClicked(true);
+    }
+  };
 
   return (
     <div
@@ -22,7 +32,12 @@ export default function CompletionButton() {
         handleAnswerClick({ socket, roomId, userId, answerCode, language })
       }
     >
-      <Image src={CheckImage} alt="CheckImage" className={styles.CheckImage} />
+      <Image
+        src={CheckImage}
+        alt="CheckImage"
+        className={styles.CheckImage}
+        onClick={() => clickFunction()}
+      />
       <p className={styles.CompletionText}>完了！</p>
     </div>
   );
