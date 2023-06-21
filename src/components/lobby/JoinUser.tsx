@@ -16,4 +16,4 @@ const JoinUser = ({ userName }: Props) => {
   );
 };
 
-export { JoinUser };
+export {JoinUser};

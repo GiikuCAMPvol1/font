@@ -1,7 +1,7 @@
 import Styles from "@/components/result/UserListCard.module.scss";
-import { JoinUser } from "../lobby/JoinUser";
+import {JoinUser} from "../lobby/JoinUser";
 import { roomState } from "@/recoil/socket";
-import { useRecoilValue } from "recoil";
+import {useRecoilValue} from "recoil";
 
 type props = {
   className?: string;

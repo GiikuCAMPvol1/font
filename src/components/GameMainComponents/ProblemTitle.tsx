@@ -1,6 +1,6 @@
 import styles from "@/styles/GameMainStyles/ProblemTitle.module.css";
-import { useRecoilValue } from "recoil";
-import { gameState, uuidState } from "@/recoil/socket";
+import {useRecoilValue} from "recoil";
+import {gameState, uuidState} from "@/recoil/socket";
 
 const ProblemTitle = () => {
   const game = useRecoilValue(gameState);
@@ -10,11 +10,9 @@ const ProblemTitle = () => {
 
   return (
     <div className={styles.TitleArea}>
-      {game.phase === "code"
-        ? game.users.filter((item) => item.userId === userId)[0].problem
-        : "このコードを説明せよ"}
+      {game.phase === "code" ? game.users.filter((item)=>item.userId === userId)[0].problem : "このコードを説明せよ"}
     </div>
   );
 };
 
-export { ProblemTitle };
+export {ProblemTitle};

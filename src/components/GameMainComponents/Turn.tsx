@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "@/styles/GameMainStyles/Turn.module.css";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue} from "recoil";
 import { gameState } from "@/recoil/socket";
 
 const Turn = () => {
@@ -15,4 +15,4 @@ const Turn = () => {
   );
 };
 
-export { Turn };
+export {Turn};

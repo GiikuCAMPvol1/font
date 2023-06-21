@@ -23,4 +23,4 @@ function AnswerInput() {
   );
 }
 
-export { AnswerInput };
+export {AnswerInput};

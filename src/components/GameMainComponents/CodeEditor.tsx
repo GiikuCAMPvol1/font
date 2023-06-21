@@ -35,4 +35,4 @@ function CodeEditor() {
   );
 }
 
-export { CodeEditor };
+export {CodeEditor}

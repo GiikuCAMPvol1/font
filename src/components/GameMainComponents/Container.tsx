@@ -1,6 +1,6 @@
 import styles from "@/styles/GameMainStyles/Container.module.css";
-import { UsersState } from "@/components/GameMainComponents/UsersState";
-import { CodeEditor } from "@/components/GameMainComponents/CodeEditor";
+import {UsersState} from "@/components/GameMainComponents/UsersState";
+import {CodeEditor} from "@/components/GameMainComponents/CodeEditor";
 
 function Container() {
   return (
@@ -11,4 +11,4 @@ function Container() {
   );
 }
 
-export { Container };
+export {Container}

@@ -1,21 +1,20 @@
-.wrapper {
+.wrapper{
   position: relative;
   overflow: hidden;
   width: 100%;
   aspect-ratio: 16/9;
-  .container {
+  .container{
     position: absolute;
     top: 0;
     transition: left ease 0.1s;
     display: flex;
     height: 100%;
-    img {
+    img{
       aspect-ratio: 16/9;
       height: 100%;
     }
   }
-  .prev,
-  .next {
+  .prev,.next{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -23,14 +22,14 @@
     width: 30px;
     border-radius: 15px;
     z-index: 1;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0,0,0,0.5);
   }
-  .prev {
+  .prev{
     left: -15px;
     text-align: right;
     padding: 0 5px;
   }
-  .next {
+  .next{
     right: -15px;
     text-align: left;
     padding: 0 5px;
