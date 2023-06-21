@@ -18,4 +18,4 @@ const LobbyBtn = ({ onClick, text, src, alt }: Props) => {
   );
 };
 
-export {LobbyBtn};
+export default LobbyBtn;

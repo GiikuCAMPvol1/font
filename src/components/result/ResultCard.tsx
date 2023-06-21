@@ -41,4 +41,4 @@ const ResultCard = ({ resultOpenData }: Props) => {
   );
 };
 
-export {ResultCard};
+export default ResultCard;

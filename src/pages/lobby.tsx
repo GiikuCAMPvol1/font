@@ -1,6 +1,6 @@
 import { HTMLIcon } from "@/assets/HTMLIcon";
-import {GameSettingCard} from "@/components/lobby/GameSettingCard";
-import {LobbyBtn} from "@/components/lobby/LobbyBtn";
+import GameSettingCard from "@/components/lobby/GameSettingCard";
+import LobbyBtn from "@/components/lobby/LobbyBtn";
 import { UserListCard } from "@/components/lobby/UserListCard";
 import Styles from "@/styles/Lobby.module.scss";
 import { useState } from "react";
