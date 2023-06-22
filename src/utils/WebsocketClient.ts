@@ -1,6 +1,6 @@
 // =============== ソケット通信で使用する関数まとめファイル ===============
 import { Socket } from "socket.io-client";
-import { ReqAnswer } from "@/@types/requests";
+import { ReqAnswer, ReqUpdateResult } from "@/@types/requests";
 
 type handleCreateRoomClickProps = {
   socket: Socket;
@@ -71,4 +71,12 @@ export const handleStartGameClick = ({
 // 回答関数
 export const handleAnswerClick = (socket: Socket, answerMessage: ReqAnswer) => {
   socket.emit("req_answer", answerMessage);
+};
+
+// 結果画面更新関数
+export const handleUpdateResultClick = (
+  socket: Socket,
+  updateResultMessage: ReqUpdateResult
+) => {
+  socket.emit("req_updateResult", updateResultMessage);
 };
