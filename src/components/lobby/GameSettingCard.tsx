@@ -1,42 +1,37 @@
 import Styles from "@/components/lobby/GameSettingCard.module.scss";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import SettingBlock from "./SettingBlock";
+import { useRecoilState } from "recoil";
+import {
+  codingTimeState,
+  difficultyState,
+  readingTimeState,
+} from "@/recoil/gameSettings";
 
 type Props = {
   className?: string;
-  difficulty: number;
-  setDifficulty: Dispatch<SetStateAction<number>>;
-  readingTime: number;
-  setReadingTime: Dispatch<SetStateAction<number>>;
-  codingTime: number;
-  setCodingTime: Dispatch<SetStateAction<number>>;
   disabled?: boolean;
 };
 
-const GameSettingCard = ({
-  className,
-  difficulty,
-  setDifficulty,
-  readingTime,
-  setReadingTime,
-  codingTime,
-  setCodingTime,
-  disabled,
-}: Props) => {
+const GameSettingCard = ({ className, disabled }: Props) => {
+  const [difficulty, setDifficulty] = useRecoilState(difficultyState);
+  const [readingTime, setReadingTime] = useRecoilState(readingTimeState);
+  const [codingTime, setCodingTime] = useRecoilState(codingTimeState);
+  const difficultyValueText = ["easy", "normal", "hard"];
+  const readingTimeValueText = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const codingTimeValueText = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
   const handleChangeDifficulty = (event: ChangeEvent<HTMLInputElement>) => {
-    setDifficulty(Number(event.target.value));
+    setDifficulty(difficultyValueText[event.target.valueAsNumber]);
   };
-  const difficultyValueText = ["Easy", "Normal", "Hard"];
 
   const handleChangeReadingTime = (event: ChangeEvent<HTMLInputElement>) => {
     setReadingTime(event.target.valueAsNumber);
   };
-  const readingTimeValueText = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const handleChangeCodingTime = (event: ChangeEvent<HTMLInputElement>) => {
     setCodingTime(event.target.valueAsNumber);
   };
-  const codingTimeValueText = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <div className={`${Styles.wrapper} ${className}`}>
@@ -44,9 +39,9 @@ const GameSettingCard = ({
         disabled={disabled}
         title={"レベル"}
         src={"/game/difficulty.png"}
-        crrValue={difficultyValueText[difficulty]}
+        crrValue={difficulty}
         stepMaxNum={difficultyValueText.length - 1}
-        setting={difficulty.toString()}
+        setting={difficultyValueText.indexOf(difficulty)}
         onChange={handleChangeDifficulty}
       />
       <SettingBlock

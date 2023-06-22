@@ -3,21 +3,23 @@ import GameSettingCard from "@/components/lobby/GameSettingCard";
 import LobbyBtn from "@/components/lobby/LobbyBtn";
 import { UserListCard } from "@/components/lobby/UserListCard";
 import Styles from "@/styles/Lobby.module.scss";
-import { useState } from "react";
 import { socket } from "@/pages/index";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { gameState, roomState, uuidState } from "@/recoil/socket";
 import { handleStartGameClick } from "@/utils/WebsocketClient";
 import { useRouter } from "next/router";
 import { Slide } from "@/components/slide";
+import {
+  codingTimeState,
+  difficultyState,
+  readingTimeState,
+} from "@/recoil/gameSettings";
 
 export default function Lobby() {
-  // [props]難易度(数値が低いほど易しい)※[Easy, Normal, Hard]
-  const [difficulty, setDifficulty] = useState(1);
-  // [props]お題解答制限時間(分)
-  const [readingTime, setReadingTime] = useState(2);
-  // [props]コード記載制限時間(分)
-  const [codingTime, setCodingTime] = useState(5);
+  const [difficulty, setDifficulty] = useRecoilState(difficultyState);
+  const [readingTime, setReadingTime] = useRecoilState(readingTimeState);
+  const [codingTime, setCodingTime] = useRecoilState(codingTimeState);
+
   const [room, setRoom] = useRecoilState(roomState);
   const setGame = useSetRecoilState(gameState);
   const uuid = useRecoilValue(uuidState);
@@ -52,12 +54,6 @@ export default function Lobby() {
             <GameSettingCard
               disabled={uuid !== room.ownerId}
               className={Styles.gameSettingCard}
-              difficulty={difficulty}
-              setDifficulty={setDifficulty}
-              readingTime={readingTime}
-              setReadingTime={setReadingTime}
-              codingTime={codingTime}
-              setCodingTime={setCodingTime}
             />
           ) : (
             <div className={Styles.slide}>
