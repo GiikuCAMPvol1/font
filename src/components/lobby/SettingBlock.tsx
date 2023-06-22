@@ -7,7 +7,7 @@ type Props = {
   src: string;
   crrValue: string | number;
   stepMaxNum: number;
-  setting: number | string;
+  setting: number;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 };
