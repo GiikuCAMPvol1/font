@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <div className={styles.footer}>
       {game.phase === "code" ? <LanguageSelect /> : <AnswerInput />}
-      <CompletionButton />
+      <CompletionButton key={game.phase} />
     </div>
   );
 };

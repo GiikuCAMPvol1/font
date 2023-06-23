@@ -3,7 +3,15 @@ import LobbyBtn from "@/components/lobby/LobbyBtn";
 import { UserListCard } from "@/components/result/UserListCard";
 import ResultCard from "@/components/result/ResultCard";
 import Styles from "@/styles/Lobby.module.scss";
-import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { gameState, roomState, uuidState } from "@/recoil/socket";
+import { socket } from "@/pages/index";
+import {
+  handleHomeResetClick,
+  handleRestartClick,
+  handleUpdateResultClick,
+} from "@/utils/WebsocketClient";
+import { useRouter } from "next/router";
 
 export type ResultOpen = {
   type: string;
@@ -13,83 +21,25 @@ export type ResultOpen = {
 }[];
 
 const Result = () => {
-  // 現在の画面状態(初期値:wait)
-  const [crrDisplay, setCrrDisplay] = useState("wait");
-  const [resultOpenData, setResultOpenData] = useState<ResultOpen>();
-  useEffect(() => {
-    // Todo:ページを開いたときに参加者情報の取得&回答取得
-    const dummyResultOpenData = [
-      {
-        type: "answer",
-        data: "リンゴと表示",
-        userId: "<uuid>",
-        username: "最初の人",
-      },
-      {
-        type: "code",
-        data: "console.log('リンゴ')",
-        userId: "<uuid>",
-        username: "<string>",
-      },
-      {
-        type: "answer",
-        data: "リンゴと表示",
-        userId: "<uuid>",
-        username: "<string>",
-      },
-      {
-        type: "code",
-        data: "print('リンゴ')",
-        userId: "<uuid>",
-        username: "<string>",
-      },
-      {
-        type: "answer",
-        data: "リンゴと表示",
-        userId: "<uuid>",
-        username: "<string>",
-      },
-      {
-        type: "code",
-        data: "print('リンゴ')",
-        userId: "<uuid>",
-        username: "<string>",
-      },
-      {
-        type: "answer",
-        data: "リンゴと表示",
-        userId: "<uuid>",
-        username: "<string>",
-      },
-      {
-        type: "code",
-        data: "print('リンゴ')",
-        userId: "<uuid>",
-        username: "<string>",
-      },
-    ];
-    setResultOpenData(dummyResultOpenData);
-  }, []);
+  const [game, setGame] = useRecoilState(gameState);
+  const [room, setRoom] = useRecoilState(roomState);
+  const [uuid, setUuid] = useRecoilState(uuidState);
+  const router = useRouter();
 
-  // Todo:開始ボタンを押したときの処理
-  const StartClick = () => {
-    console.log("Click Start");
-    setCrrDisplay("play");
-  };
+  // 結果画面更新のレスポンス
+  socket.on(`res_updateResult_${game.roomId}`, (data) => {
+    setGame(data);
+  });
 
-  // Todo:次へボタンを押したときの処理
-  const NextClick = () => {
-    console.log("Click Next");
-    if ( true ) {
-      setCrrDisplay("fin")
-    }
-  };
+  // リスタートのレスポンス: リスタートしたらロビーに戻る
+  socket.on(`res_restart_${game.roomId}`, (data) => {
+    router.push(`/lobby?id=${game.roomId}`);
+  });
 
-  // Todo:終了ボタンを押したときの処理
-  const FinClick = () => {
-    console.log("Click Fin");
-    location.href = "/";
-  };
+  // ホームリセットのレスポンス: ホームリセットしたらホームに戻る
+  socket.on(`res_homeReset_${game.roomId}`, (data) => {
+    router.push(`/`);
+  });
 
   return (
     <>
@@ -99,35 +49,47 @@ const Result = () => {
       <div className={Styles.main}>
         <UserListCard className={Styles.userListCard} />
         <div>
-          <ResultCard resultOpenData={resultOpenData} />
-          <div className={Styles.btnBox}>
-            <div></div>
-            {crrDisplay == "wait" && (
-              <LobbyBtn
-                onClick={StartClick}
-                src={"/game/Start.png"}
-                alt={"開始アイコン"}
-                text={"開始"}
-              />
-            )}
-            {crrDisplay == "play" && (
-              <LobbyBtn
-                onClick={NextClick}
-                src={"/game/Start.png"}
-                alt={"次へアイコン"}
-                text={"次へ"}
-              />
-            )}
-            {crrDisplay == "fin" && (
-              <LobbyBtn
-                onClick={FinClick}
-                src={"/game/Start.png"}
-                alt={"次のゲームアイコン"}
-                text={"ホームへ"}
-              />
-            )}
-            <div></div>
-          </div>
+          <ResultCard />
+
+          {uuid === room.ownerId &&
+            (game.turn !== game.users.length ? (
+              <div className={Styles.btnBox}>
+                <LobbyBtn
+                  onClick={() =>
+                    handleUpdateResultClick(socket, {
+                      roomId: game.roomId,
+                      turn: game.turn,
+                    })
+                  }
+                  src={"/game/Start.png"}
+                  alt={"ネクストアイコン"}
+                  text={"次へ"}
+                />
+              </div>
+            ) : (
+              <div className={Styles.btnBox}>
+                <LobbyBtn
+                  onClick={() =>
+                    handleHomeResetClick(socket, {
+                      roomId: game.roomId,
+                    })
+                  }
+                  src={"/game/Start.png"}
+                  alt={"ホームアイコン"}
+                  text={"ホームへ"}
+                />
+                <LobbyBtn
+                  onClick={() =>
+                    handleRestartClick(socket, {
+                      roomId: game.roomId,
+                    })
+                  }
+                  src={"/game/Start.png"}
+                  alt={"スタートアイコン"}
+                  text={"スタート"}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </>

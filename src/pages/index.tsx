@@ -2,12 +2,12 @@ import Styles from "@/styles/Index.module.scss";
 import { StartCard } from "@/components/index/StartCard";
 import { DescriptionCard } from "@/components/index/DescriptionCard";
 import { HTMLIcon } from "@/assets/HTMLIcon";
-import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { roomState, uuidState } from "@/recoil/socket";
 import { useRouter } from "next/router";
 import io from "socket.io-client";
 
-export const socket = io("http://localhost:8000");
+export const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT||"http://localhost:8000");
 
 export default function Home() {
   const uuid = useRecoilValue(uuidState);

@@ -1,41 +1,64 @@
 import Styles from "@/components/result/ResultCard.module.scss";
-import { ResultOpen } from "@/pages/result";
 import { UserImg } from "../UserImg";
+import { useRecoilState } from "recoil";
+import { gameState } from "@/recoil/socket";
 
-type Props = {
-  resultOpenData?: ResultOpen;
-};
-
-const ResultCard = ({ resultOpenData }: Props) => {
+const ResultCard = () => {
+  const [game, setGame] = useRecoilState(gameState);
+  console.log(game);
   return (
     <div className={Styles.wrapper}>
       <div className={Styles.resultOpenData}>
-        {resultOpenData?.map((data, index) => (
-          <div key={index}>
-            {data.type == "answer" && (
-              <div className={Styles.answerWrapper}>
-                <div className={Styles.userWrapper}>
-                  <div className={Styles.userImg}>
-                    <UserImg userId={data.userId} />
+        {game &&
+          game.problems[game.turn - 1].answers?.map((data, index) => (
+            <div key={index}>
+              {data.type == "read" && (
+                <div className={Styles.answerWrapper}>
+                  <div className={Styles.userWrapper}>
+                    <div className={Styles.userImg}>
+                      {data.userId !== "-1" && (
+                        <UserImg
+                          userId={
+                            game.users.find(
+                              (user) => user.userId === data.userId
+                            )?.username
+                          }
+                        />
+                      )}
+                    </div>
+                    <p className={Styles.userName}>
+                      {data.userId !== "-1"
+                        ? game.users.find((user) => user.userId === data.userId)
+                            ?.username
+                        : "お題"}
+                    </p>
                   </div>
-                  <p className={Styles.userName}>{data.username}</p>
+                  <div className={Styles.answerData}>{data.readAnswer}</div>
                 </div>
-                <div className={Styles.answerData}>{data.data}</div>
-              </div>
-            )}
-            {data.type == "code" && (
-              <div className={Styles.codeWrapper}>
-                <div className={Styles.userWrapper}>
-                  <div className={Styles.userImg}>
-                    <UserImg userId={data.userId} />
+              )}
+              {data.type == "code" && index <= game.users.length && (
+                <div className={Styles.codeWrapper}>
+                  <div className={Styles.userWrapper}>
+                    <div className={Styles.userImg}>
+                      <UserImg
+                        userId={
+                          game.users.find((user) => user.userId === data.userId)
+                            ?.username
+                        }
+                      />
+                    </div>
+                    <p className={Styles.userName}>
+                      {
+                        game.users.find((user) => user.userId === data.userId)
+                          ?.username
+                      }
+                    </p>
                   </div>
-                  <p className={Styles.userName}>{data.username}</p>
+                  <div className={Styles.codeData}>{data.codeAnswer}</div>
                 </div>
-                <div className={Styles.codeData}>{data.data}</div>
-              </div>
-            )}
-          </div>
-        ))}
+              )}
+            </div>
+          ))}
       </div>
     </div>
   );

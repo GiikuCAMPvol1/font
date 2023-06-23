@@ -1,5 +1,7 @@
 // =============== ソケット通信で使用する関数まとめファイル ===============
 import { Socket } from "socket.io-client";
+import { ReqAnswer, ReqUpdateResult } from "@/@types/requests";
+import { ReqHomeReset, ReqRestart } from "@/@types/WebsocketRequest";
 
 type handleCreateRoomClickProps = {
   socket: Socket;
@@ -45,7 +47,7 @@ export const handleJoinRoomClick = ({
 type handleStartGameClickProps = {
   socket: Socket;
   roomId: string;
-  difficulty: number;
+  difficulty: string;
   readingTime: number;
   codingTime: number;
 };
@@ -67,27 +69,31 @@ export const handleStartGameClick = ({
   socket.emit("req_startGame", startGameMessage);
 };
 
-type handleAnswerClickProps = {
-  socket: Socket;
-  roomId: string;
-  userId: string;
-  answerCode: string;
-  language: string;
+// 回答関数
+export const handleAnswerClick = (socket: Socket, answerMessage: ReqAnswer) => {
+  socket.emit("req_answer", answerMessage);
 };
 
-// 回答関数
-export const handleAnswerClick = ({
-  socket,
-  roomId,
-  userId,
-  answerCode,
-  language,
-}: handleAnswerClickProps) => {
-  const answerMessage = {
-    roomId,
-    userId,
-    answerCode,
-    language,
-  };
-  socket.emit("req_answer", answerMessage);
+// 結果画面更新関数
+export const handleUpdateResultClick = (
+  socket: Socket,
+  updateResultMessage: ReqUpdateResult
+) => {
+  socket.emit("req_updateResult", updateResultMessage);
+};
+
+// リスタート関数
+export const handleRestartClick = (
+  socket: Socket,
+  restartMessage: ReqRestart
+) => {
+  socket.emit("req_restart", restartMessage);
+};
+
+// ホームリセット関数
+export const handleHomeResetClick = (
+  socket: Socket,
+  homeResetMessage: ReqHomeReset
+) => {
+  socket.emit("req_homeReset", homeResetMessage);
 };

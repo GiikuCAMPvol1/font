@@ -1,23 +1,26 @@
-import { gameState, uuidState } from "@/recoil/socket";
 import styles from "@/styles/GameMainStyles/ProblemTitle.module.css";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
+import { gameState, uuidState } from "@/recoil/socket";
+import { getUserByUserId } from "@/utils/user";
+import { getLastAnswerFromProblem } from "@/utils/problem";
 
 const ProblemTitle = () => {
-  const [game, setGame] = useRecoilState(gameState);
-  const [uuid, setUuid] = useRecoilState(uuidState);
-  const userIdIndex = game.users.findIndex((user) => user.userId === uuid);
-  const nextUserIdIndex =
-    userIdIndex === game.users.length - 1 ? 0 : userIdIndex + 1;
+  const game = useRecoilValue(gameState);
+  const userId = useRecoilValue(uuidState);
+
+  if (!game) return <></>;
+
+  const user = getUserByUserId(game, userId);
+
+  const lastAnswer = getLastAnswerFromProblem(game.problems[user.problemId]);
+
   return (
     <div className={styles.TitleArea}>
-      {/* ターン1の最初のお題 */}
-      {game.turn === 1 && game.users[userIdIndex].problem}
-      {/* ターン2以降のcodeフェイズ */}
-      {game.turn !== 1 &&
-        game.phase === "code" &&
-        game.users[nextUserIdIndex].answers[game.turn - 1].answerCode}
-      {/* ターン2以降のreadフェイズ */}
-      {game.turn !== 1 && game.phase === "read" && "このコードを説明せよ"}
+      {lastAnswer.type !== game.phase
+        ? lastAnswer.type === "read"
+          ? lastAnswer.readAnswer
+          : "このコードを説明せよ"
+        : "お待ち下さい..."}
     </div>
   );
 };
