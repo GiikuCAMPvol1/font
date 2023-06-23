@@ -52,3 +52,11 @@ export type startGameRequest = {
   readingInputTime: number;
   codingInputTime: number;
 };
+
+export type ReqRestart = {
+  roomId: string;
+};
+
+export type ReqHomeReset = {
+  roomId: string;
+};
