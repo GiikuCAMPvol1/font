@@ -15,8 +15,8 @@ export default function CountDown() {
 
   const lastAnswer = getLastAnswerFromProblem(game.problems[user.problemId]);
 
-  const codingTime = game.codingTime * 60; //プログラムを書く時の制限時間
-  const readingTime = game.readingTime * 60; //回答を書く時の制限時間
+  const codingTime = (game.codingTime + 1) * 60; //プログラムを書く時の制限時間
+  const readingTime = (game.readingTime + 1) * 60; //回答を書く時の制限時間
   // 変動する時間の最大値を管理: nowTime
   const [nowTime, setNowTime] = useState(15);
   // 変動する時間を管理: time
