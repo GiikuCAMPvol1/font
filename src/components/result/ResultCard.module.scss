@@ -11,7 +11,6 @@
   font-size: 12px;
   overflow-y: scroll;
 
-
   .resultOpenData {
     width: 250px;
     margin: 0 auto;
@@ -80,13 +79,25 @@
       .codeData {
         position: relative;
         margin-right: 25px;
-        background-color: white;
-        color: black;
-        border-radius: 5px;
-        padding: 2px;
+
+        .codeLanguage {
+          position: absolute;
+          top: -20px;
+          left: 10px;
+          color: rgb(199, 255, 45);
+        }
+
+        .codeAnswer {
+          position: relative;
+
+          background-color: white;
+          color: black;
+          border-radius: 5px;
+          padding: 2px;
+        }
       }
 
-      .codeData::after {
+      .codeAnswer::after {
         content: "";
         position: absolute;
         top: 5px;

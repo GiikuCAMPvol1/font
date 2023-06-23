@@ -1,34 +1,15 @@
 import { useState, useEffect } from "react";
 import styles from "@/styles/GameMainStyles/LanguageSelect.module.css";
 import Image from "next/image";
-import type { StaticImageData } from "next/image";
-import jsImage from "../../../public/GameMainImages/js.png";
-import pythonImage from "../../../public/GameMainImages/python.png";
-import cImage from "../../../public/GameMainImages/c++.png";
-import javaImage from "../../../public/GameMainImages/java.png";
-import phpImage from "../../../public/GameMainImages/php.png";
-import rubyImage from "../../../public/GameMainImages/ruby.png";
-import goImage from "../../../public/GameMainImages/go.png";
+
 import { languageState } from "@/recoil/answers";
 import { useRecoilState } from "recoil";
-
-interface ImageData {
-  name: string;
-  src: StaticImageData;
-}
+import { languageSelectData } from "@/languageSelectData";
 
 function LanguageSelect() {
   const [language, setLanguage] = useRecoilState(languageState);
 
-  const images: ImageData[] = [
-    { name: "js", src: jsImage },
-    { name: "python", src: pythonImage },
-    { name: "c", src: cImage },
-    { name: "java", src: javaImage },
-    { name: "php", src: phpImage },
-    { name: "ruby", src: rubyImage },
-    { name: "go", src: goImage },
-  ];
+  const images = languageSelectData;
 
   const imageStyle = (name: string) => ({
     opacity: name === language ? 1 : 0.4,
