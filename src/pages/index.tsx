@@ -7,7 +7,7 @@ import { roomState, uuidState } from "@/recoil/socket";
 import { useRouter } from "next/router";
 import io from "socket.io-client";
 
-export const socket = io("http://localhost:8000");
+export const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT||"http://localhost:8000");
 
 export default function Home() {
   const uuid = useRecoilValue(uuidState);
