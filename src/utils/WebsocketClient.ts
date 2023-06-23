@@ -1,6 +1,7 @@
 // =============== ソケット通信で使用する関数まとめファイル ===============
 import { Socket } from "socket.io-client";
 import { ReqAnswer, ReqUpdateResult } from "@/@types/requests";
+import { ReqHomeReset, ReqRestart } from "@/@types/WebsocketRequest";
 
 type handleCreateRoomClickProps = {
   socket: Socket;
@@ -79,4 +80,20 @@ export const handleUpdateResultClick = (
   updateResultMessage: ReqUpdateResult
 ) => {
   socket.emit("req_updateResult", updateResultMessage);
+};
+
+// リスタート関数
+export const handleRestartClick = (
+  socket: Socket,
+  restartMessage: ReqRestart
+) => {
+  socket.emit("req_restart", restartMessage);
+};
+
+// ホームリセット関数
+export const handleHomeResetClick = (
+  socket: Socket,
+  homeResetMessage: ReqHomeReset
+) => {
+  socket.emit("req_homeReset", homeResetMessage);
 };
