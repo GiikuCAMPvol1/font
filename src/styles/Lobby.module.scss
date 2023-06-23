@@ -41,6 +41,7 @@
   .btnBox {
     margin-top: calc(280px - 195px - 39px);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap:30px
   }
 }
