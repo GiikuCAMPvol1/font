@@ -74,20 +74,21 @@ const Result = () => {
   // Todo:開始ボタンを押したときの処理
   const StartClick = () => {
     console.log("Click Start");
-    setCrrDisplay("next");
+    setCrrDisplay("play");
   };
 
   // Todo:次へボタンを押したときの処理
   const NextClick = () => {
     console.log("Click Next");
-    // if () {
-    //   setCrrDisplay("fin")
-    // }
+    if ( true ) {
+      setCrrDisplay("fin")
+    }
   };
 
   // Todo:終了ボタンを押したときの処理
   const FinClick = () => {
     console.log("Click Fin");
+    location.href = "/";
   };
 
   return (
@@ -122,7 +123,7 @@ const Result = () => {
                 onClick={FinClick}
                 src={"/game/Start.png"}
                 alt={"次のゲームアイコン"}
-                text={"次のゲームへ"}
+                text={"ホームへ"}
               />
             )}
             <div></div>
