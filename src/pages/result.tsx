@@ -33,7 +33,7 @@ const Result = () => {
 
   // リスタートのレスポンス: リスタートしたらロビーに戻る
   socket.on(`res_restart_${game.roomId}`, (data) => {
-    router.push(`/lobby?id=${data.roomId}`);
+    router.push(`/lobby?id=${game.roomId}`);
   });
 
   // ホームリセットのレスポンス: ホームリセットしたらホームに戻る
