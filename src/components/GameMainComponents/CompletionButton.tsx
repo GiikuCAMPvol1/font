@@ -22,38 +22,33 @@ export default function CompletionButton() {
   const lastAnswer = getLastAnswerFromProblem(game.problems[user.problemId]);
 
   const clickFunction = () => {
-    if (isClicked) {
-      alert("すでに回答しています。");
+    if (isClicked)return;
+    if (lastAnswer.type === "code") {
+      handleAnswerClick(socket, {
+        type: "read",
+        roomId,
+        userId,
+        readAnswer: answerCode,
+        problemId: user.problemId,
+      });
     } else {
-      setIsClicked(true);
+      handleAnswerClick(socket, {
+        type: "code",
+        roomId,
+        userId,
+        codeAnswer: answerCode,
+        language,
+        problemId: user.problemId,
+      });
     }
+    setAnswerCode("");
+    setIsClicked(true);
   };
 
   return (
     <div
       className={styles.CompletionButtonArea}
-      onClick={() => {
-        if (lastAnswer.type === "code") {
-          handleAnswerClick(socket, {
-            type: "read",
-            roomId,
-            userId,
-            readAnswer: answerCode,
-            problemId: user.problemId,
-          });
-          return;
-        } else {
-          handleAnswerClick(socket, {
-            type: "code",
-            roomId,
-            userId,
-            codeAnswer: answerCode,
-            language,
-            problemId: user.problemId,
-          });
-        }
-        setAnswerCode("");
-      }}
+      onClick={() => clickFunction()}
     >
       <Image
         src={CheckImage}
