@@ -12,7 +12,7 @@ const ResultCard = () => {
         {game &&
           game.problems[game.turn - 1].answers?.map((data, index) => (
             <div key={index}>
-              {data.type == "read" && (
+              {data.type == "read" && index <= game.users.length && (
                 <div className={Styles.answerWrapper}>
                   <div className={Styles.userWrapper}>
                     <div className={Styles.userImg}>
@@ -54,7 +54,10 @@ const ResultCard = () => {
                       }
                     </p>
                   </div>
-                  <div className={Styles.codeData}>{data.codeAnswer}</div>
+                  <div className={Styles.codeData}>
+                    <div className={Styles.codeLanguage}>{data.language}</div>
+                    <div className={Styles.codeAnswer}>{data.codeAnswer}</div>
+                  </div>
                 </div>
               )}
             </div>

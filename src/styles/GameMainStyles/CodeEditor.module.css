@@ -1,11 +1,22 @@
+.CodeEditorHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 30px;
+  background-color: rgb(86, 86, 86);
+  border-radius: 20px 20px 0px 0px;
+  color: white;
+}
+
 .CodeEditor {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 500px;
-  height: 250px;
+  height: 220px;
   background-color: black;
-  border-radius: 20px;
+  border-radius: 0px 0px 20px 20px;
 }
 .textarea {
   width: 450px;
