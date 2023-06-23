@@ -55,6 +55,8 @@ export default function CompletionButton() {
         alt="CheckImage"
         className={styles.CheckImage}
         onClick={() => clickFunction()}
+        width={138}
+        height={48}
       />
       <p className={styles.CompletionText}>完了！</p>
     </div>
